@@ -2,6 +2,7 @@
   <div v-if="isShow" class="dialog">
     <p>{{ title }}</p>
     <p>{{ message }}</p>
+    <button @click="hide">取消</button>
   </div>
 </template>
 
@@ -43,7 +44,13 @@ export default {
   },
 };
 </script>
-
+<style>
+/* body {
+  background-color: #fff !important;
+  filter: Alpha(Opacity=60);
+  opacity: 0.6;
+} */
+</style>
 <style lang="scss" scoped>
 .dialog {
   position: absolute;
