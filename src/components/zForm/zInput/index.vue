@@ -16,18 +16,18 @@ export default {
   props: {
     value: {
       type: String,
-      default: "",
-    },
+      default: ''
+    }
   },
   methods: {
     onInput(e) {
       // 通知父组件数值发生变化
-      this.$emit("input", e.target.value);
+      this.$emit('input', e.target.value)
       // 通知formitem进行校验
-      this.$parent.$emit("validate"); // 不一定是parent的
-    },
-  },
-};
+      this.$parent.$emit('validate') // 不一定是parent的
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped></style>

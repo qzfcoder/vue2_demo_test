@@ -9,57 +9,59 @@
       </z-form-item>
     </z-form>
     <button @click="btnLogin">登录</button> {{ model }}
+    <z-tree></z-tree>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import zFormItem from "@/components/zForm/zFormItem";
-import zInput from "@/components/zForm/zInput";
-import zForm from "@/components/zForm";
-import dialog from "@/utils/dialog/index.js";
-import moban from "@/utils/dialog/index.vue";
-
+import zFormItem from '@/components/zForm/zFormItem'
+import zInput from '@/components/zForm/zInput'
+import zForm from '@/components/zForm'
+import dialog from '@/utils/dialog/index.js'
+import moban from '@/utils/dialog/index.vue'
+import zTree from '@/components/zTree/index.vue'
 export default {
-  name: "HomeView",
+  name: 'HomeView',
   components: {
     zFormItem,
     zInput,
     zForm,
+    zTree
   },
   data() {
     return {
       model: {
-        username: "123",
-        password: "",
+        username: '123',
+        password: ''
       },
       rules: {
-        username: [{ required: true, message: "用户名必须填写" }],
-        password: [{ required: true, message: "密码必须填写" }],
-      },
-    };
+        username: [{ required: true, message: '用户名必须填写' }],
+        password: [{ required: true, message: '密码必须填写' }]
+      }
+    }
   },
   methods: {
     btnLogin() {
-      let dialogForm;
+      let dialogForm
       this.$refs.loginForm.validate((isValid) => {
         if (isValid) {
           // alert("通过");
           dialogForm = dialog(moban, {
-            title: "123",
-            message: "通过",
-          });
+            title: '123',
+            message: '通过'
+          })
         } else {
           // alert("gg");
           dialogForm = dialog(moban, {
-            title: "123",
-            message: "gg",
-          });
+            title: '123',
+            message: 'gg'
+          })
         }
         // console.log(dialogForm);
-        dialogForm.show();
-      });
-    },
-  },
-};
+        dialogForm.show()
+      })
+    }
+  }
+}
 </script>

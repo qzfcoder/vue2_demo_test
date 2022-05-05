@@ -11,38 +11,38 @@ export default {
   props: {
     title: {
       type: String,
-      required: true,
+      required: true
     },
     message: {
       type: String,
-      required: true,
+      required: true
     },
     duration: {
-      type: Number,
-    },
+      type: Number
+    }
   },
   data() {
-    return { isShow: false };
+    return { isShow: false }
   },
   methods: {
     show() {
-      if (this.isShow == false) {
-        console.log(this.isShow, this.duration);
-        this.isShow = true;
-        if (this.duration) {
-          setTimeout(() => {
-            this.isShow = false;
-            this.remove();
-          }, this.duration);
-        }
+      // if (this.isShow == false) {
+      //   console.log(this.isShow, this.duration);
+      this.isShow = true
+      if (this.duration) {
+        setTimeout(() => {
+          this.isShow = false
+          this.remove()
+        }, this.duration)
+        // }
       }
     },
     hide() {
-      this.isShow = false;
-      this.remove();
-    },
-  },
-};
+      this.isShow = false
+      this.remove()
+    }
+  }
+}
 </script>
 <style>
 /* body {
