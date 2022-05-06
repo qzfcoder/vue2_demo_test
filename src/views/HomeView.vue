@@ -8,60 +8,98 @@
         <z-input v-model="model.password" type="password"></z-input>
       </z-form-item>
     </z-form>
-    <button @click="btnLogin">登录</button> {{ model }}
+    <el-button @click="btnLogin">登录</el-button>
     <z-tree></z-tree>
+    <div>================================</div>
+    <el-table :data="tableData" style="width: 100%">
+      <el-table-column prop="date" label="日期" width="180"> </el-table-column>
+      <el-table-column prop="name" label="姓名" width="180"> </el-table-column>
+      <el-table-column prop="address" label="地址"> </el-table-column>
+    </el-table>
+    <div>================================</div>
+    <z-table
+      :tableData="tableData"
+      :showSelectCloum="true"
+      v-bind="contentTableConfig"
+    ></z-table>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import zFormItem from '@/components/zForm/zFormItem'
-import zInput from '@/components/zForm/zInput'
-import zForm from '@/components/zForm'
-import dialog from '@/utils/dialog/index.js'
-import moban from '@/utils/dialog/index.vue'
-import zTree from '@/components/zTree/index.vue'
+import zFormItem from '@/components/zForm/zFormItem/index.vue';
+import zInput from '@/components/zForm/zInput/index.vue';
+import zForm from '@/components/zForm/index.vue';
+import dialog from '@/utils/dialog/index';
+import zTree from '@/components/zTree/index.vue';
+import moban from '@/utils/dialog/index.vue';
+import zTable from '@/base-ui/table/index.vue';
+import { contentTableConfig } from './table_test';
 export default {
   name: 'HomeView',
   components: {
     zFormItem,
     zInput,
     zForm,
-    zTree
+    zTree,
+    zTable,
   },
   data() {
     return {
       model: {
         username: '123',
-        password: ''
+        password: '',
       },
+      tableData: [
+        {
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄',
+        },
+        {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄',
+        },
+        {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄',
+        },
+        {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄',
+        },
+      ],
+      contentTableConfig: contentTableConfig,
       rules: {
         username: [{ required: true, message: '用户名必须填写' }],
-        password: [{ required: true, message: '密码必须填写' }]
-      }
-    }
+        password: [{ required: true, message: '密码必须填写' }],
+      },
+    };
   },
   methods: {
     btnLogin() {
-      let dialogForm
+      let dialogForm;
       this.$refs.loginForm.validate((isValid) => {
         if (isValid) {
           // alert("通过");
           dialogForm = dialog(moban, {
             title: '123',
-            message: '通过'
-          })
+            message: '通过',
+          });
         } else {
           // alert("gg");
           dialogForm = dialog(moban, {
             title: '123',
-            message: 'gg'
-          })
+            message: 'gg',
+          });
         }
         // console.log(dialogForm);
-        dialogForm.show()
-      })
-    }
-  }
-}
+        dialogForm.show();
+      });
+    },
+  },
+};
 </script>

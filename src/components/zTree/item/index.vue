@@ -2,7 +2,7 @@
   <li>
     <div @click="toggle">
       {{ model.title }}
-      <span v-if="isFolder">[{{ open ? '-' : '+' }}]</span>
+      <span v-if="isFolder">[{{ open ? "-" : "+" }}]</span>
     </div>
     <ul v-show="open" v-if="isFolder">
       <item
@@ -18,28 +18,28 @@
 
 <script>
 export default {
-  name: 'item',
+  name: "item",
   props: {
-    model: Object
+    model: Object,
   },
   data() {
     return {
-      open: false
-    }
+      open: false,
+    };
   },
   computed: {
     isFolder: function () {
-      return this.model.children && this.model.children.length
-    }
+      return this.model.children && this.model.children.length;
+    },
   },
   methods: {
     toggle: function () {
       if (this.isFolder) {
-        this.open = !this.open
+        this.open = !this.open;
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>

@@ -7,35 +7,35 @@
 </template>
 
 <script>
-import Item from './item/index.vue'
+import Item from "./item/index.vue";
 export default {
   components: {
-    Item
+    Item,
   },
   data() {
     return {
       treeData: {
-        title: '第一层',
+        title: "第一层",
         children: [
           {
-            title: '第二场'
+            title: "第二场",
           },
           {
-            title: '第二层2',
+            title: "第二层2",
             children: [
               {
-                title: '第三层'
+                title: "第三层",
               },
               {
-                title: '第三层2'
-              }
-            ]
-          }
-        ]
-      }
-    }
-  }
-}
+                title: "第三层2",
+              },
+            ],
+          },
+        ],
+      },
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>
