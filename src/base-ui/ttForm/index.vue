@@ -45,12 +45,13 @@
                   class="upload-demo"
                   action="https://jsonplaceholder.typicode.com/posts/"
                   :on-preview="handlePreview"
-                  :on-remove="handleRemove"
+                  :on-remove="(e, g) => handleRemove(e, g, item.field)"
                   :before-remove="beforeRemove"
+                  :before-upload="(e) => beforeUpload(e, item.field)"
                   multiple
                   :limit="3"
                   :on-exceed="handleExceed"
-                  :file-list="formData[`${item.field}`]"
+                  :file-list="fileList"
                 >
                   <el-button size="small" type="primary">点击上传</el-button>
                   <div slot="tip" class="el-upload__tip">
@@ -100,18 +101,27 @@ export default {
     },
   },
   data() {
-    return { formData: {} };
+    return {
+      formData: {},
+      fileList: [],
+    };
   },
   mounted() {
     // console.log(this.value);
     this.formData = { ...this.value };
   },
   methods: {
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
+    handleRemove(file, fileList, asd) {
+      console.log(file, fileList, asd);
+      this.formData[asd] = fileList;
     },
     handlePreview(file) {
       console.log(file);
+      console.log(this.fileList);
+    },
+    beforeUpload(file, asd) {
+      console.log(file, asd, '1');
+      this.formData[asd] = file;
     },
     handleExceed(files, fileList) {
       this.$message.warning(

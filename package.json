@@ -6,9 +6,6 @@
     "dev": "vue-cli-service serve --mode development",
     "serve": "vue-cli-service serve --mode production",
     "build": "vue-cli-service build --mode production",
-    "lint": "eslint ./src --ext .vue,.js,.ts",
-    "format": "prettier --write ./src",
-    "lint-fix": "eslint --fix ./src --ext .vue,.js,.ts",
     "prepare": "husky install",
     "test": "vue-cli-service test:unit",
     "commit": "cz"

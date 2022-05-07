@@ -46,6 +46,7 @@ import zTable from '@/base-ui/table/index.vue';
 import ttForm from '@/base-ui/ttForm/index.vue';
 import { contentTableConfig } from './table_test';
 import { searchFormConfig } from './formConfig';
+
 export default {
   name: 'HomeView',
   components: {
@@ -87,8 +88,8 @@ export default {
           address: '上海市普陀区金沙江路 1516 弄',
         },
       ],
-      contentTableConfig: contentTableConfig,
-      searchFormConfig: searchFormConfig,
+      contentTableConfig,
+      searchFormConfig,
       rules: {
         username: [{ required: true, message: '用户名必须填写' }],
         password: [{ required: true, message: '密码必须填写' }],

@@ -36,5 +36,7 @@ module.exports = {
     'vue/no-mutating-props': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     'import/prefer-default-export': 'off',
+    'import/newline-after-import': 'off',
+    'vue/order-in-components': 'off',
   },
 };
