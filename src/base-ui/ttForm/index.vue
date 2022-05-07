@@ -51,7 +51,7 @@
                   multiple
                   :limit="3"
                   :on-exceed="handleExceed"
-                  :file-list="fileList"
+                  :file-list="formData[`${item.field}`]"
                 >
                   <el-button size="small" type="primary">点击上传</el-button>
                   <div slot="tip" class="el-upload__tip">
@@ -121,7 +121,7 @@ export default {
     },
     beforeUpload(file, asd) {
       console.log(file, asd, '1');
-      this.formData[asd] = file;
+      this.formData[asd].push(file);
     },
     handleExceed(files, fileList) {
       this.$message.warning(

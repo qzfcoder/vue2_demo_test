@@ -26,7 +26,7 @@ export const searchFormConfig = {
       placeholder: '请输入权限介绍',
     },
     {
-      field: '文件',
+      field: 'word',
       type: 'uploadFile',
       label: '权限介sad绍',
       placeholder: '请输入权限介绍',
