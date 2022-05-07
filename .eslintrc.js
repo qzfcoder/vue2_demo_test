@@ -40,5 +40,7 @@ module.exports = {
     'vue/order-in-components': 'off',
     'vue/attributes-order': 'off',
     'vue/multi-word-component-names': 'off',
+    'no-nested-ternary': 'off',
+    'prefer-template': 'off',
   },
 };
