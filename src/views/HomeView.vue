@@ -11,7 +11,7 @@
     <el-button @click="btnLogin">登录</el-button>
     <z-tree></z-tree>
     1
-    <tt-form v-bind="searchFormConfig" v-model="formData">
+    <tt-form ref="loginFormRef" v-bind="searchFormConfig" v-model="formData">
       <template #footer>
         <span class="dialog-footer">
           <el-button type="primary" @click="handleConfirmClick">确认</el-button>
@@ -128,7 +128,7 @@ export default {
       });
     },
     handleConfirmClick() {
-      console.log(this.formData);
+      console.log(this.$refs.loginFormRef);
     },
   },
 };

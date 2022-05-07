@@ -3,7 +3,7 @@
     <div class="header">
       <slot name="header"></slot>
     </div>
-    <el-form :label-width="labelWidth">
+    <el-form :label-width="labelWidth" :model="formData">
       <el-row>
         <template v-for="item in formItems">
           <el-col v-bind="colLayout" :key="item.label">
@@ -11,20 +11,23 @@
               v-if="!item.isHidden"
               :label="item.label"
               :style="itemstyle"
+              :prop="item.field"
               :rules="item.rules"
             >
-              <template
-                v-if="
-                  item.type == 'input' ||
-                  item.type == 'password' ||
-                  item.type == 'textarea'
-                "
-              >
+              <template v-if="item.type == 'input' || item.type == 'password'">
                 <el-input
                   :placeholder="item.placeholder"
                   :show-password="item.type === 'password'"
                   :type="item.type"
-                  :rows="item.type === 'textarea' ? item.rows : '2'"
+                  :rows="item.type === 'textarea' ? item.rows : 'null'"
+                  v-model="formData[`${item.field}`]"
+                ></el-input>
+              </template>
+              <template v-if="item.type == 'textarea'">
+                <el-input
+                  :placeholder="item.placeholder"
+                  :type="item.type"
+                  :rows="item.rows ? item.rows : '2'"
                   v-model="formData[`${item.field}`]"
                 ></el-input>
               </template>
@@ -212,6 +215,12 @@ export default {
     handleChange(value) {
       console.log(value);
     },
+    // checkForm() {
+    //   console.log(this.$refs.elFormRef);
+    //   this.$refs.elFormRef.validate((e) => {
+    //     console.log(e);
+    //   });
+    // },
   },
   watch: {
     formData: {

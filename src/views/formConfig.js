@@ -12,6 +12,7 @@ export const searchFormConfig = {
       type: 'input',
       label: 'id',
       placeholder: '请输入id',
+      rules: [{ required: true, message: '请输入活动名称', trigger: 'change' }],
     },
     {
       field: 'name',
