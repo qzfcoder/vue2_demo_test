@@ -13,10 +13,18 @@
               :style="itemstyle"
               :rules="item.rules"
             >
-              <template v-if="item.type == 'input' || item.type == 'password'">
+              <template
+                v-if="
+                  item.type == 'input' ||
+                  item.type == 'password' ||
+                  item.type == 'textarea'
+                "
+              >
                 <el-input
                   :placeholder="item.placeholder"
                   :show-password="item.type === 'password'"
+                  :type="item.type"
+                  :rows="item.type === 'textarea' ? item.rows : '2'"
                   v-model="formData[`${item.field}`]"
                 ></el-input>
               </template>

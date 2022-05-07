@@ -20,6 +20,13 @@ export const searchFormConfig = {
       placeholder: '请输入角色名称',
     },
     {
+      field: 'textarea',
+      type: 'textarea',
+      label: 'textarea',
+      rows: 2,
+      placeholder: '请输入角色名称',
+    },
+    {
       field: 'intro',
       type: 'input',
       label: '权限介绍',
