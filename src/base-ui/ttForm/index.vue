@@ -40,6 +40,42 @@
                   v-model="formData[`${item.field}`]"
                 ></el-date-picker>
               </template>
+              <template v-else-if="item.type === 'switch'">
+                <el-switch
+                  v-model="formData[`${item.field}`]"
+                  v-bind="{ ...item.otherOptions }"
+                >
+                </el-switch>
+              </template>
+              <template v-else-if="item.type === 'cascader'">
+                <el-cascader
+                  v-model="formData[`${item.field}`]"
+                  :options="item.options"
+                  :props="{
+                    ...item.otherOptions,
+                  }"
+                  @change="handleChange"
+                ></el-cascader>
+              </template>
+              <template v-else-if="item.type === 'uploadImg'">
+                <el-upload
+                  class="avatar-uploader"
+                  action="https://jsonplaceholder.typicode.com/posts/"
+                  :show-file-list="false"
+                  :on-success="(e, g) => handleAvatarSuccess(e, g, item.field)"
+                  :before-upload="(e) => beforeAvatarUpload(e)"
+                >
+                  <img
+                    v-if="formData[`${item.field}`]"
+                    :src="formData[`${item.field}`]"
+                    class="avatar"
+                  />
+                  <span v-if="formData[`${item.field}`]"
+                    >{{ formData[item.field] }}1</span
+                  >
+                  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                </el-upload>
+              </template>
               <template v-else-if="item.type === 'uploadFile'">
                 <el-upload
                   class="upload-demo"
@@ -111,6 +147,7 @@ export default {
     this.formData = { ...this.value };
   },
   methods: {
+    // 文件的方法
     handleRemove(file, fileList, asd) {
       console.log(file, fileList, asd);
       this.formData[asd] = fileList;
@@ -133,6 +170,27 @@ export default {
     beforeRemove(file, fileList) {
       return this.$confirm(`确定移除 ${file.name}？`);
     },
+    // 上传头像
+    handleAvatarSuccess(res, file, field) {
+      console.log(res, file, field, this.formData[field], '1');
+      this.formData[field] = URL.createObjectURL(file.raw);
+      console.log(this.formData[field]);
+    },
+    beforeAvatarUpload(file) {
+      // const isJPG = file.type === 'image/jpeg';
+      // const isLt2M = file.size / 1024 / 1024 < 2;
+      // if (!isJPG) {
+      //   this.$message.error('上传头像图片只能是 JPG 格式!');
+      // }
+      // if (!isLt2M) {
+      //   this.$message.error('上传头像图片大小不能超过 2MB!');
+      // }
+      // return isJPG && isLt2M;
+    },
+    // 级联选择
+    handleChange(value) {
+      console.log(value);
+    },
   },
   watch: {
     formData: {
@@ -146,4 +204,28 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+</style>
