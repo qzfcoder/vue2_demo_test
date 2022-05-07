@@ -65,7 +65,6 @@ export default {
       },
       formData: {
         name: '123',
-        imageUrl: '',
         word: [
           {
             name: 'food.jpeg',

@@ -39,5 +39,6 @@ module.exports = {
     'import/newline-after-import': 'off',
     'vue/order-in-components': 'off',
     'vue/attributes-order': 'off',
+    'vue/multi-word-component-names': 'off',
   },
 };
