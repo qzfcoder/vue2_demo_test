@@ -10,7 +10,8 @@
     "format": "prettier --write ./src",
     "lint-fix": "eslint --fix ./src --ext .vue,.js,.ts",
     "prepare": "husky install",
-    "test": "vue-cli-service test:unit"
+    "test": "vue-cli-service test:unit",
+    "commit": "cz"
   },
   "dependencies": {
     "@vue/composition-api": "^1.4.9",

@@ -28,42 +28,13 @@ module.exports = {
     },
   },
   rules: {
-    'import/extensions': [
-      'error',
-      'ignorePackages',
-      {
-        js: 'never',
-        jsx: 'never',
-        ts: 'never',
-        tsx: 'never',
-      },
-    ],
-    'no-param-reassign': [
-      'error',
-      {
-        props: true,
-        ignorePropertyModificationsFor: [
-          'res', // for Express responses
-          'item', // for Express responses
-          'state', // for vuex state 解决assignment to property of function parameter 'state'
-          'args', // for vue.config 解决 修改项目名称
-        ],
-      },
-    ],
-    indent: [
-      2,
-      2,
-      {
-        SwitchCase: 1,
-      },
-    ],
-    complexity: [
-      'error',
-      {
-        max: 40,
-      },
-    ],
-    'linebreak-style': 0,
-    'import/newline-after-import': off,
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'vue/no-mutating-props': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    'import/prefer-default-export': 'off',
   },
 };

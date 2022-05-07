@@ -10,6 +10,14 @@
     </z-form>
     <el-button @click="btnLogin">登录</el-button>
     <z-tree></z-tree>
+    1
+    <tt-form v-bind="searchFormConfig" v-model="formData">
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button type="primary" @click="handleConfirmClick">确认</el-button>
+        </span>
+      </template>
+    </tt-form>
     <div>================================</div>
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="date" label="日期" width="180"> </el-table-column>
@@ -21,7 +29,8 @@
       :tableData="tableData"
       :showSelectCloum="true"
       v-bind="contentTableConfig"
-    ></z-table>
+    >
+    </z-table>
   </div>
 </template>
 
@@ -34,7 +43,9 @@ import dialog from '@/utils/dialog/index';
 import zTree from '@/components/zTree/index.vue';
 import moban from '@/utils/dialog/index.vue';
 import zTable from '@/base-ui/table/index.vue';
+import ttForm from '@/base-ui/ttForm/index.vue';
 import { contentTableConfig } from './table_test';
+import { searchFormConfig } from './formConfig';
 export default {
   name: 'HomeView',
   components: {
@@ -43,12 +54,16 @@ export default {
     zForm,
     zTree,
     zTable,
+    ttForm,
   },
   data() {
     return {
       model: {
         username: '123',
         password: '',
+      },
+      formData: {
+        name: '123',
       },
       tableData: [
         {
@@ -73,6 +88,7 @@ export default {
         },
       ],
       contentTableConfig: contentTableConfig,
+      searchFormConfig: searchFormConfig,
       rules: {
         username: [{ required: true, message: '用户名必须填写' }],
         password: [{ required: true, message: '密码必须填写' }],
@@ -99,6 +115,9 @@ export default {
         // console.log(dialogForm);
         dialogForm.show();
       });
+    },
+    handleConfirmClick() {
+      console.log(this.formData);
     },
   },
 };

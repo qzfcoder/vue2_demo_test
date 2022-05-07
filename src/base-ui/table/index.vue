@@ -40,8 +40,8 @@
 export default {
   props: {
     tableData: {
-      type: Object,
-      default: () => ({}),
+      type: Array,
+      default: () => [],
     },
     propList: {
       type: Array,
