@@ -3,7 +3,7 @@
     <div class="header">
       <slot name="header"></slot>
     </div>
-    <el-form :label-width="labelWidth" :model="formData">
+    <el-form ref="elFormRef" :label-width="labelWidth" :model="formData">
       <el-row>
         <template v-for="item in formItems">
           <el-col v-bind="colLayout" :key="item.label">
@@ -215,12 +215,6 @@ export default {
     handleChange(value) {
       console.log(value);
     },
-    // checkForm() {
-    //   console.log(this.$refs.elFormRef);
-    //   this.$refs.elFormRef.validate((e) => {
-    //     console.log(e);
-    //   });
-    // },
   },
   watch: {
     formData: {

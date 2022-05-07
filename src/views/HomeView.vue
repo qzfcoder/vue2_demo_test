@@ -128,7 +128,11 @@ export default {
       });
     },
     handleConfirmClick() {
-      console.log(this.$refs.loginFormRef);
+      console.log(
+        this.$refs.loginFormRef.$refs.elFormRef.validate((e) => {
+          console.log(e);
+        })
+      );
     },
   },
 };
