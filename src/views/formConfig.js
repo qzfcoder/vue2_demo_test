@@ -46,6 +46,10 @@ export const searchFormConfig = {
       type: 'uploadImg',
       label: 'uploadImg',
       placeholder: '请输dsa入权限介绍',
+      otherOptions: {
+        lastM: 2,
+        imgType: ['image/jpeg', 'image/png'],
+      },
     },
     {
       field: 'roleId',

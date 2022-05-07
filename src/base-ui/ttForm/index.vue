@@ -63,16 +63,18 @@
                   action="https://jsonplaceholder.typicode.com/posts/"
                   :show-file-list="false"
                   :on-success="(e, g) => handleAvatarSuccess(e, g, item.field)"
-                  :before-upload="(e) => beforeAvatarUpload(e)"
+                  :before-upload="
+                    (e) => beforeAvatarUpload(e, item.otherOptions)
+                  "
                 >
                   <img
                     v-if="formData[`${item.field}`]"
                     :src="formData[`${item.field}`]"
                     class="avatar"
                   />
-                  <span v-if="formData[`${item.field}`]"
-                    >{{ formData[item.field] }}1</span
-                  >
+                  <span v-if="formData[`${item.field}`]">{{
+                    formData[item.field]
+                  }}</span>
                   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
               </template>
@@ -171,21 +173,32 @@ export default {
       return this.$confirm(`确定移除 ${file.name}？`);
     },
     // 上传头像
-    handleAvatarSuccess(res, file, field) {
+    async handleAvatarSuccess(res, file, field) {
       console.log(res, file, field, this.formData[field], '1');
-      this.formData[field] = URL.createObjectURL(file.raw);
-      console.log(this.formData[field]);
+      this.formData[field] = await URL.createObjectURL(file.raw);
+      console.log('handleAvatarSuccess', this.formData);
+      this.$forceUpdate();
     },
-    beforeAvatarUpload(file) {
-      // const isJPG = file.type === 'image/jpeg';
-      // const isLt2M = file.size / 1024 / 1024 < 2;
-      // if (!isJPG) {
-      //   this.$message.error('上传头像图片只能是 JPG 格式!');
-      // }
-      // if (!isLt2M) {
-      //   this.$message.error('上传头像图片大小不能超过 2MB!');
-      // }
-      // return isJPG && isLt2M;
+    beforeAvatarUpload(file, options) {
+      console.log(file, options, '111');
+      console.log(options.imgType);
+      let isType;
+      if (Array.isArray(options.imgType)) {
+        // isType = file.type.indexof(options.imgType) === -1;
+        isType = options.imgType.some((item) => {
+          return item === file.type;
+        });
+      } else {
+        isType = file.type === options.imgType;
+      }
+      const isLt2M = file.size / 1024 / 1024 < options.lastM;
+      if (!isType) {
+        this.$message.error('上传头像图片格式不对!');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!');
+      }
+      return isType && isLt2M;
     },
     // 级联选择
     handleChange(value) {
@@ -197,7 +210,7 @@ export default {
       handler(newV, oldV) {
         this.$emit('input', newV);
       },
-      // immediate: true,
+      immediate: true,
       deep: true,
     },
   },
