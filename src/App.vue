@@ -7,7 +7,11 @@
     <router-view />
   </div>
 </template>
-
+<script>
+export default {
+  components: {},
+};
+</script>
 <style lang="less">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -15,6 +19,9 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  border: 1px solid yellow;
+  width: 100%;
+  height: 100%;
 }
 
 nav {

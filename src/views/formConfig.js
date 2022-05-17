@@ -28,6 +28,39 @@ export const searchFormConfig = {
       placeholder: '请输入角色名称',
     },
     {
+      field: 'asaaaada',
+      type: 'radio',
+      label: 'aaa',
+      placeholder: '请输入权限介绍',
+      options: [
+        {
+          label: 'test1',
+          value: 1,
+        },
+        {
+          label: 'test2',
+          value: 2,
+        },
+      ],
+      boxs: ['上海', '北京', '广州', '深圳'],
+    },
+    {
+      field: 'checkboxsa',
+      type: 'checkbox',
+      label: 'checkbox',
+      placeholder: '请输入权限介绍',
+      options: [
+        {
+          label: 'test1',
+          value: 1,
+        },
+        {
+          label: 'test2',
+          value: 2,
+        },
+      ],
+    },
+    {
       field: 'intro',
       type: 'input',
       label: '权限介绍',

@@ -10,7 +10,11 @@
     </z-form>
     <el-button @click="btnLogin">登录</el-button>
     <z-tree></z-tree>
-    1
+    <el-checkbox-group v-model="checkedCities">
+      <el-checkbox v-for="city in cities" :label="city" :key="city">{{
+        city
+      }}</el-checkbox>
+    </el-checkbox-group>
     <tt-form ref="loginFormRef" v-bind="searchFormConfig" v-model="formData">
       <template #footer>
         <span class="dialog-footer">
@@ -59,6 +63,8 @@ export default {
   },
   data() {
     return {
+      checkedCities: [],
+      cities: ['上海', '北京', '广州', '深圳'],
       model: {
         username: '123',
         password: '',

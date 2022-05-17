@@ -31,6 +31,35 @@
                   v-model="formData[`${item.field}`]"
                 ></el-input>
               </template>
+              <template v-if="item.type == 'radio'">
+                <el-radio-group v-model="formData[`${item.field}`]">
+                  <el-radio
+                    v-for="i in item.options"
+                    :key="i.value"
+                    :label="i.value"
+                  >
+                    {{ i.label }}
+                  </el-radio>
+                </el-radio-group>
+              </template>
+              <template v-if="item.type == 'checkbox'">
+                <!-- <el-checkbox
+                  :indeterminate="item.indeterminate"
+                  v-model="checkAll"
+                  @change="handleCheckAllChange"
+                  >全选</el-checkbox
+                > -->
+                <div style="margin: 15px 0"></div>
+                <el-checkbox-group>
+                  <el-checkbox
+                    v-for="(box, index) in item.boxs"
+                    :key="box + index"
+                    :label="box"
+                  >
+                    {{ box }}
+                  </el-checkbox>
+                </el-checkbox-group>
+              </template>
               <template v-else-if="item.type == 'select'">
                 <el-select
                   :placeholder="item.placeholder"
@@ -153,6 +182,7 @@ export default {
     return {
       formData: {},
       fileList: [],
+      checkAll: false,
     };
   },
   mounted() {
@@ -160,6 +190,15 @@ export default {
     this.formData = { ...this.value };
   },
   methods: {
+    handleCheckedCitiesChange(value, e, all) {
+      // const checkedCount = value?.length;
+      // this.checkAll = checkedCount === all?.length;
+      // this.isIndeterminate = checkedCount > 0 && checkedCount < all?.length;
+    },
+    handleCheckAllChange(val, e, all) {
+      // this.formData[e] = val ? all : [];
+      // this.isIndeterminate = false;
+    },
     // 文件的方法
     handleRemove(file, fileList, asd) {
       console.log(file, fileList, asd);
