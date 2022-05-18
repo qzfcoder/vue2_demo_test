@@ -24,6 +24,11 @@ const routes: Array<RouteConfig> = [
     name: 'axiosUse',
     component: () => import('@/views/AxiosUse.vue'),
   },
+  {
+    path: '/zujianDemo',
+    name: 'zujianDemo',
+    component: () => import('@/views/zujianDemo.vue'),
+  },
 ];
 
 const router = new VueRouter({

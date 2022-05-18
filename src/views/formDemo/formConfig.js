@@ -3,9 +3,9 @@ export const searchFormConfig = {
   itemstyle: {
     padding: '10px 40px',
   },
-  // colLayout: {
-  //   span: 8
-  // },
+  colLayout: {
+    span: 8,
+  },
   formItems: [
     {
       field: 'id',
@@ -19,6 +19,7 @@ export const searchFormConfig = {
       type: 'password',
       label: '角色名称',
       placeholder: '请输入角色名称',
+      rules: [{ required: true, message: '请输入活动名称', trigger: 'change' }],
     },
     {
       field: 'textarea',

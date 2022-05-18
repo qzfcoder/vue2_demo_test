@@ -10,31 +10,6 @@
     </z-form>
     <el-button @click="btnLogin">登录</el-button>
     <z-tree></z-tree>
-    <el-checkbox-group v-model="checkedCities">
-      <el-checkbox v-for="city in cities" :label="city" :key="city">{{
-        city
-      }}</el-checkbox>
-    </el-checkbox-group>
-    <tt-form ref="loginFormRef" v-bind="searchFormConfig" v-model="formData">
-      <template #footer>
-        <span class="dialog-footer">
-          <el-button type="primary" @click="handleConfirmClick">确认</el-button>
-        </span>
-      </template>
-    </tt-form>
-    <div>================================</div>
-    <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="date" label="日期" width="180"> </el-table-column>
-      <el-table-column prop="name" label="姓名" width="180"> </el-table-column>
-      <el-table-column prop="address" label="地址"> </el-table-column>
-    </el-table>
-    <div>================================</div>
-    <z-table
-      :tableData="tableData"
-      :showSelectCloum="true"
-      v-bind="contentTableConfig"
-    >
-    </z-table>
   </div>
 </template>
 
@@ -46,10 +21,6 @@ import zForm from '@/components/zForm/index.vue';
 import dialog from '@/utils/dialog/index';
 import zTree from '@/components/zTree/index.vue';
 import moban from '@/utils/dialog/index.vue';
-import zTable from '@/base-ui/table/index.vue';
-import ttForm from '@/base-ui/ttForm/index.vue';
-import { contentTableConfig } from './table_test';
-import { searchFormConfig } from './formConfig';
 
 export default {
   name: 'HomeView',
@@ -58,13 +29,9 @@ export default {
     zInput,
     zForm,
     zTree,
-    zTable,
-    ttForm,
   },
   data() {
     return {
-      checkedCities: [],
-      cities: ['上海', '北京', '广州', '深圳'],
       model: {
         username: '123',
         password: '',
@@ -82,30 +49,7 @@ export default {
           },
         ],
       },
-      tableData: [
-        {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄',
-        },
-        {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄',
-        },
-        {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄',
-        },
-        {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄',
-        },
-      ],
-      contentTableConfig,
-      searchFormConfig,
+
       rules: {
         username: [{ required: true, message: '用户名必须填写' }],
         password: [{ required: true, message: '密码必须填写' }],
@@ -132,13 +76,6 @@ export default {
         // console.log(dialogForm);
         dialogForm.show();
       });
-    },
-    handleConfirmClick() {
-      console.log(
-        this.$refs.loginFormRef.$refs.elFormRef.validate((e) => {
-          console.log(e);
-        })
-      );
     },
   },
 };

@@ -42,5 +42,10 @@ module.exports = {
     'vue/multi-word-component-names': 'off',
     'no-nested-ternary': 'off',
     'prefer-template': 'off',
+    'import/no-mutable-exports': 'off',
+    'new-cap': 'off',
+    'consistent-return': 'off',
+    'prefer-destructuring': 'off',
+    'no-param-reassign': 'off',
   },
 };

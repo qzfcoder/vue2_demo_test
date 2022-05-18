@@ -49,15 +49,12 @@
                   @change="handleCheckAllChange"
                   >全选</el-checkbox
                 > -->
-                <div style="margin: 15px 0"></div>
-                <el-checkbox-group>
-                  <el-checkbox
-                    v-for="(box, index) in item.boxs"
-                    :key="box + index"
-                    :label="box"
+                <div style="margin: 15px 0">这个没有实现</div>
+                <!-- <el-checkbox-group v-model="formData[`${item.field}`]"> -->
+                <el-checkbox-group v-model="item.boxs">
+                  <el-checkbox v-for="i in item.boxs" :key="i" :label="i">
+                    {{ i }}</el-checkbox
                   >
-                    {{ box }}
-                  </el-checkbox>
                 </el-checkbox-group>
               </template>
               <template v-else-if="item.type == 'select'">
@@ -180,6 +177,7 @@ export default {
   },
   data() {
     return {
+      check_item: [],
       formData: {},
       fileList: [],
       checkAll: false,
