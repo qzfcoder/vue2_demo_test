@@ -25,6 +25,10 @@ export default {
   data() {
     return {
       searchFormConfig,
+      formData: {
+        checkboxsa: [],
+        asaaaada: 1,
+      },
     };
   },
   methods: {

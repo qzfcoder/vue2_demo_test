@@ -6,12 +6,14 @@ export const searchFormConfig = {
   colLayout: {
     span: 8,
   },
+  isShowFlag: true,
   formItems: [
     {
       field: 'id',
       type: 'input',
       label: 'id',
       placeholder: '请输入id',
+      showKey: 1,
       rules: [{ required: true, message: '请输入活动名称', trigger: 'change' }],
     },
     {
@@ -19,12 +21,14 @@ export const searchFormConfig = {
       type: 'password',
       label: '角色名称',
       placeholder: '请输入角色名称',
+      showKey: 2,
       rules: [{ required: true, message: '请输入活动名称', trigger: 'change' }],
     },
     {
       field: 'textarea',
       type: 'textarea',
       label: 'textarea',
+      showKey: 1,
       rows: 2,
       placeholder: '请输入角色名称',
     },
@@ -33,6 +37,24 @@ export const searchFormConfig = {
       type: 'radio',
       label: 'aaa',
       placeholder: '请输入权限介绍',
+      isChooseItem: true,
+      options: [
+        {
+          label: 'test1',
+          value: 1,
+        },
+        {
+          label: 'test2',
+          value: 2,
+        },
+      ],
+    },
+    {
+      field: 'checkboxsa',
+      type: 'checkbox',
+      label: 'checkbox',
+      placeholder: '请输入权限介绍',
+      showKey: 1,
       options: [
         {
           label: 'test1',
@@ -46,25 +68,10 @@ export const searchFormConfig = {
       boxs: ['上海', '北京', '广州', '深圳'],
     },
     {
-      field: 'checkboxsa',
-      type: 'checkbox',
-      label: 'checkbox',
-      placeholder: '请输入权限介绍',
-      options: [
-        {
-          label: 'test1',
-          value: 1,
-        },
-        {
-          label: 'test2',
-          value: 2,
-        },
-      ],
-    },
-    {
       field: 'intro',
       type: 'input',
       label: '权限介绍',
+      showKey: 1,
       placeholder: '请输入权限介绍',
     },
     {
@@ -72,6 +79,7 @@ export const searchFormConfig = {
       type: 'switch',
       label: 'switch',
       placeholder: '请输入权限介绍',
+      showKey: 2,
       otherOptions: {
         'active-color': '#13ce66',
         'inactive-color': '#ff4949',
@@ -82,11 +90,13 @@ export const searchFormConfig = {
       type: 'uploadFile',
       label: 'uploadFile',
       placeholder: '请输入权限介绍',
+      showKey: 1,
     },
     {
       field: 'uploadImg',
       type: 'uploadImg',
       label: 'uploadImg',
+      showKey: 2,
       placeholder: '请输dsa入权限介绍',
       otherOptions: {
         lastM: 2,
@@ -97,6 +107,7 @@ export const searchFormConfig = {
       field: 'roleId',
       type: 'select',
       label: '选择角色',
+      showKey: 2,
       placeholder: '请选择角色',
       options: [
         {
@@ -126,6 +137,7 @@ export const searchFormConfig = {
       type: 'cascader',
       label: '级联选择',
       placeholder: '级联选择',
+      showKey: 1,
       options: [
         {
           value: 'zhinan',
@@ -402,6 +414,7 @@ export const searchFormConfig = {
     {
       field: 'createTime',
       type: 'datepicker',
+      showKey: 1,
       label: '创建时间',
       otherOptions: {
         startPlaceholder: '开始时间',

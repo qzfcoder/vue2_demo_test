@@ -8,7 +8,9 @@
         <template v-for="item in formItems">
           <el-col v-bind="colLayout" :key="item.label">
             <el-form-item
-              v-if="!item.isHidden"
+              v-if="
+                !item.showKey || (!item.isHidden && showItem === item.showKey)
+              "
               :label="item.label"
               :style="itemstyle"
               :prop="item.field"
@@ -32,7 +34,12 @@
                 ></el-input>
               </template>
               <template v-if="item.type == 'radio'">
-                <el-radio-group v-model="formData[`${item.field}`]">
+                <el-radio-group
+                  v-model="formData[`${item.field}`]"
+                  @change="
+                    (e) => change(formData[`${item.field}`], item.isChooseItem)
+                  "
+                >
                   <el-radio
                     v-for="i in item.options"
                     :key="i.value"
@@ -43,15 +50,8 @@
                 </el-radio-group>
               </template>
               <template v-if="item.type == 'checkbox'">
-                <!-- <el-checkbox
-                  :indeterminate="item.indeterminate"
-                  v-model="checkAll"
-                  @change="handleCheckAllChange"
-                  >全选</el-checkbox
-                > -->
                 <div style="margin: 15px 0">这个没有实现</div>
-                <!-- <el-checkbox-group v-model="formData[`${item.field}`]"> -->
-                <el-checkbox-group v-model="item.boxs">
+                <el-checkbox-group v-model="formData[item.field]">
                   <el-checkbox v-for="i in item.boxs" :key="i" :label="i">
                     {{ i }}</el-checkbox
                   >
@@ -181,11 +181,16 @@ export default {
       formData: {},
       fileList: [],
       checkAll: false,
+      isShowFlag: false,
+      showItem: undefined,
     };
   },
   mounted() {
+    console.log(this.nowChooseIndex);
     // console.log(this.value);
     this.formData = { ...this.value };
+    this.isShowFlag = this.formItems.isShowFlag;
+    this.showItem = this.formData.asaaaada;
   },
   methods: {
     handleCheckedCitiesChange(value, e, all) {
@@ -251,6 +256,12 @@ export default {
     // 级联选择
     handleChange(value) {
       console.log(value);
+    },
+    change(e, f) {
+      console.log(e, f);
+      if (f) {
+        this.showItem = e;
+      }
     },
   },
   watch: {
