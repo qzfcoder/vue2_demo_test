@@ -4,6 +4,7 @@
       <router-link to="/home"> Home </router-link>|
       <router-link to="/compositionApi"> CompositionApi </router-link>
       <router-link to="/zujianDemo"> zujianDemo </router-link>
+      <router-link to="/hbTable"> hbTable </router-link>
     </nav>
     <router-view />
   </div>

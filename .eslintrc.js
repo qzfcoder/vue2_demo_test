@@ -47,5 +47,9 @@ module.exports = {
     'consistent-return': 'off',
     'prefer-destructuring': 'off',
     'no-param-reassign': 'off',
+    '@typescript-eslint/no-this-alias': 'off',
+    'no-lonely-if': 'off',
+    'no-underscore-dangle': 'off',
+    'no-else-return': 'off',
   },
 };

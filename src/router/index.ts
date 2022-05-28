@@ -29,6 +29,11 @@ const routes: Array<RouteConfig> = [
     name: 'zujianDemo',
     component: () => import('@/views/zujianDemo.vue'),
   },
+  {
+    path: '/hbTable',
+    name: 'hbTable',
+    component: () => import('@/views/hbTable.vue'),
+  },
 ];
 
 const router = new VueRouter({
