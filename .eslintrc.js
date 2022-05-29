@@ -55,5 +55,6 @@ module.exports = {
     'guard-for-in': 'off',
     'no-shadow': 'off',
     'func-names': 'off',
+    'vue/valid-v-model': 'off',
   },
 };
