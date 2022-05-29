@@ -44,26 +44,26 @@ export default {
         {
           fristTarfet: '产出指标',
           secondTarfet: '数量指标',
-          threedTarfet: '',
-          target: '',
+          threedTarfet: '1',
+          target: '2',
         },
         {
           fristTarfet: '产出指标',
           secondTarfet: '数量指标',
-          threedTarfet: '',
-          target: '',
+          threedTarfet: '3',
+          target: '4',
         },
         {
           fristTarfet: '效益指标',
-          secondTarfet: '2',
-          threedTarfet: '',
-          target: '',
+          secondTarfet: '2~',
+          threedTarfet: '5',
+          target: '6',
         },
         {
           fristTarfet: '满意度指标',
           secondTarfet: '121321',
-          threedTarfet: '321',
-          target: '',
+          threedTarfet: '7',
+          target: '8',
         },
       ],
       spanArr: [], // 遍历数据时，根据相同的标识去存储记录
@@ -108,7 +108,7 @@ export default {
           }
         }
       });
-      console.log(this.spanArr, this.pos, this.secArr);
+      console.log(this.spanArr, '~', this.pos, '~', this.secArr, '~', this.sec);
     },
     // 列表方法
     objectSpanMethod({ rowIndex, columnIndex }) {
@@ -118,26 +118,27 @@ export default {
         // 二维数组存储的数据 取出
         const _row = this.spanArr[rowIndex];
         const _col = _row > 0 ? 1 : 0;
+        console.log(rowIndex, 'q', _row);
         return {
           rowspan: _row,
           colspan: _col,
         };
-        // 不可以return {rowspan：0， colspan: 0} 会造成数据不渲染， 也可以不写else，eslint过不了的话就返回false
       } else if (columnIndex === 1) {
         // 二维数组存储的数据 取出
         const _row = this.secArr[rowIndex];
         const _col = _row > 0 ? 1 : 0;
+        // console.log(rowIndex, 'q', _row);
         return {
           rowspan: _row,
           colspan: _col,
         };
-        // 不可以return {rowspan：0， colspan: 0} 会造成数据不渲染， 也可以不写else，eslint过不了的话就返回false
       } else {
         return false;
       }
     },
     addhandler(index, row) {
-      this.list.splice(index, 0, { ...row, secondTarfet: '1' });
+      this.list.splice(index + 1, 0, { ...row, secondTarfet: {} });
+      console.log(this.list);
       this.getSpanArr(this.list);
     },
     addhandler2(index, row) {

@@ -51,5 +51,9 @@ module.exports = {
     'no-lonely-if': 'off',
     'no-underscore-dangle': 'off',
     'no-else-return': 'off',
+    'no-restricted-syntax': 'off',
+    'guard-for-in': 'off',
+    'no-shadow': 'off',
+    'func-names': 'off',
   },
 };
