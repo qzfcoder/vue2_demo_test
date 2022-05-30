@@ -45,6 +45,7 @@ export default {
       ],
       list: [
         {
+          id: 'frist',
           fristTarfet: '产出指标',
           secondTarfet: '数量指标',
           threedTarfet: '1',
@@ -53,6 +54,7 @@ export default {
         },
 
         {
+          id: 'second',
           fristTarfet: '效益指标',
           secondTarfet: '2~',
           threedTarfet: '5',
@@ -60,6 +62,7 @@ export default {
           status: true,
         },
         {
+          id: 'threed',
           fristTarfet: '满意度指标',
           secondTarfet: '121321',
           threedTarfet: '7',
@@ -100,10 +103,7 @@ export default {
             this.spanArr.push(1);
             this.pos = index;
           }
-          if (
-            data[index].secondTarfet === data[index - 1].secondTarfet &&
-            data[index].secondTarfet !== undefined
-          ) {
+          if (data[index].id === data[index - 1].id) {
             this.secArr[this.sec] += 1;
             this.secArr.push(0);
           } else {
@@ -112,7 +112,6 @@ export default {
           }
         }
       });
-      console.log(this.spanArr, '~', this.pos, '~', this.secArr, '~', this.sec);
     },
     // 列表方法
     objectSpanMethod({ rowIndex, columnIndex }) {
@@ -131,7 +130,6 @@ export default {
         // 二维数组存储的数据 取出
         const _row = this.secArr[rowIndex];
         const _col = _row > 0 ? 1 : 0;
-        // console.log(rowIndex, 'q', _row);
         return {
           rowspan: _row,
           colspan: _col,
@@ -143,20 +141,24 @@ export default {
     addhandler(index, row, e) {
       // 这里是通过表格中属性相同的话则会合并起来
       // 增加list中的数据，
-      console.log(e);
       this.list[index].status = false;
       this.list.splice(index + 1, 0, {
         ...row,
         secondTarfet: undefined,
         status: true,
+        id: this.list[index + 1].id + 1,
       });
-      console.log(this.list);
       this.getSpanArr(this.list);
     },
     addhandler2(index, row) {
       console.log(index, row);
+      this.list[index + 1].status = true;
       if (row.secondTarfet) {
-        this.list.splice(index, 0, { ...row });
+        this.list.splice(index, 0, {
+          ...row,
+          status: false,
+          isSecond: true,
+        });
         this.getSpanArr(this.list);
       } else {
         console.log('请填写二级目标');
