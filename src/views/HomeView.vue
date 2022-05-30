@@ -1,5 +1,16 @@
 <template>
   <div class="home">
+    <el-input-number v-model="test" :min="1"></el-input-number>
+    1
+    <!-- 如果需要保留两位小数或者三位小数 只需要将 最后的 +2 改为 +3 即可 以此类推，保留几位小数就 几+1 -->
+    <el-input
+      type="text"
+      placeholder="请输入保留一位小数的数字"
+      v-model="test"
+      onkeyup="value=value.replace(/[^\d]/g,'')"
+      maxlength="6"
+    />
+
     <z-form :model="model" :rules="rules" ref="loginForm">
       <z-form-item label="用户名" prop="username">
         <z-input v-model="model.username"></z-input>
@@ -32,6 +43,7 @@ export default {
   },
   data() {
     return {
+      test: '',
       model: {
         username: '123',
         password: '',
@@ -80,3 +92,18 @@ export default {
   },
 };
 </script>
+<style scoped>
+::v-deep .el-input-number__decrease {
+  display: none;
+}
+::v-deep .el-input-number__increase {
+  display: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+</style>

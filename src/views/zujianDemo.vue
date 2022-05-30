@@ -3,6 +3,8 @@
     <form-demo></form-demo>
     <div>================================</div>
     <table-demo></table-demo>
+    <div>================================</div>
+    <down-file></down-file>
   </div>
 </template>
 
@@ -11,12 +13,14 @@
 
 import formDemo from './formDemo/index.vue';
 import tableDemo from './tableDemo/index.vue';
+import downFile from './downFile/index.vue';
 
 export default {
   name: 'HomeView',
   components: {
     tableDemo,
     formDemo,
+    downFile,
   },
   data() {
     return {
