@@ -1,11 +1,11 @@
 <template>
   <div>
     <h3>表格合并</h3>
-    <el-table :data="newList" :span-method="objectSpanMethod" border>
+    <el-table :data="list" :span-method="objectSpanMethod" border>
       <template v-for="propItem in headers">
         <el-table-column v-bind="propItem" align="center" :key="propItem.prop">
           <template #default="scope">
-            <slot :name="propItem.slotName" :row="scope.row" :list="newList">
+            <slot :name="propItem.slotName" :row="scope.row">
               {{ scope.row[propItem.prop] }}
             </slot>
           </template>
@@ -15,6 +15,7 @@
         <template slot-scope="scope">
           {{ scope.row }}
           <el-button
+            v-if="scope.row.status"
             @click="addhandler(scope.$index, scope.row, scope)"
             type="primary"
             size="mini"
@@ -43,41 +44,31 @@ export default {
         { prop: 'threedTarfet', label: '三级目标', slotName: 'threedTarfet' },
         { prop: 'target', label: '指标值', slotName: 'target' },
       ],
-      newList: [],
       list: [
         {
           id: 'frist',
           fristTarfet: '产出指标',
-          children: [
-            {
-              id: 'children_frist',
-              secondTarfet: '数量指标',
-              children: [{ threedTarfet: '1', target: '2' }],
-            },
-          ],
+          secondTarfet: '数量指标',
+          threedTarfet: '1',
+          target: '2',
+          status: true,
         },
 
         {
           id: 'second',
           fristTarfet: '效益指标',
-          children: [
-            {
-              id: 'children_second',
-              secondTarfet: '2~',
-              children: [{ threedTarfet: '5', target: '6' }],
-            },
-          ],
+          secondTarfet: '2~',
+          threedTarfet: '5',
+          target: '6',
+          status: true,
         },
         {
           id: 'threed',
           fristTarfet: '满意度指标',
-          children: [
-            {
-              id: 'children_threed',
-              secondTarfet: '121321',
-              children: [{ threedTarfet: '7', target: '8' }],
-            },
-          ],
+          secondTarfet: '121321',
+          threedTarfet: '7',
+          target: '8',
+          status: true,
         },
       ],
       spanArr: [], // 遍历数据时，根据相同的标识去存储记录
@@ -87,23 +78,6 @@ export default {
     };
   },
   methods: {
-    treeToArray(arr) {
-      for (let i = 0; i < arr.length; i++) {
-        if (arr[i].children && arr[i].children.length) {
-          arr[i].children.forEach((item) => {
-            const tmp = {};
-            for (const key in arr[i]) {
-              if (key !== 'children') tmp[key] = arr[i][key];
-            }
-            arr.push({ ...tmp, ...item });
-          });
-          arr.splice(i, 1);
-          i--;
-        }
-      }
-      return arr;
-    },
-
     getSpanArr(data) {
       const that = this;
       // 页面展示的数据，不一定是全部的数据，所以每次都清空之前存储的 保证遍历的数据是最新的数据。以免造成数据渲染混乱
@@ -111,11 +85,8 @@ export default {
       that.pos = 0;
       that.secArr = [];
       that.sec = 0;
-      const res = this.treeToArray(data);
-      this.newList = res;
-      console.log(res);
       // 遍历数据
-      res.forEach((item, index) => {
+      data.forEach((item, index) => {
         // 判断是否是第一项
         if (index === 0) {
           this.spanArr.push(1);
@@ -171,48 +142,25 @@ export default {
     addhandler(index, row, e) {
       // 这里是通过表格中属性相同的话则会合并起来
       // 增加list中的数据，
-      console.log(index, row, '123', this.list);
-      this.list.forEach((item, index) => {
-        if (item.fristTarfet === row.fristTarfet) {
-          if (item.children.length === 8) {
-            alert('只能存在8个');
-          } else {
-            item.children.push({
-              secondTarfet: '',
-              id: item.id + Math.random(),
-              children: [{ threedTarfet: '7', target: '8' }],
-            });
-          }
-        }
+      this.list[index].status = false;
+      this.list.splice(index + 1, 0, {
+        ...row,
+        secondTarfet: undefined,
+        status: true,
+        id: this.list[index].id + 1,
       });
-
-      const res = [...this.list];
-      this.getSpanArr(res);
+      this.getSpanArr(this.list);
     },
     addhandler2(index, row) {
       console.log(index, row);
       // this.list[index + 1].status = true;
       if (row.secondTarfet) {
-        this.list.forEach((item) => {
-          // if (item.fristTarfet === row.fristTarfet) {
-          //   item.children.push({
-          //     secondTarfet: '',
-          //     id: this.list[index].id + 1,
-          //     children: [{ threedTarfet: '7', target: '8' }],
-          //   });
-          // }
-          item.children.forEach((child) => {
-            if (child.id === row.id) {
-              child.secondTarfet = row.secondTarfet;
-              child.children.push({
-                threedTarfet: '7',
-                target: '8',
-              });
-            }
-          });
+        this.list.splice(index, 0, {
+          ...row,
+          status: false,
+          isSecond: true,
         });
-        const res = [...this.list];
-        this.getSpanArr(res);
+        this.getSpanArr(this.list);
       } else {
         console.log('请填写二级目标');
       }
@@ -221,8 +169,7 @@ export default {
   // methods中定义方法
 
   created() {
-    const res = [...this.list];
-    this.getSpanArr(res);
+    this.getSpanArr(this.list);
   },
 };
 </script>

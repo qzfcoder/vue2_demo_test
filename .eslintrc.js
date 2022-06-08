@@ -56,5 +56,6 @@ module.exports = {
     'no-shadow': 'off',
     'func-names': 'off',
     'vue/valid-v-model': 'off',
+    'no-plusplus': 'off',
   },
 };

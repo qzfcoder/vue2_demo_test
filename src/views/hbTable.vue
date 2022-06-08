@@ -20,5 +20,6 @@ export default {
   components: {
     hbT,
   },
+  methods: {},
 };
 </script>
