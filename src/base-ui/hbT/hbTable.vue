@@ -174,18 +174,18 @@ export default {
       console.log(index, row, '123', this.list);
       this.list.forEach((item, index) => {
         if (item.fristTarfet === row.fristTarfet) {
+          console.log(index, '~~~', item.children);
           if (item.children.length === 8) {
             alert('只能存在8个');
           } else {
             item.children.push({
               secondTarfet: '',
               id: item.id + Math.random(),
-              children: [{ threedTarfet: '7', target: '8' }],
+              children: [{ threedTarfet: '', target: '' }],
             });
           }
         }
       });
-
       const res = [...this.list];
       this.getSpanArr(res);
     },
