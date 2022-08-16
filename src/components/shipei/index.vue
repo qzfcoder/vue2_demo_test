@@ -34,14 +34,14 @@ export default {
       const delay = t || 500;
       let timer;
       return function () {
-        const args = arguments;
+        // const args = arguments;
         if (timer) {
           clearTimeout(timer);
         }
         const context = this;
         timer = setTimeout(() => {
           timer = null;
-          fn.apply(context, args);
+          fn.apply(context);
         }, delay);
       };
     },

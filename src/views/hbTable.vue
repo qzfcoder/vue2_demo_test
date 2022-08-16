@@ -1,21 +1,12 @@
 <template>
   <div>
-    <hb-t>
-      <template #secondTarfet="scope">
-        <el-input v-model="scope.row.secondTarfet"></el-input>
-      </template>
-      <template #threedTarfet="scope">
-        <el-input v-model="scope.row.threedTarfet"></el-input>
-      </template>
-      <template #target="scope">
-        <el-input v-model="scope.row.target"></el-input>
-      </template>
-    </hb-t>
+    <hb-t> </hb-t>
   </div>
 </template>
 
 <script>
-import hbT from '@/base-ui/hbT/hbTable.vue';
+// import hbT from '@/base-ui/hbT/hbTable.vue';
+import hbT from '@/base-ui/hbT/hTable.vue';
 export default {
   components: {
     hbT,

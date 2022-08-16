@@ -1,34 +1,33 @@
 <template>
   <div>
     <h3>表格合并</h3>
-    <el-table :data="newList" :span-method="objectSpanMethod" border>
-      <template v-for="propItem in headers">
-        <el-table-column v-bind="propItem" align="center" :key="propItem.prop">
-          <template #default="scope">
-            <slot :name="propItem.slotName" :row="scope.row" :list="newList">
-              {{ scope.row[propItem.prop] }}
-            </slot>
-          </template>
-        </el-table-column>
-      </template>
-      <el-table-column label="操作">
-        <template slot-scope="scope">
-          {{ scope.row }}
-          <el-button
-            @click="addhandler(scope.$index, scope.row, scope)"
-            type="primary"
-            size="mini"
-            >新增
-          </el-button>
-          <el-button
-            @click="addhandler2(scope.$index, scope.row)"
-            type="primary"
-            size="mini"
-            >新增二级</el-button
-          >
+    <table border>
+      <tr>
+        <th v-for="item in headers" :key="item">{{ item.label }}</th>
+      </tr>
+      <template v-for="item in list">
+        <template v-for="i in item.children">
+          <tr v-for="(a, index) in i.children" :key="index">
+            <td
+              :rowspan="item.rowspan"
+              v-if="i.rowspan !== 0 && a.rowspan !== 0"
+            >
+              {{ i.rowspan }}
+              {{ item.fristTarfet }}
+            </td>
+            <td :rowspan="i.children.length" v-if="a.rowspan !== 0">
+              {{ i.secondTarfet }}
+            </td>
+            <td>
+              {{ a.threedTarfet }}
+            </td>
+            <td>
+              {{ a.target }}
+            </td>
+          </tr>
         </template>
-      </el-table-column>
-    </el-table>
+      </template>
+    </table>
   </div>
 </template>
 
@@ -42,16 +41,36 @@ export default {
         { prop: 'secondTarfet', label: '二级目标', slotName: 'secondTarfet' },
         { prop: 'threedTarfet', label: '三级目标', slotName: 'threedTarfet' },
         { prop: 'target', label: '指标值', slotName: 'target' },
+        { prop: 'target', label: '操作' },
       ],
       newList: [],
       list: [
         {
           id: 'frist',
           fristTarfet: '产出指标',
+          rowspan: 5,
           children: [
             {
               id: 'children_frist',
               secondTarfet: '数量指标',
+              children: [
+                { threedTarfet: '1', target: '2' },
+                { rowspan: 0, threedTarfet: '1', target: '2' },
+              ],
+            },
+            {
+              id: 'children_frist',
+              secondTarfet: '数量指标',
+              rowspan: 0,
+              children: [
+                { threedTarfet: '1', target: '2' },
+                { rowspan: 0, threedTarfet: '1', target: '2' },
+              ],
+            },
+            {
+              id: 'children_frist',
+              secondTarfet: '数量指标',
+              rowspan: 0,
               children: [{ threedTarfet: '1', target: '2' }],
             },
           ],
@@ -60,17 +79,22 @@ export default {
         {
           id: 'second',
           fristTarfet: '效益指标',
+          rowspan: 2,
           children: [
             {
               id: 'children_second',
               secondTarfet: '2~',
-              children: [{ threedTarfet: '5', target: '6' }],
+              children: [
+                { threedTarfet: '5', target: '6' },
+                { rowspan: 0, threedTarfet: '5', target: '6' },
+              ],
             },
           ],
         },
         {
           id: 'threed',
           fristTarfet: '满意度指标',
+          rowspan: 1,
           children: [
             {
               id: 'children_threed',
@@ -80,149 +104,9 @@ export default {
           ],
         },
       ],
-      spanArr: [], // 遍历数据时，根据相同的标识去存储记录
-      pos: 0, // 二维数组的索引
-      secArr: [],
-      sec: 0, // 二维数组的索引
     };
   },
-  methods: {
-    treeToArray(arr) {
-      for (let i = 0; i < arr.length; i++) {
-        if (arr[i].children && arr[i].children.length) {
-          arr[i].children.forEach((item) => {
-            const tmp = {};
-            for (const key in arr[i]) {
-              if (key !== 'children') tmp[key] = arr[i][key];
-            }
-            arr.push({ ...tmp, ...item });
-          });
-          arr.splice(i, 1);
-          i--;
-        }
-      }
-      return arr;
-    },
-
-    getSpanArr(data) {
-      const that = this;
-      // 页面展示的数据，不一定是全部的数据，所以每次都清空之前存储的 保证遍历的数据是最新的数据。以免造成数据渲染混乱
-      that.spanArr = [];
-      that.pos = 0;
-      that.secArr = [];
-      that.sec = 0;
-      const res = this.treeToArray(data);
-      this.newList = res;
-      console.log(res);
-      // 遍历数据
-      res.forEach((item, index) => {
-        // 判断是否是第一项
-        if (index === 0) {
-          this.spanArr.push(1);
-          this.pos = 0;
-          this.secArr.push(1);
-          this.sec = 0;
-        } else {
-          // 不是第一项时，就根据标识去存储
-          if (data[index].fristTarfet === data[index - 1].fristTarfet) {
-            // 查找到符合条件的数据时每次要把之前存储的数据+1
-            this.spanArr[this.pos] += 1;
-            this.spanArr.push(0);
-          } else {
-            // 没有符合的数据时，要记住当前的index
-            this.spanArr.push(1);
-            this.pos = index;
-          }
-          if (data[index].id === data[index - 1].id) {
-            this.secArr[this.sec] += 1;
-            this.secArr.push(0);
-          } else {
-            this.secArr.push(1);
-            this.sec = index;
-          }
-        }
-      });
-    },
-    // 列表方法
-    objectSpanMethod({ rowIndex, columnIndex }) {
-      // 页面列表上 表格合并行 -> 第几列(从0开始)
-      // 需要合并多个单元格时 依次增加判断条件即可
-      if (columnIndex === 0) {
-        // 二维数组存储的数据 取出
-        const _row = this.spanArr[rowIndex];
-        const _col = _row > 0 ? 1 : 0;
-        console.log(rowIndex, 'q', _row);
-        return {
-          rowspan: _row,
-          colspan: _col,
-        };
-      } else if (columnIndex === 1) {
-        // 二维数组存储的数据 取出
-        const _row = this.secArr[rowIndex];
-        const _col = _row > 0 ? 1 : 0;
-        return {
-          rowspan: _row,
-          colspan: _col,
-        };
-      } else {
-        return false;
-      }
-    },
-    addhandler(index, row, e) {
-      // 这里是通过表格中属性相同的话则会合并起来
-      // 增加list中的数据，
-      console.log(index, row, '123', this.list);
-      this.list.forEach((item, index) => {
-        if (item.fristTarfet === row.fristTarfet) {
-          console.log(index, '~~~', item.children);
-          if (item.children.length === 8) {
-            alert('只能存在8个');
-          } else {
-            item.children.push({
-              secondTarfet: '',
-              id: item.id + Math.random(),
-              children: [{ threedTarfet: '', target: '' }],
-            });
-          }
-        }
-      });
-      const res = [...this.list];
-      this.getSpanArr(res);
-    },
-    addhandler2(index, row) {
-      console.log(index, row);
-      // this.list[index + 1].status = true;
-      if (row.secondTarfet) {
-        this.list.forEach((item) => {
-          // if (item.fristTarfet === row.fristTarfet) {
-          //   item.children.push({
-          //     secondTarfet: '',
-          //     id: this.list[index].id + 1,
-          //     children: [{ threedTarfet: '7', target: '8' }],
-          //   });
-          // }
-          item.children.forEach((child) => {
-            if (child.id === row.id) {
-              child.secondTarfet = row.secondTarfet;
-              child.children.push({
-                threedTarfet: '7',
-                target: '8',
-              });
-            }
-          });
-        });
-        const res = [...this.list];
-        this.getSpanArr(res);
-      } else {
-        console.log('请填写二级目标');
-      }
-    },
-  },
+  methods: {},
   // methods中定义方法
-
-  created() {
-    const res = [...this.list];
-    this.getSpanArr(res);
-  },
 };
 </script>
