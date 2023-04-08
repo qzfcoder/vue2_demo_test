@@ -6,6 +6,7 @@
       <router-link to="/zujianDemo"> zujianDemo </router-link>
       <router-link to="/hbTable"> hbTable </router-link>
       <router-link to="/hbTable2"> hbTable2 </router-link>
+      <router-link to="/printFile"> printFile </router-link>
     </nav>
     <router-view />
   </div>
