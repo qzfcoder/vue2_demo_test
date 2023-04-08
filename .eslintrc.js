@@ -57,5 +57,8 @@ module.exports = {
     'func-names': 'off',
     'vue/valid-v-model': 'off',
     'no-plusplus': 'off',
+    'dot-notation': 'off',
+    'array-callback-return': 'off',
+    eqeqeq: 'off',
   },
 };
