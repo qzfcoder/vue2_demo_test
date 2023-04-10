@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+    <style>* {
+        margin: 0;
+        padding: 0;
+      }
+
+      table,
+      td,
+      th {
+        border: 1px solid #000;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 3px 10px;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      table {
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .title {
+        font-size: 14px;
+        line-height: 1.5;
+        text-align: center;
+        margin-bottom: 20px;
+        font-weight: normal;
+      }
+
+      .footer-wrap {
+        margin-top: 20px;
+        display: flex;
+      }
+
+      .footer {
+        margin-left: auto;
+        padding-right: 100px;
+        font-size: 12px;
+        line-height: 1.5;
+        text-align: left;
+      }</style>
+  </head>
+  <body>
+    <h1 class="title">{{ title }}</h1>
+    <table>
+      <thead>
+        <tr>
+          <th rowspan="2">日期</th>
+          <th  rowspan="2">日期1</th>
+          <th  rowspan="2">日期2</th>
+          <th colspan="10">姓名
+          </th>
+        </tr>
+        <tr>
+          <th>地址</th>
+          <th>地址2</th>
+          <th>地址2</th>
+          <th>地址2</th>
+          <th>地址2</th>
+          <th>地址2</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for row in list %}
+        <tr>
+          <td>{{ row.date }}</td>
+          <td>{{ row.name }}</td>
+          <td>{{ row.address }}</td>
+          <td>{{ row.name1 }}</td>
+          <td>{{ row.address1 }}</td>
+          <td>{{ row.name2 }}</td>
+          <td>{{ row.address2 }}</td>
+          <td>{{ row.name3 }}</td>
+          <td>{{ row.address3 }}</td>
+          <td>{{ row.name4 }}</td>
+          <td>{{ row.address4 }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="footer-wrap">
+      <div class="footer">
+        <div>打印日期：{{ now_time }}</div>
+      </div>
+    </div>
+  </body>
+</html>
+

@@ -49,6 +49,11 @@ const routes: Array<RouteConfig> = [
     name: 'hbTable2',
     component: () => import('@/views/hbTable2.vue'),
   },
+  {
+    path: '/printFile',
+    name: 'printFile',
+    component: () => import('@/views/printFile/index.vue'),
+  },
 ];
 
 const router = new VueRouter({
