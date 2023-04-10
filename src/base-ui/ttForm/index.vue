@@ -95,10 +95,12 @@
                 ></el-cascader>
               </template>
               <template v-else-if="item.type === 'uploadImg'">
+                {{ formData[item.field] }}111111111
                 <el-upload
                   class="avatar-uploader"
                   action="https://jsonplaceholder.typicode.com/posts/"
                   :show-file-list="false"
+                  name="fileName"
                   :on-success="(e, g) => handleAvatarSuccess(e, g, item.field)"
                   :before-upload="
                     (e) => beforeAvatarUpload(e, item.otherOptions)

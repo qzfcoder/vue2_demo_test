@@ -20,6 +20,16 @@ const routes: Array<RouteConfig> = [
     component: () => import('@/views/CompositionApi.vue'),
   },
   {
+    path: '/video',
+    name: 'videoApi',
+    component: () => import('@/views/video'),
+  },
+  {
+    path: '/office',
+    name: 'office',
+    component: () => import('@/views/office'),
+  },
+  {
     path: '/axiosUse',
     name: 'axiosUse',
     component: () => import('@/views/AxiosUse.vue'),

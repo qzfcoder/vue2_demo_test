@@ -15,6 +15,9 @@ class ttRequest {
     // 2.添加所有的实例都有的拦截器
     this.instance.interceptors.request.use(
       (res) => {
+        const token =
+          'eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6Ijk2ZjkzNTUzLTY5ZTktNDdmNy1hNjYwLWFjM2M2NzU5ZjQ5NSJ9.dJfpYqsxk5kbkI47h950ymXQ2A0iS2uR5U2UlxH34bw0uIz-wk8yn4jbnjM45VrSxLYr6sWIy231LCTdVWFVpQ';
+        res.headers.Authorization = `Bearer ${token}`;
         console.log('所有的实例都有的拦截器: 请求成功拦截');
         return res;
       },

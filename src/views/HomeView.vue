@@ -1,5 +1,9 @@
 <template>
   <div class="home">
+    <Title :title="'tets'">
+      <template #slot1> 1 </template>
+      <!-- <template #slot2> 2 </template> -->
+    </Title>
     <el-input-number v-model="test" :min="1"></el-input-number>
     1
     <!-- 如果需要保留两位小数或者三位小数 只需要将 最后的 +2 改为 +3 即可 以此类推，保留几位小数就 几+1 -->
@@ -32,6 +36,7 @@ import zForm from '@/components/zForm/index.vue';
 import dialog from '@/utils/dialog/index';
 import zTree from '@/components/zTree/index.vue';
 import moban from '@/utils/dialog/index.vue';
+import Title from '@/components/Title/index.vue';
 
 export default {
   name: 'HomeView',
@@ -40,6 +45,7 @@ export default {
     zInput,
     zForm,
     zTree,
+    Title,
   },
   data() {
     return {

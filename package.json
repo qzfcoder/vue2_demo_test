@@ -20,6 +20,8 @@
     "file-saver": "^2.0.5",
     "fs": "0.0.1-security",
     "pinia": "^2.0.11",
+    "pixi.js": "^7.2.0",
+    "print-js": "^1.6.0",
     "table-xlsx": "^0.1.6",
     "vue": "^2.6.14",
     "vue-router": "^3.5.1",

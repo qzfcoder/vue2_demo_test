@@ -6,13 +6,19 @@
       <router-link to="/zujianDemo"> zujianDemo </router-link>
       <router-link to="/hbTable"> hbTable </router-link>
       <router-link to="/hbTable2"> hbTable2 </router-link>
+      <router-link to="/video"> video </router-link>
+      <router-link to="/office"> office </router-link>
     </nav>
     <router-view />
   </div>
 </template>
 <script>
+import { accountLoginRequest } from '@/api/index';
 export default {
   components: {},
+  mounted() {
+    accountLoginRequest('select');
+  },
 };
 </script>
 <style lang="less">

@@ -59,6 +59,13 @@ module.exports = {
     'no-plusplus': 'off',
     'dot-notation': 'off',
     'array-callback-return': 'off',
+    'lines-between-class-members': 'off',
+    'object-shorthand': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
+    'prefer-const': 'off',
+    'no-var': 'off',
+    'vars-on-top': 'off',
+    'no-unused-expressions': 'off',
     eqeqeq: 'off',
   },
 };
