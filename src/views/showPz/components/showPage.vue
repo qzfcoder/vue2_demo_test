@@ -1,7 +1,7 @@
 <template>
   <div>
-    {{ searchFormConfig }}
     <tt-form
+      v-if="showForm"
       ref="loginFormRef"
       v-bind="searchFormConfig"
       v-model="formData"
@@ -13,26 +13,36 @@
         </span>
       </template>
     </tt-form>
+    <el-button type="primary" @click="getAllMsg">获取相关信息</el-button>
   </div>
 </template>
 
 <script>
 import ttForm from '@/base-ui/ttForm/index.vue';
-import { searchFormConfig } from './formConfig';
+import { mainStore } from '@/store';
+import rule from '@/utils/rule';
 export default {
   components: {
     ttForm,
   },
   data() {
     return {
-      searchFormConfig,
-      formData: {
-        checkboxsa: [],
-        asaaaada: 1,
-      },
+      searchFormConfig: {},
+      showForm: true,
+      formData: {},
     };
   },
   methods: {
+    getAllMsg() {
+      this.showForm = false;
+      this.searchFormConfig = {};
+      this.searchFormConfig = mainStore().getCommonMsg;
+      this.searchFormConfig.formItems.map((item) => {
+        item.rules = rule(item.ruleSwitch, item.ruleContent ?? null);
+        return item;
+      });
+      this.showForm = true;
+    },
     handleConfirmClick() {
       console.log(
         this.$refs.loginFormRef.$refs.elFormRef.validate((e) => {

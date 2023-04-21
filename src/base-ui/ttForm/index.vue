@@ -6,7 +6,10 @@
     <el-form ref="elFormRef" :label-width="labelWidth" :model="formData">
       <el-row>
         <template v-for="item in formItems">
-          <el-col v-bind="colLayout" :key="item.label">
+          <el-col :span="24" v-if="item.type == 'label'" :key="item.label">
+            {{ item.label }}
+          </el-col>
+          <el-col v-bind="colLayout" v-else :key="item.label">
             <el-form-item
               v-if="
                 !item.showKey || (!item.isHidden && showItem === item.showKey)
@@ -50,7 +53,6 @@
                 </el-radio-group>
               </template>
               <template v-if="item.type == 'checkbox'">
-                <div style="margin: 15px 0">这个没有实现</div>
                 <el-checkbox-group v-model="formData[item.field]">
                   <el-checkbox v-for="i in item.boxs" :key="i" :label="i">
                     {{ i }}</el-checkbox

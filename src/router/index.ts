@@ -54,6 +54,16 @@ const routes: Array<RouteConfig> = [
     name: 'printFile',
     component: () => import('@/views/printFile/index.vue'),
   },
+  {
+    path: '/showPz',
+    name: 'showPz',
+    component: () => import('@/views/showPz/index.vue'),
+  },
+  {
+    path: '/chajianDemo',
+    name: 'chajianDemo',
+    component: () => import('@/views/chajianDemo/index.vue'),
+  },
 ];
 
 const router = new VueRouter({

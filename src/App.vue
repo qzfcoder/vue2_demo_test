@@ -9,6 +9,8 @@
       <router-link to="/video"> video </router-link>
       <router-link to="/office"> office </router-link>
       <router-link to="/printFile"> printFile </router-link>
+      <router-link to="/showPz"> showPz </router-link>
+      <router-link to="/chajianDemo"> chajianDemo </router-link>
     </nav>
     <router-view />
   </div>
