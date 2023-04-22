@@ -33,38 +33,90 @@ export default {
         span: 16,
         items: [
           {
-            prop: 'user',
-            label: '活动名称',
-          },
-          {
-            prop: 'region',
-            label: '活动区域',
-            component: 'el-input',
-            type: 'textarea',
-          },
-          {
-            prop: 'address',
-            label: '项目地址',
-            required: true,
-          },
-          {
-            prop: 'evaluate',
-            label: '评价',
-            component: 'el-radio',
-            options: ['很棒', '一般', '糟糕'],
-            on: {
-              change: (v) => {
-                this.$message.info('给个好评吧');
+            ruleSwitch: false,
+            component: 'el-date-picker',
+            prop: 'date',
+            type: 'daterange',
+            label: 'as ',
+            props: { label: 'label', value: 'value' },
+            rules: [
+              {
+                required: false,
+                trigger: 'blur',
+                message: '该字段为必填项',
+                type: 'string',
+              },
+            ],
+            pickerOptions: {
+              disabledDate(time) {
+                return time.getTime() < Date.now();
               },
             },
           },
-        ],
-        on: {
-          validate: (v) => {
-            console.log('验证字段：' + v);
+          {
+            options: [{ label: '', value: '', iseditor: false }],
+            ruleSwitch: false,
+            component: 'el-input',
+            prop: '1dsa',
+            label: '2',
+            props: { label: 'label', value: 'value' },
+            rules: [
+              {
+                required: false,
+                trigger: 'blur',
+                message: '该字段为必填项',
+                type: 'string',
+              },
+            ],
           },
+        ],
+        on: {},
+        layout: 'grid',
+        data: {
+          user: '',
+          region: '',
+          address: '',
+          evaluate: '',
+          date: '2023-04-08',
+          '1dsa': '',
         },
       },
+      // form: {
+      //   span: 16,
+      //   items: [
+      //     {
+      //       prop: 'user',
+      //       label: '活动名称',
+      //     },
+      //     {
+      //       prop: 'region',
+      //       label: '活动区域',
+      //       component: 'el-input',
+      //       type: 'textarea',
+      //     },
+      //     {
+      //       prop: 'address',
+      //       label: '项目地址',
+      //       required: true,
+      //     },
+      //     {
+      //       prop: 'evaluate',
+      //       label: '评价',
+      //       component: 'el-radio',
+      //       options: ['很棒', '一般', '糟糕'],
+      //       on: {
+      //         change: (v) => {
+      //           this.$message.info('给个好评吧');
+      //         },
+      //       },
+      //     },
+      //   ],
+      //   on: {
+      //     validate: (v) => {
+      //       console.log('验证字段：' + v);
+      //     },
+      //   },
+      // },
     };
   },
   async mounted() {
@@ -85,6 +137,17 @@ export default {
             content: item.labelTitle,
             labelPosition: item.labelPosition,
           });
+        }
+        if (item.component == 'el-date-picker' && item.dateDisabled) {
+          item.pickerOptions = {
+            disabledDate(time) {
+              if (item.dateDisabled == 1) {
+                return time.getTime() < Date.now();
+              } else {
+                return time.getTime() > Date.now();
+              }
+            },
+          };
         }
         if (item.controllerPz?.allChoose) {
           pz = [...pz, ...item.controllerPz.allChoose];

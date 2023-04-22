@@ -6,7 +6,11 @@
       <div v-for="(item, index) in formData.items" :key="item.key">
         <el-button @click="deleteHang(index)">删除行</el-button>
         <el-form-item label="类型选择">
-          <el-select v-model="item.component" placeholder="请选择">
+          <el-select
+            v-model="item.component"
+            placeholder="请选择"
+            @change="(e) => changeType(e, index)"
+          >
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -87,16 +91,29 @@
               </el-select>
             </el-form-item>
           </template>
-          <template v-if="item.component == 'el-input'">
-            <el-select v-model="item.type" placeholder="请选择">
-              <el-option
-                v-for="item in inputOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              >
-              </el-option>
-            </el-select>
+          <template v-if="item.component == 'el-date-picker'">
+            <el-form-item label="选择日期格式">
+              <el-select v-model="item.type" placeholder="请选择">
+                <el-option
+                  v-for="item in dateOptionList"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="选择日期禁用范围">
+              <el-select v-model="item.dateDisabled" placeholder="请选择">
+                <el-option
+                  v-for="item in dateDisabledOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </el-form-item>
           </template>
           <template
             v-if="item.component == 'el-select' || item.component == 'el-radio'"
@@ -169,7 +186,6 @@
       </div>
     </el-form>
     <el-dialog title="配置xxxxx" :visible.sync="dialogVisible" width="70%">
-      {{ pzForm.allChoose }}
       <el-form :model="pzForm">
         <el-button @click="addConnect()">增加关联项目</el-button>
         <div v-for="(item, index) in pzForm.allChoose" :key="item.key">
@@ -227,6 +243,46 @@ export default {
         requireBoolean: rule(true, null, null, null, 'boolean'),
       },
       chooseMsgList: [],
+      dateDisabledOptions: [
+        {
+          value: 1,
+          label: '大于当前时间',
+        },
+        {
+          value: 2,
+          label: '小于当前时间',
+        },
+      ],
+      dateOptionList: [
+        {
+          value: undefined,
+          label: '时间',
+        },
+        {
+          value: 'daterange',
+          label: '时间范围',
+        },
+        {
+          value: 'datetimerange',
+          label: '时间范围2-包含时间',
+        },
+        {
+          value: 'datetime',
+          label: '时间-包含时间',
+        },
+        {
+          value: 'month',
+          label: '时间-到月',
+        },
+        {
+          value: 'monthrange',
+          label: '时间范围-到月',
+        },
+        {
+          value: 'year',
+          label: '时间年',
+        },
+      ],
       options: [
         {
           value: 'label',
@@ -249,7 +305,7 @@ export default {
           label: '下拉选择',
         },
         {
-          value: 'el-datepicker',
+          value: 'el-date-picker',
           label: '时间选择',
         },
         {
@@ -358,6 +414,13 @@ export default {
   },
   mounted() {},
   methods: {
+    changeType(e, index) {
+      if (e == 'el-date-picker') {
+        this.formData.items[index].prop = 'date';
+      } else {
+        this.formData.items[index].prop = null;
+      }
+    },
     addHang() {
       this.formData.items.push({
         options: [{ label: '', value: '', iseditor: false }],
