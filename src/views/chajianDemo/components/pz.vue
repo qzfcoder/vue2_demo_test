@@ -169,6 +169,7 @@
       </div>
     </el-form>
     <el-dialog title="配置xxxxx" :visible.sync="dialogVisible" width="70%">
+      {{ pzForm.allChoose }}
       <el-form :model="pzForm">
         <el-button @click="addConnect()">增加关联项目</el-button>
         <div v-for="(item, index) in pzForm.allChoose" :key="item.key">
@@ -352,6 +353,7 @@ export default {
       getFieldChooseList: [],
       pzForm: { allChoose: [] },
       chooseIndex: null,
+      nowProp: '',
     };
   },
   mounted() {},
@@ -375,6 +377,7 @@ export default {
     async connectBtn(e, f) {
       this.chooseIndex = null;
       console.log(e);
+      this.nowProp = e.prop;
       if (e.options.length && e.prop && e.label) {
         this.chooseIndex = f;
         console.log(Boolean(e.controllerPz));
@@ -396,7 +399,6 @@ export default {
         console.log(tem, index, 111);
         await tem.splice(index, 1);
         this.getAllFieldList = tem;
-        console.log(tem, 111);
         this.getFieldChooseList = [...e.options];
         this.$nextTick(() => {
           this.dialogVisible = true;
@@ -425,7 +427,7 @@ export default {
       });
     },
     addConnect() {
-      let tem = { chooseKey: '', value: '' };
+      let tem = { prop: this.nowProp, chooseKey: '', value: '' };
       this.pzForm.allChoose.push(tem);
     },
     confirmChoose() {
