@@ -64,6 +64,11 @@ const routes: Array<RouteConfig> = [
     name: 'chajianDemo',
     component: () => import('@/views/chajianDemo/index.vue'),
   },
+  {
+    path: '/csDemo',
+    name: 'csDemo',
+    component: () => import('@/views/csDemo/index.vue'),
+  },
 ];
 
 const router = new VueRouter({

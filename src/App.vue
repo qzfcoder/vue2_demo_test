@@ -11,6 +11,7 @@
       <router-link to="/printFile"> printFile </router-link>
       <router-link to="/showPz"> showPz </router-link>
       <router-link to="/chajianDemo"> chajianDemo </router-link>
+      <router-link to="/csDemo"> csDemo </router-link>
     </nav>
     <router-view />
   </div>
