@@ -62,30 +62,45 @@ export default {
       isFlag: true,
       tempArrLength: 2,
       tempArr: [],
+      tempValue: [],
       realTempArr: [],
     };
   },
   methods: {
+    // 转义
+    setValue(ShowEncode, Realencode) {
+      // 给计算公式中匹配对应公式来更改数据
+      var regex = /all|sum/gi;
+      let str = Realencode.replace(regex, (match) => {
+        return '#' + match + '#';
+      }).replace(/\(|\)/g, '$');
+      // realTempArr中存储需要替换的真实数据
+      this.realTempArr.push({
+        label: ShowEncode,
+        real: '(' + str + ')',
+      });
+    },
     addnum(e) {
       console.log(e);
       this.tempArr.push(e.label);
+      this.tempValue.push(e.value);
+      // this.tempArr.push(e.label);
       // this.realTempArr.push(e.value);
       if (this.tempArr.length == this.tempArrLength) {
         this.isFlag = !this.isFlag;
         let encode = this.newValue;
-        encode = encode.replace('()', '(' + this.tempArr.join(',') + ')');
-        console.log(encode);
-        var regex = /all|sum/gi;
-        let str = encode
-          .replace(regex, (match) => {
-            return '#' + match + '#';
-          })
-          .replace(/\(|\)/g, '$');
-        this.realTempArr.push({
-          label: encode,
-          real: '(' + str + ')',
-        });
-        this.show(encode);
+        let ShowEncode = encode.replace(
+          '()',
+          '(' + this.tempArr.join(',') + ')'
+        );
+        let realEncode = encode.replace(
+          '()',
+          '(' + this.tempValue.join(',') + ')'
+        );
+        console.log(encode, 'encode');
+        // 设置数据转义
+        this.setValue(ShowEncode, realEncode);
+        this.show(ShowEncode);
 
         // var re = /\([^\)]+\)/g;
         // console.log(encode.match(re));
@@ -100,18 +115,23 @@ export default {
       this.tempArr = [];
       // 需要的数组长度
       this.tempArrLength = e.need;
-      console.log(e);
+      console.log(e, '00');
       this.newValue = e.label;
       this.realValue = e.value;
     },
+    // 设置数据展示控制，div中数据展示内容
     show(e) {
+      // str魏获取到所有的内容
       let str = this.$refs.content.innerText;
+      // realStr为返回后端所需要的真实数据
       let realStr = '';
-      console.log(str, this.realTempArr);
+      // 通过遍历realTempArr替换realTempArr中所存在的数据，显示
+      console.log(str, this.realTempArr, 111111111);
       for (let i = 0; i < this.realTempArr.length; i++) {
         str = str.replace(this.realTempArr[i].label, this.realTempArr[i].real);
       }
-      console.log(realStr, str);
+      console.log(realStr, str, '111111111111');
+      // 创建span标签，控制span标签直接删除控制
       var input = document.createElement('span');
       // contenteditable="false"
       input.setAttribute('contenteditable', 'false');
