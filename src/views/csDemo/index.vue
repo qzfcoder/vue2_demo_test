@@ -183,7 +183,7 @@ export default {
     // 设置数据展示控制，div中数据展示内容
     show(e, index) {
       // str魏获取到所有的内容
-      let str = this.$refs[`content${index}`].innerText;
+      let str = this.$refs[`content${index}`][0].innerText;
       // realStr为返回后端所需要的真实数据
       let realStr = '';
       // 通过遍历realTempArr替换realTempArr中所存在的数据，显示
@@ -197,7 +197,7 @@ export default {
       // contenteditable="false"
       input.setAttribute('contenteditable', 'false');
       input.textContent = e;
-      this.$refs[`content${index}`].appendChild(input);
+      this.$refs[`content${index}`][0].appendChild(input);
     },
     // 计算公式部分处理-----ending
     del(index) {
