@@ -32,15 +32,15 @@ export default {
         },
         {
           blurPicUrl: require('../../assets/1.jpg'),
-          name: 3,
+          name: 4,
         },
         {
           blurPicUrl: require('../../assets/1.jpg'),
-          name: 3,
+          name: 5,
         },
         {
           blurPicUrl: require('../../assets/1.jpg'),
-          name: 3,
+          name: 6,
         },
       ],
     };
