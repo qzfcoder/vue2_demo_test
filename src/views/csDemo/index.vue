@@ -4,17 +4,13 @@
     <hr />
     SUM(合同金额) (#SUM#$F8hu1nobfwn31p:1|Fk2p1noc8fblh3$)
     <hr />
-    <div v-for="i in 10" :key="i">
+    <div v-for="i in 2" :key="i">
       <span v-for="(item, index) in allList" :key="index">
-        <el-button :disabled="isFlag" @click="addnum(item, i)">{{
-          item.label
-        }}</el-button>
+        <el-button @click="addnum(item, i)">{{ item.label }}</el-button>
       </span>
       <hr />
       <span v-for="(item, index) in allList2" :key="index + 'ff'">
-        <el-button :disabled="!isFlag" @click="addfs(item, i)">{{
-          item.label
-        }}</el-button>
+        <el-button @click="addfs(item, i)">{{ item.label }}</el-button>
       </span>
       <div contenteditable :ref="`content${i}`"></div>
       <el-button @click="show(null, i)"></el-button>
@@ -67,6 +63,23 @@
       <div class="add-btn" @click="addTabColunm">+</div>
     </el-form>
     <el-button @click="save">保存</el-button>
+
+    <el-select
+      v-model="value"
+      placeholder="请选择"
+      clearable
+      filterable
+      @blur="selectBlur"
+      @clear="selectClear"
+      @change="selectChange"
+    >
+      <el-option
+        v-for="(item, index) in options"
+        :key="index"
+        :label="item.label"
+        :value="item.value"
+      />
+    </el-select>
   </div>
 </template>
 
@@ -74,6 +87,11 @@
 export default {
   data() {
     return {
+      value: '',
+      options: [
+        { value: '无保留意见', label: '无保留意见' },
+        { value: '保留意见', label: '保留意见' },
+      ],
       // 计算公式部分处理-----变量
       newValue: '',
       realValue: '',
@@ -218,6 +236,22 @@ export default {
         height: '',
         other: '',
       });
+    },
+    // =========
+    selectBlur(e) {
+      // 意见类型
+      if (e.target.value !== '') {
+        this.value = e.target.value;
+        this.$forceUpdate(); // 强制更新
+      }
+    },
+    selectClear() {
+      this.value = '';
+      this.$forceUpdate();
+    },
+    selectChange(val) {
+      this.value = val;
+      this.$forceUpdate();
     },
   },
 };

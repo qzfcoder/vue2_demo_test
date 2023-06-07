@@ -12,16 +12,19 @@
       <router-link to="/showPz"> showPz </router-link>
       <router-link to="/chajianDemo"> chajianDemo </router-link>
       <router-link to="/csDemo"> csDemo </router-link>
+      <router-link to="/docViewDemo"> docViewDemo </router-link>
+      <router-link to="/docViewDemo2"> docViewDemo2 </router-link>
+      <router-link to="/docViewDemo3"> docViewDemo3 </router-link>
     </nav>
     <router-view />
   </div>
 </template>
 <script>
-import { accountLoginRequest } from '@/api/index';
+// import { accountLoginRequest } from '@/api/index';
 export default {
   components: {},
   mounted() {
-    accountLoginRequest('select');
+    // accountLoginRequest('select');
   },
 };
 </script>

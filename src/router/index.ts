@@ -69,6 +69,21 @@ const routes: Array<RouteConfig> = [
     name: 'csDemo',
     component: () => import('@/views/csDemo/index.vue'),
   },
+  {
+    path: '/docViewDemo',
+    name: 'docViewDemo',
+    component: () => import('@/views/docViewDemo/index.vue'),
+  },
+  {
+    path: '/docViewDemo2',
+    name: 'docViewDemo2',
+    component: () => import('@/views/docViewDemo2/index.vue'),
+  },
+  {
+    path: '/docViewDemo3',
+    name: 'docViewDemo3',
+    component: () => import('@/views/docViewDemo3/index.vue'),
+  },
 ];
 
 const router = new VueRouter({

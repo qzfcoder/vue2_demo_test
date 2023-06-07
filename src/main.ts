@@ -7,10 +7,12 @@ import router from './router';
 import Print from '@/utils/print';
 import agelForm from 'agel-form';
 import '@/global/index';
+// import VueEditorWord from 'vue-editor-word';
+
 Vue.config.productionTip = false;
 Vue.use(VueCompositionAPI);
 Vue.use(Print);
-
+// Vue.use(VueEditorWord);
 Vue.use(PiniaVuePlugin);
 const pinia = createPinia();
 const formConfig = {
