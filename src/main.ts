@@ -6,12 +6,14 @@ import router from './router';
 // import 'pixi-filters';
 import Print from '@/utils/print';
 import agelForm from 'agel-form';
+import WujieVue from "wujie-vue2";
 import '@/global/index';
 // import VueEditorWord from 'vue-editor-word';
 
 Vue.config.productionTip = false;
 Vue.use(VueCompositionAPI);
 Vue.use(Print);
+Vue.use(WujieVue);
 // Vue.use(VueEditorWord);
 Vue.use(PiniaVuePlugin);
 const pinia = createPinia();

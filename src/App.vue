@@ -2,6 +2,7 @@
   <div id="app">
     <nav>
       <router-link to="/home"> Home </router-link>|
+      <router-link to="/sub_app_page1"> sub_app_page1 </router-link>
       <router-link to="/compositionApi"> CompositionApi </router-link>
       <router-link to="/zujianDemo"> zujianDemo </router-link>
       <router-link to="/hbTable"> hbTable </router-link>
@@ -15,6 +16,7 @@
       <router-link to="/docViewDemo"> docViewDemo </router-link>
       <router-link to="/docViewDemo2"> docViewDemo2 </router-link>
       <router-link to="/docViewDemo3"> docViewDemo3 </router-link>
+      <router-link to="/moreTable"> moreTable </router-link>
     </nav>
     <router-view />
   </div>

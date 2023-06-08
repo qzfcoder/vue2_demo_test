@@ -10,6 +10,11 @@ const routes: Array<RouteConfig> = [
     redirect: '/home',
   },
   {
+    path: '/sub_app_page1',
+    name: 'sub_app_page1',
+    component: () => import('@/views/subEntry/index.vue'),
+  },
+  {
     path: '/home',
     name: 'home',
     component: HomeView,
@@ -83,6 +88,11 @@ const routes: Array<RouteConfig> = [
     path: '/docViewDemo3',
     name: 'docViewDemo3',
     component: () => import('@/views/docViewDemo3/index.vue'),
+  },
+  {
+    path: '/moreTable',
+    name: 'moreTable',
+    component: () => import('@/views/moreTable/index.vue'),
   },
 ];
 
