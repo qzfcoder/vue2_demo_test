@@ -4,15 +4,13 @@
       <template #slot1> 1 </template>
       <!-- <template #slot2> 2 </template> -->
     </Title>
-    <el-input-number v-model="test" :min="1"></el-input-number>
-    1
+    <!-- <el-input-number v-model="test" :min="1"></el-input-number> -->
+    11111111111111111111111
     <!-- 如果需要保留两位小数或者三位小数 只需要将 最后的 +2 改为 +3 即可 以此类推，保留几位小数就 几+1 -->
     <el-input
       type="text"
-      placeholder="请输入保留一位小数的数字"
       v-model="test"
-      onkeyup="value=value.replace(/[^\d]/g,'')"
-      maxlength="6"
+      oninput="value=value.replace(/^([0-9-]\d*\.?\d{0,2})?.*$/,'$1')"
     />
 
     <z-form :model="model" :rules="rules" ref="loginForm">

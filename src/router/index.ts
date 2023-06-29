@@ -94,6 +94,16 @@ const routes: Array<RouteConfig> = [
     name: 'moreTable',
     component: () => import('@/views/moreTable/index.vue'),
   },
+  {
+    path: '/uploadSlice',
+    name: 'uploadSlice',
+    component: () => import('@/views/uploadSlice/index.vue'),
+  },
+  {
+    path: '/hb',
+    name: 'hb',
+    component: () => import('@/views/hb.vue'),
+  },
 ];
 
 const router = new VueRouter({

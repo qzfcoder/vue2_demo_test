@@ -17,6 +17,8 @@
       <router-link to="/docViewDemo2"> docViewDemo2 </router-link>
       <router-link to="/docViewDemo3"> docViewDemo3 </router-link>
       <router-link to="/moreTable"> moreTable </router-link>
+      <router-link to="/uploadSlice"> uploadSlice </router-link>
+      <router-link to="/hb"> hb </router-link>
     </nav>
     <router-view />
   </div>
