@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { CrossPage } from "./CrossPage";
+import { CrossPage } from './CrossPage';
 export default {
   data() {
     return {
@@ -34,9 +34,9 @@ export default {
       pageSize: 10,
       totalData: Array.from({ length: 1000 }, (_, index) => {
         return {
-          date: "2016-05-03",
+          date: '2016-05-03',
           id: index,
-          name: "王小虎" + index,
+          name: '王小虎' + index,
         };
       }),
       multipleSelection: [],
@@ -53,7 +53,7 @@ export default {
   },
   mounted() {
     this.crossPageIns = new CrossPage({
-      key: "id",
+      key: 'id',
       data: this.tableData,
       toggleRowSelection: this.$refs.multipleTable.toggleRowSelection,
     });
@@ -65,13 +65,13 @@ export default {
     },
     keys() {
       console.log(
-        "__SY__🍟 ~ keys ~ this.crossPageIns.keys:",
+        '__SY__🍟 ~ keys ~ this.crossPageIns.keys:',
         this.crossPageIns.keys
       );
     },
     values() {
       console.log(
-        "__SY__🍟 ~ values ~ this.crossPageIns.values:",
+        '__SY__🍟 ~ values ~ this.crossPageIns.values:',
         this.crossPageIns.values
       );
     },
@@ -83,7 +83,7 @@ export default {
       this.crossPageIns.onRowSelectChange(row);
     },
     handleSelectAllChange(val) {
-      console.log("__SY__🍟 ~ handleSelectAllChange ~ val:", val);
+      console.log('__SY__🍟 ~ handleSelectAllChange ~ val:', val);
       this.tableData.forEach((row) => {
         if (val.length === 0) {
           // 取消全选
