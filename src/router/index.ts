@@ -104,6 +104,16 @@ const routes: Array<RouteConfig> = [
     name: 'hb',
     component: () => import('@/views/hb.vue'),
   },
+  {
+    path: '/ceshi',
+    name: 'ceshi',
+    component: () => import('@/views/ceshi.vue'),
+  },
+  {
+    path: '/tableChoose',
+    name: 'tableChoose',
+    component: () => import('@/views/tableChoose.vue'),
+  },
 ];
 
 const router = new VueRouter({

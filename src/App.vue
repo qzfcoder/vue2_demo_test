@@ -19,6 +19,8 @@
       <router-link to="/moreTable"> moreTable </router-link>
       <router-link to="/uploadSlice"> uploadSlice </router-link>
       <router-link to="/hb"> hb </router-link>
+      <router-link to="/ceshi"> ceshi </router-link>
+      <router-link to="/tableChoose"> tableChoose </router-link>
     </nav>
     <router-view />
   </div>
