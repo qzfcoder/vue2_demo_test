@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@pengchen/xlsx": "0.0.6",
+    "@riophae/vue-treeselect": "^0.4.0",
     "@tinymce/tinymce-vue": "^3.2.8",
     "@vue/composition-api": "^1.4.9",
     "agel-form": "^0.3.41",

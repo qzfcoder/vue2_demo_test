@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <deptTreeSelect></deptTreeSelect>
     <nav>
       <router-link to="/home"> Home </router-link>|
       <router-link to="/sub_app_page1"> sub_app_page1 </router-link>
@@ -27,8 +28,9 @@
 </template>
 <script>
 // import { accountLoginRequest } from '@/api/index';
+import deptTreeSelect from '@/components/deptTreeSelect'
 export default {
-  components: {},
+  components: {deptTreeSelect},
   mounted() {
     // accountLoginRequest('select');
   },
