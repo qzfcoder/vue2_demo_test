@@ -7,6 +7,8 @@ import router from './router';
 import Print from '@/utils/print';
 import agelForm from 'agel-form';
 import WujieVue from "wujie-vue2";
+// import UUID from "vue-uuid";
+// Vue.use(UUID);
 import '@/global/index';
 // import VueEditorWord from 'vue-editor-word';
 

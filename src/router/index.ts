@@ -114,11 +114,16 @@ const routes: Array<RouteConfig> = [
     name: 'tableChoose',
     component: () => import('@/views/tableChoose.vue'),
   },
+  {
+    path: '/formChild',
+    name: 'formChild',
+    component: () => import('@/views/formChild/index.vue'),
+  },
 ];
 
 const router = new VueRouter({
   mode: 'hash',
-  base: process.env.BASE_URL,
+  base: '/main',
   routes,
 });
 

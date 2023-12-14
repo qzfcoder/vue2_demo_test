@@ -21,8 +21,6 @@
     "element-ui": "^2.15.7",
     "file-saver": "^2.0.5",
     "fs": "0.0.1-security",
-    "office-js": "^0.1.0",
-    "office-ui-fabric-react": "^7.204.0",
     "path-browserify": "^1.0.1",
     "pinia": "^2.0.11",
     "pixi.js": "^7.2.0",

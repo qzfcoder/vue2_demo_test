@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-    {{ alarmBizCode }}1``
-    <el-button @click="click">无需处理</el-button>
-    <el-button @click="toHandle">去处理</el-button>
     <nav>
       <router-link to="/home"> Home </router-link>|
       <router-link to="/sub_app_page1"> sub_app_page1 </router-link>
@@ -24,7 +21,6 @@
       <router-link to="/hb"> hb </router-link>
       <router-link to="/ceshi"> ceshi </router-link>
       <router-link to="/tableChoose"> tableChoose </router-link>
-      <router-link to="/formChild"> formChild </router-link>
     </nav>
     <router-view />
   </div>
@@ -33,58 +29,8 @@
 // import { accountLoginRequest } from '@/api/index';
 export default {
   components: {},
-  data() {
-    return {
-      token: '',
-      query: '',
-      queryJson: '',
-      alarmBizCode: '',
-    };
-  },
-  created() {
-    console.log('页面刷新了');
-    // 接收消息，子页面
-    // window.addEventListener('message', this.handleMessage, false);
-  },
-  methods: {
-    // 获取到可能传过来的token,等相关信息
-    handleMessage(event) {
-      console.log(event.data, '1');
-      const { token, type, id } = event.data;
-      if (type == 'msg') {
-        this.token = token;
-        this.alarmBizCode = id;
-        console.log(event.data);
-      }
-    },
-
-    click() {
-      console.log('点击了');
-      // 点击无需处理, 向父级页面发送相关内容
-      window.parent.postMessage(
-        {
-          type: 'noHandle',
-          data: {
-            alarmBizCode: this.alarmBizCode,
-          },
-        },
-        '*'
-      );
-    },
-    toHandle() {
-      console.log(this.alarmBizCode);
-      let that = this;
-      // 点击去派单, 向父级页面发送相关内容
-      window.parent.postMessage(
-        {
-          type: 'toHandle',
-          data: {
-            alarmBizCode: that.alarmBizCode,
-          },
-        },
-        '*'
-      );
-    },
+  mounted() {
+    // accountLoginRequest('select');
   },
 };
 </script>
