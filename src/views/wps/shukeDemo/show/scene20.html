@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	   <link href="../css/scene.css" rel="stylesheet" type="text/css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="text/javascript" src="../res/suwell_ofdReader.js" charset="UTF-8" ></script>
+
+
+
+		<title>场景20：从虚拟打印创建文件并上传</title>
+		<script>
+		var ocx;
+			function initObject()
+			{
+
+			  if(window.console)
+				   window.console.log("initObject()");
+				else  
+				   alert("initObject()");
+
+			   //注意：插件宽高设固定值。
+				ocx = suwell.ofdReaderInit("OFDActiveXDIV","700px","600px");
+				if(ocx){
+			    	ocx.setCompsiteVisible("create_print",true);
+				}
+
+			}
+
+
+    //上传文件
+		function saveFile(){
+
+		  var path=document.getElementById("uploadUrl").value;
+          ocx.saveFile(path);
+		}
+
+
+	</script>
+    </head>
+    <body onload="initObject();">
+
+  <div class="list"><b> </b>	
+
+
+
+    <p >  1.打开版式页面，调用ocx.setCompsiteVisible("create_print",true);将从“虚拟打印创建”的工具栏按钮显示出来。</p><br/>
+
+	 <hr/>
+
+      <p > 2.点击 “从虚拟打印创建”的工具栏按钮，按提示选择文件，选择完成提交将显示无状态等待动图，直至转换完成，转换成的文档会显示在阅读器的内容显示区。</p><br/>
+
+  	 <hr/>
+
+   
+      <p > 3.客户可通过saveFile将文件保存至本地或提交到应用系统后台。</p><br/>
+
+	   <p ><input type="text"  size="50" id="uploadUrl" value="http://172.16.14.43:8080/suwell-ofd-server-demo/UploadServlet?id=00001"/></p>
+      <p style="width:80px;"></p> <p style="width:50px;"><input type="button" value="上传" onclick="saveFile()" class="btn1"></p><br/>
+	 
+	
+	
+
+
+    <hr/>
+
+
+
+
+
+</div>
+
+	
+
+
+   	<div id="OFDActiveXDIV" style="float:left;" ></div>
+    </body>
+    </html>
+ 
+    

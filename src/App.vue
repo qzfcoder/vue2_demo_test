@@ -25,6 +25,7 @@
       <router-link to="/ceshi"> ceshi </router-link>
       <router-link to="/tableChoose"> tableChoose </router-link>
       <router-link to="/formChild"> formChild </router-link>
+      <router-link to="/wps"> wps </router-link>
     </nav>
     <router-view />
   </div>

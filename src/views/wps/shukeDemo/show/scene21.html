@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	   <link href="../css/scene.css" rel="stylesheet" type="text/css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="text/javascript" src="../res/suwell_ofdReader.js" charset="UTF-8" ></script>
+
+
+
+		<title>场景21：汉王手写板集成</title>
+		<script>
+		var ocx;
+			function initObject()
+			{
+
+			  if(window.console)
+				   window.console.log("initObject()");
+				else  
+				   alert("initObject()");
+
+			   //注意：插件宽高设固定值。
+				ocx = suwell.ofdReaderInit("OFDActiveXDIV","700px","600px");
+				if(ocx){
+			    	ocx.setCompsiteVisible("create_print",true);
+				}
+
+			}
+
+
+    //通过xml方式设置用户信息。docinfo可先不设，此接口为避免某些其它途径生成的文档无 docID每次打开提示手动设置的情况
+		function setInfo(){
+
+		  var userInfo=document.getElementById("setUserInfo").value;
+
+          ocx.setUserInfo(userInfo);
+
+		}
+
+
+		 //上传文件
+		function setInfo2(){
+
+		  var userName=document.getElementById("setUserName").value;
+
+		  var userId=document.getElementById("setUserId").value;
+
+          ocx.setUserName(userName);
+
+		  ocx.setUserID(userId);
+		}
+
+
+
+	</script>
+    </head>
+    <body onload="initObject();">
+
+  <div class="list"><b> </b>	
+
+
+<p > UserInfo：<br/>	<input type="text"  size="50" id="setUserInfo" value="<setinfo type='userinfo'>
+     <parameter name = 'userid'   value='00001'/>       
+     <parameter name = 'username' value='lixin'/>        
+     <parameter name = 'userrole'  value='主任'/>      
+     <parameter name = 'unitid'   value='u0001'/>        
+     <parameter name = 'unitname' value='信息办公室'/>   
+     <parameter name = 'ipaddress' value='127.0.0.1'/>   
+     <parameter name = 'machinecode' value='机器码'/>    
+</setinfo >
+" /></p><br/>
+			 
+
+      <p style="width:80px;"></p> <p style="width:50px;"><input type="button" value="xml设置" onclick="setInfo()" class="btn1"></p><br/>
+
+	 <hr/>
+
+	 	<p > UserName：<br/>	<input type="text"  size="50" id="setUserName" value="lixin"/></p><br/>
+       <p > UserId：<br/>	<input type="text"  size="50" id="setUserId" value="000088"/></p><br/>
+    
+      <p style="width:80px;"></p> <p style="width:50px;"><input type="button" value="具体接口设置" onclick="setInfo2()" class="btn2"></p><br/>
+
+
+</div>
+
+
+
+   	<div id="OFDActiveXDIV" style="float:left;" ></div>
+    </body>
+    </html>
+ 
+    

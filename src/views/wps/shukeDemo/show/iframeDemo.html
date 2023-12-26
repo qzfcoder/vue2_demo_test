@@ -1,0 +1,23 @@
+
+<html>
+ <script src="../res/suwell_ofdReader.js" charset="UTF-8" ></script>
+	<script language="JavaScript">
+	var ocx;
+		function initObject(){
+		ocx=suwell.ofdReaderInit("OFDActiveXDIV","500px","400px");
+		if(ocx){
+		ocx.openFile("http://172.16.14.43:8080/suwell-ofd-server-demo/DownloadServlet?id=00001",false);
+		}
+		}
+		function a(){
+			var diva = document.getElementById("a");
+				diva.style.display="none"; 
+				
+		}
+	</script>
+ <body onload="initObject();">
+
+ <div id="OFDActiveXDIV"></div>
+ 
+ </body>
+</html>

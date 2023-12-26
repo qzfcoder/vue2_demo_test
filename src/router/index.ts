@@ -119,6 +119,11 @@ const routes: Array<RouteConfig> = [
     name: 'formChild',
     component: () => import('@/views/formChild/index.vue'),
   },
+  {
+    path: '/wps',
+    name: 'wps',
+    component: () => import('@/views/wps/index.vue'),
+  },
 ];
 
 const router = new VueRouter({

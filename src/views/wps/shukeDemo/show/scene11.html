@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	   <link href="../css/scene.css" rel="stylesheet" type="text/css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="text/javascript" src="../res/suwell_ofdReader.js" charset="UTF-8" ></script>
+
+
+
+		<title>场景11：套版打印</title>
+		<script>
+		var ocx;
+			function initObject()
+			{
+
+			  if(window.console)
+				   window.console.log("initObject()");
+				else  
+				   alert("initObject()");
+
+			   //注意：插件宽高设固定值。
+				ocx = suwell.ofdReaderInit("OFDActiveXDIV","700px","600px");
+				
+			
+			}
+
+
+        //打开远程服务上的文件。
+        function openFile(){
+
+		  var path=document.getElementById("url").value;
+          ocx.openFile(path,false);
+		}
+
+
+
+        //上传文件至远程服务
+		function saveFile(){
+		  var path=document.getElementById("uploadUrl").value;
+          ocx.saveFile(path);
+		}
+
+function setAnnotArea(){
+	var annotPos=  document.getElementById("annotPos").value;
+	var str=annotPos.split(",");
+	//以下两个type均可
+    ocx.addPageAnnot("rectmask",str[0],str[1],str[2],str[3],str[4]);
+	alert(str);
+ // ocx.addPageAnnot("t_printmask",str[0],str[1],str[2],str[3],str[4]);
+}
+
+function setViewAnnotArea(){
+
+var annotPos=  document.getElementById("annotPos").value;
+	var str=annotPos.split(",");
+    ocx.addPageAnnot("t_displaymask",str[0],str[1],str[2],str[3],str[4]);
+
+}
+ 
+ function setMaskMode(){
+    var maskMode=document.getElementById("maskMode").value;
+
+	ocx.setMaskMode(maskMode);
+ }
+			</script>
+    </head>
+    <body onload="initObject();">
+
+  <div class="list"><b> </b>	
+
+    <p >  1.打开版式页面，并在插件准备好后调用setUserToken设置进行本次操作的Token信息，随后调用openFile，参数filename指向本地文件</p><br/>
+
+	<p > UserToken:<br/>	<input type="text"  size="50" id="userToken" /></p><br/>
+	<p > url:<br/>	<input type="text"  size="50" id="url" value="http://172.16.14.43:8080/suwell-ofd-server-demo/DownloadServlet?id=00001"/></p><br/>
+
+   <p style="width:80px;"></p> <p style="width:50px;"><input type="button" value="打开" onclick="openFile()" class="btn1"></p>
+
+
+	 <hr/>
+
+      <p > 2、在插件中使用内建掩膜功能在需要隐藏的部分添加打印掩膜注释；如果外部可以明确知晓需要掩膜的位置，使用addPageAnnot接口直接添加掩膜注释。</p><br/>
+	  	<p style="width:200px;text-align:center;"><input id="annotPos" type="text" value="0,65,64,240,220" size="50"/></p><br/>
+<p style="width:80px;"></p> 	<p style="width:50px;"><input type="button" value="套打区域注释" onclick="setAnnotArea()" class="btn2"></p>
+
+
+   <hr/>
+
+      <p > 3、在插件中使用内建掩膜功能在需要遮盖的部分添加显示掩膜；此掩膜只控制显示对打印无效。</p><br/>
+	  	<p style="width:200px;text-align:center;"><input id="annotPos" type="text" value="0,65,64,240,220" size="50"/></p><br/>
+        <p style="width:80px;"></p> 	<p style="width:50px;"><input type="button" value="显示区域注释" onclick="setViewAnnotArea()" class="btn2"></p>
+
+
+  	 <hr/>
+
+   
+      <p > 4.使用saveFile将插件中文档上传到服务，参数filename将指定为服务端接收文档上传的servlet地址，或放弃保存。</p><br/>
+	<p><input type="text"  size="50" id="uploadUrl" value="http://172.16.14.43:8080/suwell-ofd-server-demo/UploadServlet?id=00001"/></p>
+     <p style="width:80px;"></p> <p style="width:50px;"><input type="button" value="上传" onclick="saveFile()" class="btn1"></p><br/>
+
+    <hr/>
+
+	  <p >5.setMaskMode接口设置掩膜模式。 0为不禁止；1为禁止显示掩膜；2为禁止打印掩膜；3为全部禁止；其他值按照0处理。
+	 <select id="maskMode" ><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
+<input type="button" value="设置" onclick="setMaskMode()" class="btn1"></p>
+    <hr/>
+    
+</div>
+
+	
+   	<div id="OFDActiveXDIV" style="float:left;" ></div>
+    </body>
+    </html>
+ 
+    

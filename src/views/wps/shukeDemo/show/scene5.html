@@ -1,0 +1,694 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>场景5：简单界面和权限控制</title>
+
+	    <link href="../css/showDemo.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="../res/suwell_ofdReader.js" charset="UTF-8" ></script>
+	
+
+			
+<script>
+	
+	var ocx;
+	function initObject()
+	{
+
+	  if(window.console)
+           window.console.log("initObject()");
+        else  
+           alert("initObject()");
+
+       //注意：插件宽高设固定值。
+		ocx = suwell.ofdReaderInit("OFDActiveXDIV","1200px","500px");
+		ocx.registListener("f_open","clickButton",true);
+
+	}
+
+
+function openPerformed(){
+
+ocx.setCompsiteVisible("navigator",false);//隐藏导航栏
+
+}
+
+
+
+//------------------------以下为js控制界面按钮的显示与否-------------------------------------------
+	
+	//是否显示打开文件快捷按钮
+	function enableOpenButton(){
+		var enableButton=document.getElementById("enableOpenButton");
+		if(enableButton.checked==true){
+			ocx.setCompsiteEnable("open",true);
+		}else{
+			ocx.setCompsiteEnable("open",false);
+		}
+		
+	}
+	
+	//是否显示保存文件快捷按钮
+		function enableSaveButton(){
+		var enableButton=document.getElementById("enableSaveButton");
+		if(enableButton.checked==true){
+			ocx.setCompsiteEnable("save",true);
+		}else{
+			ocx.setCompsiteEnable("save",false);
+		}
+		
+	}
+	
+		//是否显示离线下载按钮(加密信封)。
+	function enableOffLoadButton(){
+		var enableButton=document.getElementById("enableOffLoadButton");
+		if(enableButton.checked==true){
+			ocx.setCompsiteEnable("downloadenv",true);
+		
+		}else{
+			ocx.setCompsiteEnable("downloadenv",false);
+		}
+	}
+	
+	//是否显示打印快捷按钮
+	function enablePrintButton(){
+			var enableButton=document.getElementById("enablePrintButton");
+		if(enableButton.checked==true){
+			ocx.setCompsiteEnable("print",true);
+		}else{
+			ocx.setCompsiteEnable("print",false);
+		}
+		
+	}
+	
+		//是否显示菜单
+	function enableMenu(){
+			var enableButton=document.getElementById("enableMenu");
+		if(enableButton.checked==true){
+			ocx.setCompsiteEnable("menu",true);
+		}else{
+			ocx.setCompsiteEnable("menu",false);
+		}
+	}
+	
+	
+	
+		//是否显示工具栏
+	function enableTool(){
+			var enableButton=document.getElementById("enableTool");
+		if(enableButton.checked==true){
+			ocx.setCompsiteEnable("toolbar",true);
+		}else{
+			ocx.setCompsiteEnable("toolbar",false);
+		}
+	}
+	
+		//是否显示橡皮章快捷按钮
+	function enableStamp(){
+			var enableButton=document.getElementById("enableStamp");
+		if(enableButton.checked==true){
+			ocx.setCompsiteEnable("tool_stamp",true);
+		}else{
+			ocx.setCompsiteEnable("tool_stamp",false);
+		}
+	}
+	
+		//是否显示签章快捷按钮
+	function enableSealsign(){
+		var enableButton=document.getElementById("enableSealsign");
+		if(enableButton.checked==true){
+			ocx.setCompsiteEnable("t_sealsign",true);
+		}else{
+			ocx.setCompsiteEnable("t_sealsign",false);
+		}
+	}
+	
+	
+		//是否显示套打掩膜快捷按钮
+	function enableRectmask(){
+		var enableButton=document.getElementById("enableRectmask");
+		if(enableButton.checked==true){
+			ocx.setCompsiteEnable("t_printmask",true);
+		}else{
+			ocx.setCompsiteEnable("t_printmask",false);
+		}
+	}
+
+//是否显示文本选择快捷按钮
+	function enableTextselect(){
+		var enableButton=document.getElementById("enableTextselect");
+		if(enableButton.checked==true){
+			ocx.setCompsiteEnable("t_textselect",true);
+		}else{
+		   
+			ocx.setCompsiteEnable("t_textselect",false);
+		}
+	}
+
+
+//是否显示预盖章快捷按钮
+	function enableSealpreview(){
+		var enableButton=document.getElementById("enableSealpreview");
+		if(enableButton.checked==true){
+			ocx.setCompsiteEnable("t_sealmark",true);
+		}else{
+			ocx.setCompsiteEnable("t_sealmark",false);
+		}
+	}
+//是否显示重点圈阅快捷按钮
+	function enableAnnotmark(){
+		var enableButton=document.getElementById("enableAnnotmark");
+		if(enableButton.checked==true){
+			ocx.setCompsiteEnable("t_annotmark",true);
+		}else{
+			ocx.setCompsiteEnable("t_annotmark",false);
+		}
+	}
+
+
+
+
+//----------------------------显示部分完---------------------------
+
+//是否显示打开文件快捷按钮
+	function viewOpenButton(){
+		var viewButton=document.getElementById("viewOpenButton");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("open",true);
+		}else{
+			ocx.setCompsiteVisible("open",false);
+		}
+		
+	}
+	
+	//是否显示保存文件快捷按钮
+		function viewSaveButton(){
+		var viewButton=document.getElementById("viewSaveButton");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("save",true);
+		}else{
+			ocx.setCompsiteVisible("save",false);
+		}
+		
+	}
+		//是否显示另存文件快捷按钮
+		function viewSaveAsButton(){
+		var viewButton=document.getElementById("viewSaveAsButton");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("f_saveas",true);
+		}else{
+			ocx.setCompsiteVisible("f_saveas",false);
+		}
+		
+	}
+	
+		//是否显示离线下载按钮(加密信封)。
+	function viewOffLoadButton(){
+		var viewButton=document.getElementById("viewOffLoadButton");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("f_downloadenv",true);
+		}else{
+			ocx.setCompsiteVisible("f_downloadenv",false);
+		}
+	}
+	
+	//是否显示打印快捷按钮
+	function viewPrintButton(){
+			var viewButton=document.getElementById("viewPrintButton");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("print",true);
+		}else{
+			ocx.setCompsiteVisible("print",false);
+		}
+		
+	}
+	
+		//是否显示菜单
+	function viewMenu(){
+			var viewButton=document.getElementById("viewMenu");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("menu",true);
+		}else{
+			ocx.setCompsiteVisible("menu",false);
+		}
+	}
+	
+	//是否显示左侧导航栏
+	function viewNavigator(){
+			var viewButton=document.getElementById("viewNavigator");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("navigator",true);
+		}else{
+			ocx.setCompsiteVisible("navigator",false);
+		}
+	}
+	
+	//是否显示工具栏
+	function viewTool(){
+			var viewButton=document.getElementById("viewTool");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("toolbar",true);
+		}else{
+			ocx.setCompsiteVisible("toolbar",false);
+		}
+	}
+	
+	//是否显示橡皮章快捷按钮
+	function viewStamp(){
+			var viewButton=document.getElementById("viewStamp");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("tool_stamp",true);
+		}else{
+			ocx.setCompsiteVisible("tool_stamp",false);
+		}
+	}
+	
+	//是否显示签章快捷按钮
+	function viewSealsign(){
+	
+			var viewButton=document.getElementById("viewSealsign");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("t_sealsign",true);
+		}else{
+			ocx.setCompsiteVisible("t_sealsign",false);
+		}
+	}
+	
+	
+		//是否显示打印掩膜快捷按钮
+	function viewRectmask(){
+		var viewButton=document.getElementById("viewRectmask");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("t_printmask",true);
+		}else{
+			ocx.setCompsiteVisible("t_printmask",false);
+		}
+	}
+
+
+	//是否显示打印掩膜快捷按钮
+	function viewRectmask1(){
+		var viewButton=document.getElementById("viewRectmask1");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("t_displaymask",true);
+		}else{
+			ocx.setCompsiteVisible("t_displaymask",false);
+		}
+	}
+
+
+//是否显示文本选择快捷按钮
+	function viewTextselect(){
+		var viewButton=document.getElementById("viewTextselect");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("t_textselect",true);
+		}else{
+			ocx.setCompsiteVisible("t_textselect",false);
+		}
+	}
+
+//是否显示预盖章快捷按钮
+	function viewSealpreview(){
+		var viewButton=document.getElementById("viewSealpreview");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("t_sealmark",true);
+		}else{
+			ocx.setCompsiteVisible("t_sealmark",false);
+		}
+	}
+
+//是否显示重点圈阅快捷按钮
+	function viewAnnotmark(){
+		var viewButton=document.getElementById("viewAnnotmark");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("t_annotmark",true);
+		}else{
+			ocx.setCompsiteVisible("t_annotmark",false);
+		}
+	}
+
+//是否显示插入签批页按钮
+	function viewInsertblankpage(){
+		var viewButton=document.getElementById("viewInsertblankpage");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("d_insertblankpage",true);
+		}else{
+			ocx.setCompsiteVisible("d_insertblankpage",false);
+		}
+
+	}
+
+//是否显示铅笔工具
+function viewTp_penceil(){
+		var viewButton=document.getElementById("viewTp_penceil");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("tp_penceil",true);
+		}else{
+			ocx.setCompsiteVisible("tp_penceil",false);
+		}
+}
+
+//是否显示从虚拟打印创建
+	function create_print(){
+	var viewButton=document.getElementById("create_print");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("create_print",true);
+		}else{
+			ocx.setCompsiteVisible("create_print",false);
+		}
+	}
+
+	function create_convert(){
+	var viewButton=document.getElementById("create_convert");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("create_svc",true);
+		}else{
+			ocx.setCompsiteVisible("create_svc",false);
+		}
+	}
+	
+//是否显示文件操作工具栏
+	function viewToolbar_file(){
+		var viewButton=document.getElementById("viewToolbar_file");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("toolbar_file",true);
+		}else{
+			ocx.setCompsiteVisible("toolbar_file",false);
+		}
+	}
+
+//是否显示视图工具栏
+function viewShowbar_file(){
+	var viewButton=document.getElementById("viewShowbar_file");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("toolbar_view",true);
+		}else{
+			ocx.setCompsiteVisible("toolbar_view",false);
+		}
+}
+
+//是否显示基础工具栏
+function viewBasebar_file(){
+	var viewButton=document.getElementById("viewBasebar_file");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("toolbar_basetool",true);
+		}else{
+			ocx.setCompsiteVisible("toolbar_basetool",false);
+		}
+}
+
+//是否显示文本工具栏
+function viewDocumentbar_file(){
+	var viewButton=document.getElementById("viewDocumentbar_file");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("toolbar_document",true);
+		}else{
+			ocx.setCompsiteVisible("toolbar_document",false);
+		}
+}
+
+function viewEditbar_file(){
+	var viewButton=document.getElementById("viewEditbar_file");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("toolbar_edit",true);
+		}else{
+			ocx.setCompsiteVisible("toolbar_edit",false);
+		}
+}
+
+
+function viewCustombar_file(){
+	var viewButton=document.getElementById("viewCustombar_file");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("toolbar_seal",true);
+		}else{
+			ocx.setCompsiteVisible("toolbar_seal",false);
+		}
+}
+
+//隐藏缩放工具栏
+function viewToolbar_zoom()
+
+{
+	var viewButton=document.getElementById("viewToolbar_zoom");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("toolbar_zoom",true);
+		}else{
+			ocx.setCompsiteVisible("toolbar_zoom",false);
+		}
+
+
+}
+
+
+//显示隐藏手写工具栏
+function viewToolbar_tablet(){
+var viewButton=document.getElementById("viewToolbar_tablet");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("toolbar_tablet",true);
+		}else{
+			ocx.setCompsiteVisible("toolbar_tablet",false);
+		}
+}
+
+
+
+
+
+
+function viewtoolbar_annotp(){
+var viewButton=document.getElementById("viewtoolbar_annotp");
+if(viewButton.checked==true){
+			ocx.setCompsiteVisible("toolbar_annotp",true);
+		}else{
+			ocx.setCompsiteVisible("toolbar_annotp",false);
+		}
+}
+
+
+function viewtoolbar_annott(){
+var viewButton=document.getElementById("viewtoolbar_annott");
+if(viewButton.checked==true){
+			ocx.setCompsiteVisible("toolbar_annott",true);
+		}else{
+			ocx.setCompsiteVisible("toolbar_annott",false);
+		}
+}
+
+
+//显示隐藏区载手写签批
+function  viewT_tabletdlg(){
+var viewButton=document.getElementById("viewT_tabletdlg");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("t_tabletdlg",true);
+		}else{
+			ocx.setCompsiteVisible("t_tabletdlg",false);
+		}
+}
+
+
+//显示隐藏屏幕手写签批
+function  viewT_digitalscreen(){
+var viewButton=document.getElementById("viewT_digitalscreen");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("t_digitalscreen",true);
+		}else{
+			ocx.setCompsiteVisible("t_digitalscreen",false);
+		}
+}
+
+//显示隐藏全屏手写签批
+function  viewT_tablet(){
+var viewButton=document.getElementById("viewT_tablet");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("t_tablet",true);
+		}else{
+			ocx.setCompsiteVisible("t_tablet",false);
+		}
+}
+
+
+
+
+//显示隐藏全屏手写签批
+function  viewT_textbox(){
+var viewButton=document.getElementById("viewT_textbox");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("t_freetext",true);
+		}else{
+			ocx.setCompsiteVisible("t_freetext",false);
+		}
+}
+
+
+//是否显示附件的四个按钮（需在打开文档前调用）
+	function viewAttach(){
+     var viewButton=document.getElementById("viewAttach");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("delattach",true);
+			ocx.setCompsiteVisible("openattach",true);
+			ocx.setCompsiteVisible("saveattach",true);
+			ocx.setCompsiteVisible("addattach",true);
+		}else{
+		  
+			ocx.setCompsiteVisible("delattach",false);
+			ocx.setCompsiteVisible("openattach",false);
+			ocx.setCompsiteVisible("saveattach",false);
+			ocx.setCompsiteVisible("addattach",false);
+		}
+
+	}
+//----------------------------------------------------------------------------------------------
+//设置背景色
+function setBackGroundInfo(){
+     var colors=document.getElementById("colors").value;
+     ocx.setBackGroundInfo("<fillcolor><color>"+colors+"</color></fillcolor>");
+}
+
+//设置前景色
+function setForeGroundInfo(){
+     var colors=document.getElementById("colors").value;
+     ocx.setForeGroundInfo("<fillcolor><color>"+colors+"</color></fillcolor>");
+}
+
+
+//----------------------------------------------------------------------------------------------------
+
+
+function setViewPreference_Navigator(){
+	var navigatorViewPreference=document.getElementById("navigatorViewPreference").value;
+	alert(navigatorViewPreference);
+	ocx.setViewPreference("Navigator",navigatorViewPreference);
+	}
+
+
+function setViewPreference_TabDisplay(){
+		var tabViewPreference=document.getElementById("tabViewPreference").value;
+		ocx.setViewPreference("TabDisplay",tabViewPreference);
+}
+
+
+
+function clickButton(){
+
+//var buttonID=document.getElementById("buttonID").value;
+alert("kkkkkkk");
+   ocx.performClick("t_textselect");
+}
+
+
+	</script>
+    </head>
+    <body onload="initObject()" style="width:1200px">
+
+   
+
+    <div class="list" ><b> </b>	
+	<p style="width:60px;">界面配置（可用性）</p>
+	
+	<p style="width:40px;"><input id="enableOpenButton" type="checkbox" value=""  onclick="enableOpenButton()"/>打开</p>
+	<p style="width:40px;"><input id="enableSaveButton" type="checkbox" value=""  onclick="enableSaveButton()"/>保存</p>
+	<p style="width:70px;"><input id="enableOffLoadButton" type="checkbox" value=""  onclick="enableOffLoadButton()"/>离线下载</p>
+	<p style="width:40px;"><input id="enablePrintButton" type="checkbox" value=""  onclick="enablePrintButton()"/>打印</p>
+	<p style="width:40px;"><input id="enableMenu" type="checkbox" value="" onclick="enableMenu()"  />菜单</p>
+
+	<p style="width:50px;"><input id="enableTool" type="checkbox" value=""  onclick="enableTool()" />工具栏</p>
+	<p style="width:50px;"><input id="enableStamp" type="checkbox" value=""  onclick="enableStamp()"/>橡皮章</p>
+	<p style="width:40px;"><input id="enableSealsign" type="checkbox" value=""  onclick="enableSealsign()"/>签章</p>
+	<p style="width:80px;"><input id="enableRectmask" type="checkbox" value=""  onclick="enableRectmask()"/>打印掩膜</p>
+	<p style="width:80px;"><input id="enableTextselect" type="checkbox" value=""  onclick="enableTextselect()"/>文本选择</p>
+	<p style="width:80px;"><input id="enableSealpreview" type="checkbox" value=""  onclick="enableSealpreview()"/>预盖章</p>
+	<p style="width:80px;"><input id="enableAnnotmark" type="checkbox" value=""  onclick="enableAnnotmark()"/>重点圈阅</p>
+	</div>
+
+
+   <div class="list"><b> </b>	
+	<p style="width:60px;">界面配置（可见性）</p>
+	
+	<p style="width:40px;"><input id="viewOpenButton" type="checkbox" value="" onclick="viewOpenButton()"/>打开</p>
+	<p style="width:40px;"><input id="viewSaveButton" type="checkbox" value=""  onclick="viewSaveButton()"/>保存</p>
+ <!--   <p style="width:40px;"><input id="viewSaveAsButton" type="checkbox" value=""  onclick="viewSaveAsButton()"/>另存</p>   -->
+	<p style="width:70px;"><input id="viewOffLoadButton" type="checkbox" value=""  onclick="viewOffLoadButton()"/>离线下载</p>
+	<p style="width:40px;"><input id="viewPrintButton" type="checkbox" value=""  onclick="viewPrintButton()"/>打印</p>
+	<p style="width:40px;"><input id="viewMenu" type="checkbox" value="" onclick="viewMenu()"  />菜单</p>
+	<p style="width:50px;"><input id="viewTool" type="checkbox" value=""  onclick="viewTool()" />工具栏</p>
+	<p style="width:50px;"><input id="viewStamp" type="checkbox" value="" onclick="viewStamp()"/>橡皮章</p>
+	<p style="width:40px;"><input id="viewSealsign" type="checkbox" value=""  onclick="viewSealsign()"/>签章</p>
+	<p style="width:80px;"><input id="viewRectmask" type="checkbox" value=""  onclick="viewRectmask()"/>打印掩膜</p>
+	<p style="width:80px;"><input id="viewRectmask1" type="checkbox" value=""  onclick="viewRectmask1()"/>显示掩膜</p>
+	<p style="width:80px;"><input id="viewTextselect" type="checkbox" value=""  onclick="viewTextselect()"/>文本选择</p>
+	<p style="width:80px;"><input id="viewSealpreview" type="checkbox" value=""  onclick="viewSealpreview()"/>预盖章</p>
+	
+	<p style="width:80px;"><input id="viewAnnotmark" type="checkbox" value=""  onclick="viewAnnotmark()"/>重点圈阅</p><br/>
+	  <p style="width:60px;"></p>
+   	<p style="width:80px;"><input id="viewInsertblankpage" type="checkbox" value=""  onclick="viewInsertblankpage()"/>插入签批页</p>
+    <p style="width:80px;"><input id="viewTp_penceil" type="checkbox" value=""  onclick="viewTp_penceil()"/>铅笔工具</p>
+   
+     <p style="width:120px;"><input id="create_print" type="checkbox" value=""  onclick="create_print()"/>从虚拟打印创建</p>
+	  <p style="width:120px;"><input id="create_convert" type="checkbox" value=""  onclick="create_convert()"/>从转换服务创建</p>
+	 <p style="width:50px;"><input id="viewNavigator" type="checkbox" value=""  onclick="viewNavigator()"/>导航栏</p>
+
+
+     <p style="width:80px;"><input id="viewToolbar_file" type="checkbox" value=""  onclick="viewToolbar_file()"/>操作工具栏</p>
+	 <p style="width:80px;"><input id="viewShowbar_file" type="checkbox" value=""  onclick="viewShowbar_file()"/>视图工具栏</p>
+	 <p style="width:80px;"><input id="viewBasebar_file" type="checkbox" value=""  onclick="viewBasebar_file()"/>基础工具栏</p>
+  	 <p style="width:80px;"><input id="viewDocumentbar_file" type="checkbox" value=""  onclick="viewDocumentbar_file()"/>文本工具栏</p>
+	
+     <p style="width:80px;"><input id="viewEditbar_file" type="checkbox" value=""  onclick="viewEditbar_file()"/>搜索工具栏</p><br/>
+	  	  <p style="width:60px;"></p>
+	 <p style="width:80px;"><input id="viewCustombar_file" type="checkbox" value=""  onclick="viewCustombar_file()"/>签章工具栏</p>
+     <p style="width:80px;"><input id="viewToolbar_zoom" type="checkbox" value=""  onclick="viewToolbar_zoom()"/>缩放工具栏</p>
+     <p style="width:80px;"><input id="viewToolbar_tablet" type="checkbox" value=""  onclick="viewToolbar_tablet()"/>手写工具栏</p>
+
+	  <p style="width:80px;"><input id="viewtoolbar_annotp" type="checkbox" value=""  onclick="viewtoolbar_annotp()"/>图形注释工具栏</p>
+	  <p style="width:80px;"><input id="viewtoolbar_annott" type="checkbox" value=""  onclick="viewtoolbar_annott()"/>文本注释工具栏</p>
+
+
+
+     <p style="width:100px;"><input id="viewT_tabletdlg" type="checkbox" value=""  onclick="viewT_tabletdlg()"/>区域手写签批</p>
+	  <p style="width:100px;"><input id="viewT_digitalscreen" type="checkbox" value=""  onclick="viewT_digitalscreen()"/>屏幕手写签批</p>
+     <p style="width:100px;"><input id="viewT_tablet" type="checkbox" value=""  onclick="viewT_tablet()"/>全屏手写签批</p>
+
+     <p style="width:100px;"><input id="viewT_textbox" type="checkbox" value=""  onclick="viewT_textbox()"/>文本框工具</p>
+
+	<!--<p style="width:60px;"><input id="viewAttach" type="checkbox" value=""  onclick="viewAttach()"/>附件</p>-->
+	</div>
+
+  <div class="list"><b> </b>	
+
+     <p style="width:60px;">初始视图</p>
+	<p style="width:130px;">
+    <select id="navigatorViewPreference" ><option value="none">仅显示页面</option><option value="outline">显示大纲和页面</option><option value="thumbnail">显示缩略图和页面</option>
+	<option value="semanteme">显示语义和页面</option><option value="all">软件默认的显示配置</option></select></p>
+
+
+	<p style="width:30px;"><input  type="button" value="设置导览标签"  onclick="setViewPreference_Navigator()" class="btn2"/></p>
+
+	<p style="width:100px;">  </p>
+     <p style="width:150px;">
+    <select id="tabViewPreference" ><option value="doctitle">使用元数据中的Title属性</option><option value="filename">使用文件名</option></select></p>
+
+
+	<p style="width:30px;"><input type="button" value="设置窗口页签"  onclick="setViewPreference_TabDisplay()" class="btn2"/></p><br>
+ 
+	</div>
+
+   <div class="list"><b> </b>	
+	<p style="width:60px;">窗体外观</p>
+	
+	<select id="colors" ><option value="#FF4500">红色</option><option value="#54FF9F">绿色</option><option value="#BFEFFF">蓝色</option></select>
+	<p style="width:50px;"><input id="setBackGroundInfo" type="button" value="设背景色"  onclick="setBackGroundInfo()" class="btn1"/></p>
+    <p style="width:80px;"><input id="setForeGroundInfo" type="button" value="设前景色"  onclick="setForeGroundInfo()" class="btn1"/></p>
+
+ 
+   <p style="width:180px;"><input id="buttonID" type="text" value="commandId"  size="30"/></p>
+     <p style="width:60px;"><input id="clickButton" type="button" value="点击按钮"  onclick="clickButton()" class="btn1"/></p>
+
+	</div>
+	<div id="OFDActiveXDIV" style="float:center;" ></div>
+	
+
+    </body>
+    </html>
+ 
+    

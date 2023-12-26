@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	   <link href="../css/scene.css" rel="stylesheet" type="text/css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="text/javascript" src="../res/suwell_ofdReader.js" charset="UTF-8" ></script>
+
+
+
+		<title>场景19：转换本地文件并上传</title>
+		<script>
+		var ocx;
+			function initObject()
+			{
+
+			  if(window.console)
+				   window.console.log("initObject()");
+				else  
+				   alert("initObject()");
+
+			   //注意：插件宽高设固定值。
+				ocx = suwell.ofdReaderInit("OFDActiveXDIV","700px","600px");
+
+			}
+
+
+	   //通过转换服务，将一个源文件转换为ofd文件，再由Reader打开。
+	function convertServerOpen() 
+	{//此接口
+		var convertPath=document.getElementById("convertPath").value;
+		var fromPath=document.getElementById("fromPath").value;
+		var toPath=document.getElementById("toPath").value;
+		var metaData=document.getElementById("metaData").value;
+
+		//参数为转换服务地址。如："http://172.16.14.43:8080/cpcns-convert-server"
+		ocx.setConvertSvrAddr(convertPath);
+
+		//通知控件执行转换并打开/持有转换后的文档
+		//转换文件。参数1.源文件地址。参数2.生成的ofd的位置。参数3.元数据。例："<MetaRoot><DocID>HB0001</DocID><Title>HB测试文档0001号</Title></MetaRoot>"
+		ocx.convertFile(fromPath, toPath, metaData);
+		ocx.openFile(toPath);
+	}
+
+    //上传文件
+		function saveFile(){
+
+		  var path=document.getElementById("uploadUrl").value;
+          ocx.saveFile(path);
+		}
+
+
+	</script>
+    </head>
+    <body onload="initObject();">
+
+  <div class="list"><b> </b>	
+
+
+
+    <p >  1.打开版式页面，在插件准备好后调用convertFile，注意srcFile指定为待转的本地文件路径，destFile指定为转换后文件本地暂存的位置。</p><br/>
+
+	<p > 服务地址：<br/><input  id="convertPath" type="text" value="http://172.16.14.43:8080/cpcns-convert-server" size="50"/></p><br/>
+	<p > 源文件路径：<br/>	<input id="fromPath" type="text" value="" size="50"/></p><br/>
+	<p > 目标路径：<br/>	<input id="toPath" type="text" value="" size="50"/></p><br/>
+	<p > 源文件路径：<br/>	<input id="metaData" type="text" value="<MetaRoot><DocID>HB0001</DocID><Title>HB测试文档0001号</Title></MetaRoot>" size="50"/></p><br/>
+
+   <p style="width:80px;"></p> <p style="width:50px;"> <input type="button" value="转换服务打开" onclick="convertServerOpen()" class="btn2"></p>
+
+
+	 <hr/>
+
+      <p > 2.调用后将显示无状态等待动图，直至转换完成。</p><br/>
+
+  	 <hr/>
+
+   
+      <p > 3.插件将直接打开转换后的OFD文档，在客户端确认后，通过saveFile提交到应用系统后台。</p><br/>
+
+	   <p ><input type="text"  size="50" id="uploadUrl" value="http://172.16.14.43:8080/suwell-ofd-server-demo/UploadServlet?id=00001"/></p>
+      <p style="width:80px;"></p> <p style="width:50px;"><input type="button" value="上传" onclick="saveFile()" class="btn1"></p><br/>
+	 
+	
+	
+
+
+    <hr/>
+
+
+
+
+
+</div>
+
+	
+
+
+   	<div id="OFDActiveXDIV" style="float:left;" ></div>
+    </body>
+    </html>
+ 
+    

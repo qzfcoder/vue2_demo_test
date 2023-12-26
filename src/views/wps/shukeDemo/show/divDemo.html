@@ -1,0 +1,43 @@
+<html>
+		<link href="../css/scene.css" rel="stylesheet" type="text/css" />
+		<link href="../jquery-easyui-1.4.4/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+        <link href="../jquery-easyui-1.4.4/themes/icon.css" rel="stylesheet" type="text/css" />
+		<script src="../res/suwell_ofdReader.js" type="text/javascript"  charset="UTF-8" ></script>
+        <script src="../jquery-easyui-1.4.4/jquery.min.js" type="text/javascript"></script>
+        <script src="../jquery-easyui-1.4.4/jquery.easyui.min.js" type="text/javascript"></script>
+<script language="JavaScript">
+	$(function(){
+		$("#ifr").attr("src","iframeDemo.html");
+		$("#butt").click(function(){
+			removea()
+		});
+	})
+	function removea(){
+		//var diva = document.getElementById("ifr").contentWindow;//window.frames["myframe"];
+		//diva.a();
+		//var diva = document.getElementById("ifr");	
+		//var doc=$('#ifr').prop('contentWindow').document//getIframeDocument(diva);
+		//doc.getElementById("a").style.display="none"; 
+		//$("#ifr").remove();
+		//$("#ifr").attr("width","0");
+		//$("#ifr").attr("height","0");
+		$("#ifr").remove();
+		//document.getElementById("ifr").height="0";
+		//document.getElementById("ifr").width="0";
+		//$("#iframe").attr("src","htmmmm.html");
+		$("#div").append('<img src="1.jpg" width="301" height="200" border="0" alt="">');
+		//window.frames["ifm"].document.getElementByIdx_x("a").style.display="none";
+	}
+	var getIframeDocument = function(element) {   
+			 return  element.contentDocument || element.contentWindow.document;   
+		}; 
+		//removeNode(this)
+	</script>
+ <body>
+ <input type="button" value="¹Ø±Õ"  id="butt"/>
+ <div id="div">
+	
+  <iframe  width="800" height="600" id="ifr" name="ifr"> 
+ </div>
+ </body>
+</html>

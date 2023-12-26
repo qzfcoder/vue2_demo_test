@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	   <link href="../css/scene.css" rel="stylesheet" type="text/css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="text/javascript" src="../res/suwell_ofdReader.js" charset="UTF-8" ></script>
+	    <script type="../res/suwell_ofdReader.js" type="text/javascript"  charset="UTF-8" ></script>
+
+		<link href="../jquery-easyui-1.4.4/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+        <link href="../jquery-easyui-1.4.4/themes/icon.css" rel="stylesheet" type="text/css" />
+        <script src="../jquery-easyui-1.4.4/jquery.min.js" type="text/javascript"></script>
+        <script src="../jquery-easyui-1.4.4/jquery.easyui.min.js" type="text/javascript"></script>
+	
+	
+		<title>场景1：打开本地文件并上传</title>
+		<script>
+		var ocx;
+			function initObject()
+			{
+              			
+			  if(window.console)
+				   window.console.log("initObject()");
+				else  
+				   alert("initObject()");
+
+	   //注意：插件宽高设固定值。
+				ocx = suwell.ofdReaderInit("OFDActiveXDIV","800px","600px");
+				
+				//此监听用于判断远程保存文件的成败。如果此监听被触发说明文件保存成功。如果不被触发说明文件保存失败。
+                if(ocx){
+                   ocx.registListener("f_saveurl","savePerformed",true);
+				}
+
+			//	openFile();  
+
+			
+		
+			
+			
+			}
+
+			function savePerformed(){
+			//注意监听处理里最好不用alert方法，一个控件处于监听状态触发另一个控件可能会有问题。目前我方测试某些firefox，alert中会卡死.chrome弹出窗口位置异常。
+			//建议通过ajax后台处理后回弹信息，或使用iframe方法重构提示窗口。
+      
+		       alert("保存成功");
+            }
+
+
+
+        //打开本地文件。
+        function openFile(){
+	
+
+		 var path=document.getElementById("openPath").value;
+   
+      //  ocx.openFile(path,false);
+	      ocx.openFileOld(path);
+	
+		
+		}
+
+
+
+        //上传文件
+		function saveFile(){
+
+		  var path=document.getElementById("uploadUrl").value;
+          var issuccess=ocx.saveFile(path);
+		  alert(issuccess);
+		}
+
+
+			</script>
+    </head>
+    <body onload="initObject();">
+
+
+
+  <div class="list"><b> </b>	
+
+    <p >  1.打开流式界面完成编辑后，调用流式插件“另存为OFD”方法，生成本地临时文件。(此步骤在流式软件中完成，此处略)</p><br/>
+
+
+	 <hr/>
+
+	  <p >  2.打开版式页面，并在插件准备好后调用openFile，参数filename指向本地文件。</p><br/>
+
+	
+	<p ><!--<input id="openPath" type="file" name="file" size="26"  />-->
+
+
+	<input id="openPath" type="text" name="file" size="50"  />
+	</p>
+    <p style="width:80px;"></p> <p style="width:50px;"><input type="button" value="打开" onclick="openFile()" class="btn1"></p><br/>
+ 
+  	 <hr/>
+
+   
+    <p >  3.在版式页面确认转版效果。</p><br/>
+
+	<hr/>
+      <p > 4.使用saveFile将插件中文档上传到服务，参数filename将指定为服务端接收文档上传的servlet地址，或放弃保存。</p><br/>
+	  <p ><input type="text"  size="50" id="uploadUrl" value="http://172.16.14.43:8080/suwell-ofd-server-demo/UploadServlet?id=00001"/></p>
+      <p style="width:80px;"></p> <p style="width:50px;"><input type="button" value="上传" onclick="saveFile()" class="btn1"></p><br/>
+</div>
+
+	
+
+
+
+   	<div id="OFDActiveXDIV" style="float:left;width:800px;height:600px;" ></div>
+
+    </body>
+    </html>
+ 
+    

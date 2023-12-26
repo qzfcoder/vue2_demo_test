@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	   <link href="../css/scene.css" rel="stylesheet" type="text/css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="text/javascript" src="../res/suwell_ofdReader.js" charset="UTF-8" ></script>
+
+
+
+		<title>场景14：获取打开文档的元数据和语义</title>
+		<script>
+		var ocx;
+			function initObject()
+			{
+
+			  if(window.console)
+				   window.console.log("initObject()");
+				else  
+				   alert("initObject()");
+
+			   //注意：插件宽高设固定值。
+				ocx = suwell.ofdReaderInit("OFDActiveXDIV","700px","600px");
+			  	
+
+			}
+
+
+        //打开远程服务上的文件。
+        function openFile(){
+
+		  var path=document.getElementById("url").value;
+          ocx.openFile(path,false);
+			 
+		}
+
+
+
+     function getMetaData(){
+
+
+   var metaData=document.getElementById("metaData").value;
+      var author=ocx.getMetaData(metaData);
+	
+	   alert(author);
+    // var info=ocx.getDocInfo(metaData);
+     //   alert(info);
+	 }
+
+	 function setMetaData(){
+     var metaDataID=document.getElementById("metaDataID").value;
+
+     var metaDataContent=document.getElementById("metaDataContent").value;
+
+	 ocx.setMetaData(metaDataID,metaDataContent);
+	 }
+
+	//获取语义节点内容。前提条件：必须有符合规范的语义。
+function getTagText(){
+     var  contentFH=document.getElementById("tagPath").value;
+	 //注意：语义标识以"电子公文/"开头。例："电子公文/公文体/版头/份号"
+	  var  tagText =ocx.getTaggedText("电子公文/"+contentFH);
+	   alert(tagText);
+}
+
+
+	</script>
+    </head>
+    <body onload="initObject();">
+
+  <div class="list"><b> </b>	
+
+    <p >  1.打开版式页面，并在插件准备好后调用setUserToken设置进行本次操作的Token信息，随后调用openFile，参数filename指向本地文件</p><br/>
+
+	<p > UserToken:<br/>	<input type="text"  size="50" id="userToken" /></p><br/>
+	<p > url:<br/>	<input type="text"  size="50" id="url" value="http://172.16.14.43:8080/suwell-ofd-server-demo/DownloadServlet?id=00001"/></p><br/>
+
+   <p style="width:80px;"></p> <p style="width:50px;"><input type="button" value="打开" onclick="openFile()" class="btn1"></p>
+
+
+	 <hr/>
+
+      <p > 2.在文档打开后调用getMetaData获得文档中元数据。</p><br/>
+	 
+     <p style="width:100px;"><select id="metaData" ><option value="DocID">DocID</option><option value="Title">Title</option><option value="Author">Author</option><option value="Subject">Subject</option><option value="CreationDate">CreationDate</option><option value="ModDate">ModDate</option><option value="Creator">Creator</option><option value="CreatorVersion">CreatorVersion</option></select></p> <p style="width:50px;"><input type="button" value="获取" onclick="getMetaData()" class="btn1"></p>
+
+  	 <hr/>
+
+   
+      <p > 3.调用setMetaData设置元数据</p><br/>
+
+	     <p style="width:90px;"><select id="metaDataID" ><option value="DocID">DocID</option><option value="Title">Title</option><option value="Author">Author</option><option value="Subject">Subject</option><option value="CreationDate">CreationDate</option><option value="ModDate">ModDate</option><option value="Creator">Creator</option><option value="CreatorVersion">CreatorVersion</option></select></p> <p style="width:50px;"> <input type="text"  size="30" id="metaDataContent" /></p><br/>
+	     <p style="width:90px;"></p><p><input type="button" value="设置" onclick="setMetaData()" class="btn1"></p>
+	
+	
+
+
+    <hr/>
+
+	  <p> 4.如果文中存在标引信息，调用getTaggedText获得文档的（密级、份号、标题等）语义值。</p><br/>
+	  <p> 电子公文/<input id="tagPath" type="text" value="" size="30"/></p><br/>
+		<p><input type="button" value="获取语义内容" onclick="getTagText()" class="btn2"></p>
+	 
+    <hr/>
+
+
+
+
+</div>
+
+	
+
+
+   	<div id="OFDActiveXDIV" style="float:left;" ></div>
+    </body>
+    </html>
+ 
+    

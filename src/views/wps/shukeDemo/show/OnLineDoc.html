@@ -1,0 +1,107 @@
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Expires" CONTENT="0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<script type="text/javascript" src="../res/suwell_ofdReader.js" charset="UTF-8" ></script>
+<style type="text/css">
+div#rMenu {
+	position: absolute;
+	background-color: #EEEEEE;
+	/*border:1px solid black;*/
+	visibility: hidden;
+	text-align: center;
+	padding: 2px;
+	width: 120px;
+	font-family: "宋体";
+	line-height: 20px;
+}
+
+#hint {
+	width: 220px;
+	border: 1px solid #000000;
+	background: #EEEEEE;
+	position: absolute;
+	z-index: 9;
+	padding: 6px;
+	line-height: 17px;
+	text-align: left;
+	top: 1520px;
+}
+
+div#rMenu ul li {
+	cursor: pointer;
+	list-style: none outside none;
+	background-color: #EEEEEE;
+	border: 1px solid black;
+}
+ .tab-hd {
+	height: 27px;
+	line-height: 27px;
+	position: relative;
+	width: 100%;
+	background-image: url(../images/bg02-2.jpg);
+	background-repeat: repeat-x;
+	text-align: left;
+}
+
+.tab-hd>li {
+	background-image: url("../images/bg02-2.jpg");
+	float: left;
+	cursor: pointer;
+	width: 100px;
+	color: #000;
+	margin-right: 0px;
+	height: 27px;
+	line-height: 27px;
+	margin-left: 0px;
+	border-bottom: 1px solid #BEC2CD;
+	display:inline-block;
+	*display:inline;
+*zoom:1;
+	
+}
+
+</style>
+
+<script type="text/javascript">
+//在线加载ofd文件
+
+function loadofd()
+{	var ocx ;
+	ocx = suwell.ofdReaderInit("content0","1000px","500px");
+	if (ocx) 
+	{
+		ocx.setCompositeVisible(["menu","toolbar","navigator"], false);
+		ocx.setPrintCopies(4);
+	}else{
+	}
+	ocx.setCallback("print","printPerforming",false);
+	ocx.openFile("C:\\Users\\Administrator\\Desktop\\k.ofd");
+
+	
+};
+
+function ks(){
+
+   document.getElementById("content0").style.display="block";
+}
+
+</script>
+<!-- 选项卡js -->
+<title>文件操作</title>
+</head>
+<object classid="clsid:F0D10A19-B64C-4F9C-88FF-FF8B323DEF9E" width="0" height="0" id="suwell" name="suwell"> </object>
+
+<body onload="loadofd()">
+
+	<div id="news" >
+	
+		<div style="clear:both;">
+			<div id="content0" class="content"  ></div>
+			
+			
+	</div>
+</body>
+</html>

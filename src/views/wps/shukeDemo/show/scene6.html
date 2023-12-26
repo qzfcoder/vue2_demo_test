@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	   <link href="../css/scene.css" rel="stylesheet" type="text/css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="text/javascript" src="../res/suwell_ofdReader.js" charset="UTF-8" ></script>
+
+	 
+
+		<title>场景6：设置显示和打印水印</title>
+		<script>
+		var ocx;
+			function initObject()
+			{
+
+			  if(window.console)
+				   window.console.log("initObject()");
+				else  
+				   alert("initObject()");
+
+			   //注意：插件宽高设固定值。
+				ocx = suwell.ofdReaderInit("OFDActiveXDIV","700px","600px");
+				if(ocx){
+			
+				//加载插件直接显示水印及远程文件的调用方式。
+			//	 ocx.registListener("f_open","openPerformed",true);
+			//	  openFileInit();
+			   }
+			}
+		 //打开本地或远程服务上的文件。
+        function openFileInit(){
+		  ocx.openFile("http://172.16.14.43:8080/suwell-ofd-server-demo/DownloadServlet?id=00001",false);
+		}
+
+
+		function openPerformed(){
+			ocx.addTrackInfo("<setinfo type='barinfo'><parameter name='pages' value=\"1\"/><parameter name=\"rotate\" value=\"315\"/><parameter name=\"visible\" value=\"true\"/><parameter name=\"printable\" value=\"true\"/><parameter name=\"xpostype\" value=\"center\"/><parameter name=\"ypostype\" value=\"center\"/><parameter name=\"x\" value=\"5\"/><parameter name=\"y\" value=\"80\"/><parameter name=\"w\" value=\"30\"/><parameter name=\"h\" value=\"20\"/><parameter name=\"strcont\" font=\"宋体\" size=\"28\" bold=\"true\" italic=\"false\" color= \"00FFFF\">"+"文字水印旋转120度"+"</parameter></setinfo>");
+
+			ocx.addTrackInfo("<setinfo type='barinfo'><parameter name='pages' value=\"last\"/><parameter name=\"rotate\" value=\"0\"/><parameter name=\"visible\" value=\"true\"/><parameter name=\"printable\" value=\"true\"/><parameter name=\"xpostype\" value=\"absolute\"/><parameter name=\"ypostype\" value=\"absolute\"/><parameter name=\"x\" value=\"5\"/><parameter name=\"y\" value=\"10\"/><parameter name=\"w\" value=\"30\"/><parameter name=\"h\" value=\"20\"/><parameter name=\"strcont\" font=\"宋体\" size=\"28\" bold=\"true\" italic=\"false\" color= \"00FFFF\">"+"文字水印+显示+打印"+"</parameter></setinfo>");
+
+        
+			ocx.addTrackInfo("<setinfo type='barinfo'><parameter name='pages' value=\"all\"/><parameter name=\"rotate\" value=\"0\"/><parameter name=\"visible\" value=\"true\"/><parameter name=\"printable\" value=\"true\"/><parameter name=\"xpostype\" value=\"absolute\"/><parameter name=\"ypostype\" value=\"absolute\"/><parameter name=\"x\" value=\"5\"/><parameter name=\"y\" value=\"100\"/><parameter name=\"w\" value=\"30\"/><parameter name=\"h\" value=\"20\"/><parameter name=\"strcont\" font=\"宋体\" size=\"28\" bold=\"true\" italic=\"false\" color= \"00FFFF\">"+"文字水印+显示+打印"+"</parameter></setinfo>");
+
+			
+			}
+
+
+
+
+        //打开本地或远程服务上的文件。
+        function openFile(){
+ 		  var path=document.getElementById("url").value;
+          ocx.openFile(path,false);
+		 
+		}
+
+
+        function addBarcodeBF(){
+
+		var fontVP=document.getElementById("barcode1").checked;
+		if(fontVP){
+		ocx.addTrackInfo("<setinfo type='barinfo'><parameter name='pages' value=\"1\"/><parameter name=\"rotate\" value=\"0\"/><parameter name=\"visible\" value=\"true\"/><parameter name=\"printable\" value=\"true\"/><parameter name=\"xpostype\" value=\"absolute\"/><parameter name=\"ypostype\" value=\"absolute\"/><parameter name=\"x\" value=\"5\"/><parameter name=\"y\" value=\"10\"/><parameter name=\"w\" value=\"30\"/><parameter name=\"h\" value=\"20\"/><parameter name=\"strcont\" font=\"宋体\" size=\"28\" bold=\"true\" italic=\"false\" color= \"00FFFF\">"+"文字水印+显示+打印"+"</parameter></setinfo>");
+
+		}
+
+
+	 var fontP=document.getElementById("barcode2").checked;
+		if(fontP){
+		ocx.addTrackInfo("<setinfo type='barinfo'><parameter name='pages' value=\"1\"/><parameter name=\"rotate\" value=\"0\"/><parameter name=\"visible\" value=\"false\"/><parameter name=\"printable\" value=\"true\"/><parameter name=\"xpostype\" value=\"absolute\"/><parameter name=\"ypostype\" value=\"absolute\"/><parameter name=\"x\" value=\"5\"/><parameter name=\"y\" value=\"30\"/><parameter name=\"w\" value=\"30\"/><parameter name=\"h\" value=\"20\"/><parameter name=\"strcont\" font=\"黑体\" size=\"48\" bold=\"true\" italic=\"true\" color= \"00FF00\">"+"文字水印+不显示+打印"+"</parameter></setinfo>");
+
+		}
+
+
+
+	var fontV=document.getElementById("barcode3").checked;
+		if(fontV){
+		ocx.addTrackInfo("<setinfo type='barinfo'><parameter name='pages' value=\"1,2\"/><parameter name=\"rotate\" value=\"0\"/><parameter name=\"visible\" value=\"true\"/><parameter name=\"printable\" value=\"false\"/><parameter name=\"xpostype\" value=\"absolute\"/><parameter name=\"ypostype\" value=\"absolute\"/><parameter name=\"x\" value=\"5\"/><parameter name=\"y\" value=\"60\"/><parameter name=\"w\" value=\"30\"/><parameter name=\"h\" value=\"20\"/><parameter name=\"strcont\" font=\"黑体\" size=\"48\" bold=\"true\" italic=\"true\" color= \"00FF00\">"+"文字水印+显示+不打印"+"</parameter></setinfo>");
+
+		}
+
+	var barcode=document.getElementById("barcode4").checked;
+		if(barcode){
+		//设置二维码水印
+//参数1：xml字符串表示图片信息。详细说明请参见插件集成文档。
+ocx.addTrackInfo("<setinfo type=\"barinfo\"><parameter name=\"pages\" value=\"1\"/><parameter name=\"rotate\" value=\"0\"/><parameter name=\"visible\" value=\"true\"/><parameter name=\"printable\" value=\"true\"/><parameter name=\"xpostype\" value=\"absolute\"/><parameter name=\"ypostype\" value=\"absolute\"/><parameter name=\"x\" value=\"5\"/><parameter name=\"y\" value=\"80\"/><parameter name=\"w\" value=\"100\"/><parameter name=\"h\" value=\"20\"/><parameter name=\"content\">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</parameter></setinfo>");
+
+
+
+}
+
+
+
+	var rotate=document.getElementById("barcode5").checked;
+		if(rotate){
+
+ocx.addTrackInfo("<setinfo type='barinfo'><parameter name='pages' value=\"1-3\"/><parameter name=\"rotate\" value=\"315\"/><parameter name=\"visible\" value=\"true\"/><parameter name=\"printable\" value=\"true\"/><parameter name=\"xpostype\" value=\"center\"/><parameter name=\"ypostype\" value=\"center\"/><parameter name=\"x\" value=\"5\"/><parameter name=\"y\" value=\"80\"/><parameter name=\"w\" value=\"30\"/><parameter name=\"h\" value=\"20\"/><parameter name=\"strcont\" font=\"宋体\" size=\"28\" bold=\"true\" italic=\"false\"  opaque=\"true\" color= \"00FFFF\">"+"文字水印旋转120度"+"</parameter></setinfo>");
+
+		}
+
+
+		}
+
+
+       function addBarcodeAF(){
+
+	
+
+
+			var fontBVP=document.getElementById("barcode6").checked;
+		if(fontBVP){
+		ocx.addTrackInfo("<setinfo type='barinfo'><parameter name='pages' value=\"last\"/><parameter name=\"rotate\" value=\"0\"/><parameter name=\"visible\" value=\"true\"/><parameter name=\"printable\" value=\"true\"/><parameter name=\"xpostype\" value=\"absolute\"/><parameter name=\"ypostype\" value=\"absolute\"/><parameter name=\"x\" value=\"5\"/><parameter name=\"y\" value=\"10\"/><parameter name=\"w\" value=\"30\"/><parameter name=\"h\" value=\"20\"/><parameter name=\"strcont\" font=\"宋体\" size=\"28\" bold=\"true\" italic=\"false\" color= \"00FFFF\">"+"文字水印+显示+打印"+"</parameter></setinfo>");
+
+		}
+
+
+
+         var fontAVP=document.getElementById("barcode7").checked;
+		 if(fontAVP){
+			ocx.addTrackInfo("<setinfo type='barinfo'><parameter name='pages' value=\"all\"/><parameter name=\"rotate\" value=\"0\"/><parameter name=\"visible\" value=\"true\"/><parameter name=\"printable\" value=\"true\"/><parameter name=\"xpostype\" value=\"absolute\"/><parameter name=\"ypostype\" value=\"absolute\"/><parameter name=\"x\" value=\"5\"/><parameter name=\"y\" value=\"100\"/><parameter name=\"w\" value=\"30\"/><parameter name=\"h\" value=\"20\"/><parameter name=\"strcont\" font=\"宋体\" size=\"28\" bold=\"true\" italic=\"false\" color= \"00FFFF\">"+"文字水印+显示+打印"+"</parameter></setinfo>");
+		 }
+
+		}
+
+
+
+
+
+	
+function clearBarcode(){
+ocx.clearTrackInfo();
+
+}
+
+   
+
+			</script>
+    </head>
+    <body onload="initObject();">
+
+  <div class="list"><b> </b>	
+
+  
+      <p >  1.打开版式页面，并在插件准备好后调用addTrackInfo或者setBarcodeInfo将水印或条码信息设置到阅读器插件。</p><br/>
+
+		<p>	<input type="checkbox"  id="barcode1" value="fontVP"/>首页 + 文字水印 + 显示 + 打印</p>  <br/>
+		<p> <input type="checkbox"  id="barcode2" value="fontP"/>首页 + 文字水印 + 不显示 + 打印	</p><br/>
+		<p> <input type="checkbox"  id="barcode3" value="fontV"/>1,2页 + 文字水印 + 显示 + 不打印	</p><br/>
+		<p> <input type="checkbox"  id="barcode4" value="barcode"/>首页 + 二维码 + 显示 + 打印</p><br/>
+		<p> <input type="checkbox"  id="barcode5" value="rotate" />1-3页 + 文字水印旋转120度+背景覆盖</p><br/>
+
+     <p style="width:80px;"></p> <p style="width:50px;"><input type="button" value="填加水印" onclick="addBarcodeBF()" class="btn1"></p><br/>
+
+  	 <hr/>
+
+
+  <p >  2.调用openFile或者openSvcFile打开文件后，预定位置后将出现水印或者条码。以openFile为例。</p><br/>
+ 
+	<p > <input type="text"  size="50" id="url" value=""/></p><br/>
+
+   <p style="width:80px;"></p> <p style="width:50px;"><input type="button" value="打开" onclick="openFile()" class="btn1"></p>
+
+
+	 <hr/>
+
+     <p >3.打开文档后可进行的水印操作。</p><br/>
+
+
+
+        <p>	<input type="checkbox"  id="barcode6" value="fontBVP"/>末页 + 文字水印 + 显示 + 打印</p>  <br/>
+	    <p>	<input type="checkbox"  id="barcode7" value="fontAVP"/>所有页 + 文字水印 + 显示 + 打印</p>  <br/>
+     <p style="width:80px;"></p> <p style="width:50px;"><input type="button" value="填加水印" onclick="addBarcodeAF()" class="btn1"></p><br/>
+
+  	 <hr/>
+      <p >4.调用clearTrackInfo清除水印或条码设置。</p><br/>
+	  
+     <p style="width:80px;"></p> <p style="width:50px;"><input type="button" value="移除" onclick="clearBarcode()" class="btn1"></p><br/>
+<hr/>
+<p >  注意：应用中需要完成插件初始化后打开文件并加水印的一连串动作，需灵活运用打开的事后监听ocx.registListener("f_open","openPerformed",true)，详见js代码</p><br/> 
+	<hr/>
+
+		 
+</div>
+
+
+
+   	<div id="OFDActiveXDIV" style="float:left;width:700px;height:600px;" ></div>
+    </body>
+    </html>
+ 
+    

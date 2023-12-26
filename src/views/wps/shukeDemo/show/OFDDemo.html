@@ -1,0 +1,948 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>suwell demo</title>
+	   <link href="../css/showDemo.css" rel="stylesheet" type="text/css" />
+	   <script type="text/javascript" src="../res/suwell_ofdReader.js?v=2" charset="UTF-8" ></script>
+	
+
+			
+<script>
+	
+	var ocx;
+	function initObject()
+	{
+
+	  if(window.console)
+           window.console.log("initObject()");
+        else  
+           alert("initObject()");
+
+       //注意：插件宽高设固定值。
+		ocx = suwell.ofdReaderInit("OFDActiveXDIV","1200px","400px");
+
+		if(ocx){
+				var time = setInterval(function() {
+						if (ocx.version()) {
+							clearInterval(time);
+
+							alert(ocx);
+						//   getVersion();
+							alert(ocx.version());
+							//ocx.openFile("C:/Users/Administrator/Desktop/1.ofd", true);
+						}
+					}, 100);
+			
+			}
+		
+
+	}
+
+	function openPerform(){
+
+	          ocx.setCompsiteVisible("navigator",false);
+
+
+	}
+
+
+	function activexTest(){
+        window.open("activexDemo.html", 'newwindow', 'height=700, width=1200, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no');
+	}
+
+	function npapiTest(){
+
+      window.open("npapiDemo.html",'newwindow', 'height=700, width=1200, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no');
+	}
+	
+
+	function setOpenUrl(){
+      var openUrl="http://172.16.14.43:8080/suwell-ofd-server-demo/DownloadServlet?id=00001";
+
+     var urlButton=document.getElementById("setOpenUrl");
+		if(urlButton.checked==true){
+			  document.getElementById("path").value=openUrl;
+
+		}
+	}
+
+
+
+function setSaveUrl(){
+      var saveUrl="http://172.16.14.43:8080/suwell-ofd-server-demo/UploadServlet?id=00001";
+
+     var urlButton=document.getElementById("setSaveUrl");
+		if(urlButton.checked==true){
+			  document.getElementById("path").value=saveUrl;
+
+		}
+	}
+
+function setSrvUrl(){
+  var srvUrl="http://172.16.14.43:8080/cpcns-content-server/ofd/sc";
+
+     var urlButton=document.getElementById("setSrvUrl");
+		if(urlButton.checked==true){
+			  document.getElementById("path").value=srvUrl;
+
+		}
+
+}
+
+	//打开文件。可以实现打开本地文件。也可实现打开远程文件。
+	function openFile(){
+
+		var filePath=document.getElementById("path").value;
+		if(filePath==""||filePath==null){
+		 alert("路径不能为空！");
+			return;
+		}else{
+			ocx.openFile(filePath,false);
+		}
+	}
+	
+	//保存文件。可以实现将文件保存到本地磁盘。也可实现保存到远程服务器上。
+	function saveFile(){
+		var filePath=document.getElementById("path").value;
+		if(filePath==""||filePath==null){
+				 alert("路径不能为空！");
+					return;
+				}else{
+					ocx.saveFile(filePath);
+				}
+	}
+	
+	//关闭文件。
+	function closeFile(){
+			ocx.closeFile();
+	}
+
+//打开内容服务上的文件。
+   function openSvrFile(){
+				var userId=document.getElementById("userId").value;
+			   if(userId==""||userId==null){
+				alert("userId 是用户的准一标识，必须有值");
+				return;
+			   }else{
+				ocx.setUserID(userId);
+			  }
+			   
+			   var srvUrl=  document.getElementById("path").value;
+
+			   if(srvUrl==""||srvUrl==null){
+				 alert("服务地址不能为空！");
+				return;
+			   }
+				
+				 var docId=  document.getElementById("docId").value;
+
+			   if(docId==""||docId==null){
+				 alert("docId 是文档的准一标识，必须有值");
+				return;
+			   }
+			 
+				ocx.openSvcFile(srvUrl, docId);  //docId
+			   //alert(userId +">>>"+srvUrl+">>>"+docId);
+
+   }
+
+
+//------------------------以下为js控制界面按钮的显示与否-------------------------------------------
+	
+	//是否显示打开文件快捷按钮
+	function viewOpenButton(){
+		var viewButton=document.getElementById("viewOpenButton");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("open",true);
+		}else{
+			ocx.setCompsiteVisible("open",false);
+		}
+		
+	}
+	
+	//是否显示保存文件快捷按钮
+		function viewSaveButton(){
+		var viewButton=document.getElementById("viewSaveButton");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("save",true);
+		}else{
+			ocx.setCompsiteVisible("save",false);
+		}
+		
+	}
+		//是否显示另存文件快捷按钮
+		function viewSaveAsButton(){
+		var viewButton=document.getElementById("viewSaveAsButton");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("f_saveas",true);
+		}else{
+			ocx.setCompsiteVisible("f_saveas",false);
+		}
+		
+	}
+	
+		//是否显示离线下载按钮(加密信封)。
+	function viewOffLoadButton(){
+		var viewButton=document.getElementById("viewOffLoadButton");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("f_downloadenv",true);
+			ocx.setCompsiteEnable("f_downloadenv",true);
+
+		}else{
+			ocx.setCompsiteVisible("f_downloadenv",false);
+		}
+	}
+	
+	//是否显示打印快捷按钮
+	function viewPrintButton(){
+			var viewButton=document.getElementById("viewPrintButton");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("print",true);
+		}else{
+			ocx.setCompsiteVisible("print",false);
+		}
+		
+	}
+	
+		//是否显示菜单
+	function viewMenu(){
+			var viewButton=document.getElementById("viewMenu");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("menu",true);
+		}else{
+			ocx.setCompsiteVisible("menu",false);
+		}
+	}
+	
+	//是否显示左侧导航栏
+	function viewNavigator(){
+			var viewButton=document.getElementById("viewNavigator");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("navigator",true);
+		}else{
+			ocx.setCompsiteVisible("navigator",false);
+		}
+	}
+	
+	//是否显示工具栏
+	function viewTool(){
+			var viewButton=document.getElementById("viewTool");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("toolbar",true);
+		}else{
+			ocx.setCompsiteVisible("toolbar",false);
+		}
+	}
+	
+	//是否显示橡皮章快捷按钮
+	function viewStamp(){
+			var viewButton=document.getElementById("viewStamp");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("tool_stamp",true);
+		}else{
+			ocx.setCompsiteVisible("tool_stamp",false);
+		}
+	}
+	
+	//是否显示签章快捷按钮
+	function viewSealsign(){
+	
+			var viewButton=document.getElementById("viewSealsign");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("t_sealsign",true);
+		}else{
+			ocx.setCompsiteVisible("t_sealsign",false);
+		}
+	}
+	
+	
+		//是否显示打印掩膜快捷按钮
+	function viewRectmask(){
+		var viewButton=document.getElementById("viewRectmask");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("t_printmask",true);
+		}else{
+			ocx.setCompsiteVisible("t_printmask",false);
+		}
+	}
+
+
+	//是否显示打印掩膜快捷按钮
+	function viewRectmask1(){
+		var viewButton=document.getElementById("viewRectmask1");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("t_displaymask",true);
+		}else{
+			ocx.setCompsiteVisible("t_displaymask",false);
+		}
+	}
+
+
+//是否显示文本选择快捷按钮
+	function viewTextselect(){
+		var viewButton=document.getElementById("viewTextselect");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("t_textselect",true);
+		}else{
+			ocx.setCompsiteVisible("t_textselect",false);
+		}
+	}
+
+//是否显示预盖章快捷按钮
+	function viewSealpreview(){
+		var viewButton=document.getElementById("viewSealpreview");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("t_sealmark",true);
+		}else{
+			ocx.setCompsiteVisible("t_sealmark",false);
+		}
+	}
+
+//是否显示重点圈阅快捷按钮
+	function viewAnnotmark(){
+		var viewButton=document.getElementById("viewAnnotmark");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("t_annotmark",true);
+		}else{
+			ocx.setCompsiteVisible("t_annotmark",false);
+		}
+	}
+
+//是否显示插入签批页按钮
+	function viewInsertblankpage(){
+		var viewButton=document.getElementById("viewInsertblankpage");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("d_insertblankpage",true);
+		}else{
+			ocx.setCompsiteVisible("d_insertblankpage",false);
+		}
+
+	}
+
+//是否显示铅笔工具
+function viewTp_penceil(){
+		var viewButton=document.getElementById("viewTp_penceil");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("tp_penceil",true);
+		}else{
+			ocx.setCompsiteVisible("tp_penceil",false);
+		}
+}
+
+//是否显示从虚拟打印创建
+	function create_print(){
+	var viewButton=document.getElementById("create_print");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("create_print",true);
+		}else{
+			ocx.setCompsiteVisible("create_print",false);
+		}
+	}
+
+	function create_convert(){
+	var viewButton=document.getElementById("create_convert");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("create_svc",true);
+		}else{
+			ocx.setCompsiteVisible("create_svc",false);
+		}
+	}
+	
+//是否显示文件操作工具栏
+	function viewToolbar_file(){
+		var viewButton=document.getElementById("viewToolbar_file");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("toolbar_file",true);
+		}else{
+			ocx.setCompsiteVisible("toolbar_file",false);
+		}
+	}
+
+//是否显示视图工具栏
+function viewShowbar_file(){
+	var viewButton=document.getElementById("viewShowbar_file");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("toolbar_view",true);
+		}else{
+			ocx.setCompsiteVisible("toolbar_view",false);
+		}
+}
+
+//是否显示基础工具栏
+function viewBasebar_file(){
+	var viewButton=document.getElementById("viewBasebar_file");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("toolbar_basetool",true);
+		}else{
+			ocx.setCompsiteVisible("toolbar_basetool",false);
+		}
+}
+
+//是否显示文本工具栏
+function viewDocumentbar_file(){
+	var viewButton=document.getElementById("viewDocumentbar_file");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("toolbar_document",true);
+		}else{
+			ocx.setCompsiteVisible("toolbar_document",false);
+		}
+}
+
+function viewEditbar_file(){
+	var viewButton=document.getElementById("viewEditbar_file");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("toolbar_edit",true);
+		}else{
+			ocx.setCompsiteVisible("toolbar_edit",false);
+		}
+}
+
+
+function viewCustombar_file(){
+	var viewButton=document.getElementById("viewCustombar_file");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("toolbar_custom",true);
+		}else{
+			ocx.setCompsiteVisible("toolbar_custom",false);
+		}
+}
+
+//隐藏缩放工具栏
+function viewToolbar_zoom()
+
+{
+	var viewButton=document.getElementById("viewToolbar_zoom");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("toolbar_zoom",true);
+		}else{
+			ocx.setCompsiteVisible("toolbar_zoom",false);
+		}
+
+
+}
+
+
+//是否显示附件的四个按钮（需在打开文档前调用）
+	function viewAttach(){
+     var viewButton=document.getElementById("viewAttach");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("delattach",true);
+			ocx.setCompsiteVisible("openattach",true);
+			ocx.setCompsiteVisible("saveattach",true);
+			ocx.setCompsiteVisible("addattach",true);
+		}else{
+		    alert("false");
+			ocx.setCompsiteVisible("delattach",false);
+			ocx.setCompsiteVisible("openattach",false);
+			ocx.setCompsiteVisible("saveattach",false);
+			ocx.setCompsiteVisible("addattach",false);
+		}
+
+	}
+//----------------------------显示部分完---------------------------
+
+//---------------------------通过js实现按钮操作效果-------------------
+   //弹出选择要打开文档的文件选择对话框。
+	function optOpen(){
+		var optButton=document.getElementById("optOpen");
+		if(optButton.checked==true){
+			ocx.performClick("f_open",true);
+		}
+
+	}
+
+//弹出文档令存为对话框。注意，保存是不用选择存在哪儿的。
+	function optSave(){
+
+	var optButton=document.getElementById("optSave");
+		if(optButton.checked==true){
+			ocx.performClick("f_saveas",true);
+		}
+
+	}
+
+//弹出离线下载的对话框。
+	function optDownload(){
+	var optButton=document.getElementById("optDownload");
+		if(optButton.checked==true){
+			ocx.performClick("f_downloadenv",true);
+		}
+
+	}
+
+//弹出打印属性对话框
+   function optPrint(){
+	var optButton=document.getElementById("optPrint");
+		if(optButton.checked==true){
+			ocx.performClick("f_print",true);
+		}
+   }
+
+//弹出签章选择对话框
+   function optSealsign(){
+
+	var optButton=document.getElementById("optSealsign");
+		if(optButton.checked==true){
+			ocx.performClick("t_sealsign",true);
+		}
+   }
+
+//全屏显示
+   function optFullscreen(){
+
+	var optButton=document.getElementById("optFullscreen");
+		if(optButton.checked==true){
+			ocx.performClick("v_fullscreen",true);
+		}
+   }
+
+//合适宽度显示
+  function optFitwidth(){
+  var optButton=document.getElementById("optFitwidth");
+	if(optButton.checked==true){
+			ocx.performClick("vzmode_fitwidth",true);
+		}
+  }
+
+//设置多页签或单页签显示
+  function optSingleModel(){
+	var optButton=document.getElementById("optSingleModel");
+			if(optButton.checked==true){
+				ocx.setSingleMode(true);
+			}else{
+				ocx.setSingleMode(false);
+			}
+  }
+
+ 	function create_print(){
+	var viewButton=document.getElementById("create_print");
+		if(viewButton.checked==true){
+			ocx.setCompsiteVisible("create_print",true);
+		}else{
+			ocx.setCompsiteVisible("create_print",false);
+		}
+	}
+
+
+//------------------------操作完----------------------------------------
+
+  function setCopies(){
+
+   var max=document.getElementById("copies").value;
+    ocx.setPrintCopies(max);
+  }
+
+
+var printBefNo;
+   function addPrintBefListener(){
+   //填加打印的事前监听事件
+   	//参数1：监听事件名称。参数2：回调方法。参数3： true事后调用，false事前调用。
+	 printBefNo= ocx.registListener("f_print","printPerforming",false);
+  }
+  
+  function printPerforming(param){
+		 //1.设置阅读模式。
+	   ocx.setReaderMode(2);
+
+        //2.获取业务系统可打印份数，判断。
+		//getUserMaxCopies() 示例为从后台取用户可打印最大份数的方法。此方法客户自行实现。
+		//getCopies();示例为从param里获取到的用户欲打印份数。param为一个xml字符串。此方法客户自行实现。
+        //if(getUserMaxCopies()<getCopies()){
+			//alert("您的可打印份数不足");
+			//return ;
+		//}else{
+		  
+
+		//3.打印水印。可用于打印时自动插入份号等场景
+		 setFontBarcodeInfo();
+		 setSecBarcodeInfo();
+
+		//打印当前的文档至默认的打印设备。
+		//参数1：打印的份数。（用户通过打印属性页设置的需打印份数可通过param参数中的xml串获得。）
+	   //	 ocx.printFile(1);
+	   //printFile为旧的方法。当前已改为  //ocx.printFileCopies(2);
+
+	   //或用。参数1为文件名 参数2为是否灰度打印（ture为是）。
+        ocx.printFile("1.ofd",true);
+
+	
+  }
+
+
+function setFontBarcodeInfo(){
+//参数1：xml字符串表示需打印的文字水印信息。详细说明请参见插件集成文档。
+ocx.setBarcodeInfo("<setinfo type='barinfo'><parameter name='pages' value=\"1\"/><parameter name=\"rotate\" value=\"0\"/><parameter name=\"xpostype\" value=\"absolute\"/><parameter name=\"ypostype\" value=\"absolute\"/><parameter name=\"x\" value=\"30\"/><parameter name=\"y\" value=\"10\"/><parameter name=\"w\" value=\"30\"/><parameter name=\"h\" value=\"20\"/><parameter name=\"strcont\" font=\"黑体\" size=\"48\" bold=\"true\" italic=\"true\" color= \"00FF00\">"+"0000001"+"</parameter></setinfo>");
+ 
+
+}
+
+function setSecBarcodeInfo(){
+
+//设置二维码水印
+//参数1：xml字符串表示图片信息。详细说明请参见插件集成文档。
+ocx.setBarcodeInfo("<setinfo type=\"barinfo\"><parameter name=\"pages\" value=\"1\"/><parameter name=\"rotate\" value=\"0\"/><parameter name=\"visible\" value=\"true\"/><parameter name=\"printable\" value=\"true\"/><parameter name=\"xpostype\" value=\"absolute\"/><parameter name=\"ypostype\" value=\"absolute\"/><parameter name=\"x\" value=\"30\"/><parameter name=\"y\" value=\"150\"/><parameter name=\"w\" value=\"100\"/><parameter name=\"h\" value=\"20\"/><parameter name=\"content\">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</parameter></setinfo>");
+
+}
+
+
+var printAftNo;
+	function addPrintAftListener(){
+	//注册打印的事后监听事件。
+	//参数1：监听事件名称。参数2：回调方法。参数3： true事后调用，false事前调用。
+	printAftNo=ocx.registListener("print","printPerformed",true);
+
+  }
+
+  function printPerformed(){
+  //1.将已打印份数传递给业务系统.此处客户自行实现
+  //2.接收可打印份数。此处客户自行实现。设：2份
+  //3.重新设置最大可打印份数
+  alert("print after....");
+ //   ocx.setPrintCopies(2);
+  }
+
+
+function setBInfo(){
+		var mark=document.getElementById("mark").value;
+			if(mark=="fontMark"){
+			  alert("font");
+				setFontBarcodeInfo();
+
+		}else if(mark=="secMark"){
+
+			   setSecBarcodeInfo();
+		}
+}
+
+
+function removeBInfo(){
+alert("移除水印");
+//移除水印。会移除所有的水印。
+ ocx.removeBarcodeInfo();
+}
+
+
+//添加监听
+var lisNo;
+function  setLn(){
+   var liId=document.getElementById("lnID").value;
+   var isaf;
+   var  ar=document.getElementById("ar");
+     var  bf=document.getElementById("bf");
+	
+	if(ar.checked==true){
+		isaf=true;
+	}else if(bf.checked==true){
+		isaf=false;
+	}
+	 alert(liId+":"+isaf);
+  lisNo=  ocx.registListener(liId,"perform",isaf);  
+   // alert("f_save,perform,fals");
+
+  //  lisNo=  ocx.registListener("f_print","perform",true);
+  // lisNo=  ocx.registListener("f_save","perform",false);
+  //  alert(lisNo);
+
+  }
+
+  function perform(){
+   alert("监听事件");
+  }
+
+//移除监听
+function removeLn(){
+ //参数为注册的监听的返回值
+   ocx.unRegistListener(lisNo);
+}
+
+
+//设置首选项。相当于手动设置菜单-工具-首选项的内容
+  function setFirstSet(){
+   var firstItem=  document.getElementById("firstSet").value;
+   var firstUrl= document.getElementById("firestUrl").value;
+   if(firstItem=="1"){
+    //http://172.16.14.43:8080/cpcns-convert-server
+	ocx.setConvertSvrAddr(firstUrl);
+   }else if(firstItem=="5"){
+   //http://172.16.2.99:8080/cpcns-content-server/ofd/envelop
+   alert(firstUrl);
+	 ocx.setEncryptSvrAddr(firstUrl);
+
+   }
+
+  }
+
+//添加高亮
+  function dLink(){
+   var textKey=document.getElementById("textKey").value;
+   //参数1：关键词； 参数2：跳转链接； 参数3：高亮颜色
+   	ocx.addDynamicLink(textKey, "http://www.sina.com.cn","#00FF00");
+
+  }
+
+
+
+//此接口用于查找字符串，在匹配处添加指定的URL链接动作，并进行高亮显示。
+// 参数1：表示使用者信息。参数2:匹配处需要添加的链接地址，为空时表示不添加。参数3：匹配处需要添加高亮显示颜色
+function removeDLink(){
+	ocx.clearDynamicLink();
+}
+
+
+//获取语义节点内容。前提条件：必须有符合规范的语义。
+function getTagText(){
+     var  contentFH=document.getElementById("tagPath").value;
+	 //注意：语义标识以"电子公文/"开头。例："电子公文/公文体/版头/份号"
+	  var  tagText =ocx.getTaggedText("电子公文/"+contentFH);
+	   alert(tagText);
+}
+
+//获取语义节点位置。前提条件：必须有符合规范的语义。
+//可与打印控制接口配合使用，可实现打印时纸制文件份号不同的解决方案。
+function getTagPos(){
+     var  contentFH=document.getElementById("tagPath").value;
+	 //注意：语义标识以"电子公文/"开头。例："电子公文/公文体/版头/份号"
+	  var  tagPos =ocx.getTaggedPosition("电子公文/"+contentFH);
+	   alert(tagPos);
+
+     document.getElementById("annotPos").value=tagPos;
+
+}
+
+ //向当前的文档添加临时注释（如打印屏蔽区等）。一般配合语义位置使用。
+ //参数1：type String型，按钮的名称。套打设置为“rectmask”。
+ //参数2：index int型，页面的索引值（从0开始）
+ //参数3：x float型，注释boundary的起始位置
+ //参数4：y float型，注释boundary的起始位置
+ //参数5：w float型，注释boundary的宽度
+ //参数6：h float型，注释boundary的高度
+ //参数7：parms String型，其他更多的参数，采用xml描述key-value样式
+function setAnnotArea(){
+	var annotPos=  document.getElementById("annotPos").value;
+	var str=annotPos.split(",");
+    ocx.addPageAnnot("rectmask",str[0],str[1],str[2],str[3],str[4]);
+}
+
+//跳转到指定位置。一般配合语义位置使用。
+function gotoDest(){
+alert("gotoDest");
+	var pos=document.getElementById("destPos").value;
+		alert(pos);
+    var str=pos.split(",");
+	alert(str[1]);
+
+	 ocx.gotoDest(str[0],str[1],str[2]);
+
+}
+
+//设置默认打印机。反应为设置此项后，打印页面的打印机项中首显此打印机。
+function setPrinterName(){
+var name=document.getElementById("printerName").value;
+ocx.setPrinterName(name);
+
+}
+
+//通过转换服务，将一个源文件转换为ofd文件，再由Reader打开。
+function convertServerOpen() 
+{//此接口
+	var convertPath=document.getElementById("convertPath").value;
+	var fromPath=document.getElementById("fromPath").value;
+	var toPath=document.getElementById("toPath").value;
+	var metaData=document.getElementById("metaData").value;
+
+    //参数为转换服务地址。如："http://172.16.14.43:8080/cpcns-convert-server"
+	ocx.setConvertSvrAddr(convertPath);
+
+	//通知控件执行转换并打开/持有转换后的文档
+	//转换文件。参数1.源文件地址。参数2.生成的ofd的位置。参数3.元数据。例："<MetaRoot><DocID>HB0001</DocID><Title>HB测试文档0001号</Title></MetaRoot>"
+	ocx.convertFile(fromPath, toPath, metaData);
+	ocx.openFile(toPath);
+}
+
+
+function getLogFilePath(){
+
+var path=ocx.getLogFilePath();
+alert(path);
+
+}
+
+function getVersion(){
+var v =ocx.version();
+alert(v);
+}
+
+	</script>
+    </head>
+    <body onload="initObject()">
+<!--
+  <div class="list"><b> </b>	
+	<p style="width:80px;">初始化</p>
+	<p style="width:160px;"><input type="button" value="ActiveX插件测试" onclick="activexTest()" class="btn2"></p>
+	<p style="width:160px;"><input type="button" value="NPAPI插件测试" onclick="npapiTest()" class="btn2"></p>
+	</div>
+-->
+
+     <div class="list"><b> </b>	
+	<p style="width:80px;">基本功能</p>
+	<p style="width:380px;text-align:center">
+	
+	远程打开demo路径    <input type="radio" id="setOpenUrl" name="url" value="" onclick="setOpenUrl()"/>
+	远程保存demo路径    <input type="radio" id="setSaveUrl" name="url" value="" onclick="setSaveUrl()"/>
+	内容服务地址        <input type="radio" id="setSrvUrl" name="url" value="" onclick="setSrvUrl()"/><br/>
+	本地路径/远程url：<input id="path" type="text" value="" size="40"/><br/>
+
+	<input type="button" value="打开" onclick="openFile()" class="btn1">
+	<input type="button" value="保存" onclick="saveFile()" class="btn1">
+	<input type="button" value="关闭" onclick="closeFile()" class="btn1">
+	</p>
+
+
+    <p style="width:200px;text-align:center;">userId：<input id="userId" type="text" value="" size="20"/><br/>
+	                        docId ：<input id="docId" type="text" value="" size="20"/><br/>
+							
+							 <input type="button" value="内容服务打开" onclick="openSvrFile()" class="btn2"></p>
+
+	  <p style="width:480px;text-align:center;">服务地址：<input  id="convertPath" type="text" value="http://172.16.14.43:8080/cpcns-convert-server" size="20"/>
+	                        源文件路径：<input id="fromPath" type="text" value="" size="20"/><br/>
+							目标路径：<input id="toPath" type="text" value="" size="20"/>
+							文档元数据：<input id="metaData" type="text" value="<MetaRoot><DocID>HB0001</DocID><Title>HB测试文档0001号</Title></MetaRoot>" size="20"/><br/>
+							
+							 <input type="button" value="转换服务打开" onclick="convertServerOpen()" class="btn2"></p>
+ 
+	
+	</div>
+
+
+
+    <div class="list"><b> </b>	
+		<p style="width:60px;">界面配置（可用性）</p>
+	<p style="width:40px;"><input id="viewOpenButton" type="checkbox" value="" onclick="viewOpenButton()"/>打开</p>
+	<p style="width:40px;"><input id="viewSaveButton" type="checkbox" value=""  onclick="viewSaveButton()"/>保存</p>
+ <!--   <p style="width:40px;"><input id="viewSaveAsButton" type="checkbox" value=""  onclick="viewSaveAsButton()"/>另存</p>   -->
+	<p style="width:70px;"><input id="viewOffLoadButton" type="checkbox" value=""  onclick="viewOffLoadButton()"/>离线下载</p>
+	<p style="width:40px;"><input id="viewPrintButton" type="checkbox" value=""  onclick="viewPrintButton()"/>打印</p>
+	<p style="width:40px;"><input id="viewMenu" type="checkbox" value="" onclick="viewMenu()"  />菜单</p>
+	<p style="width:50px;"><input id="viewTool" type="checkbox" value=""  onclick="viewTool()" />工具栏</p>
+	<p style="width:50px;"><input id="viewStamp" type="checkbox" value="" onclick="viewStamp()"/>橡皮章</p>
+	<p style="width:40px;"><input id="viewSealsign" type="checkbox" value=""  onclick="viewSealsign()"/>签章</p>
+	<p style="width:80px;"><input id="viewRectmask" type="checkbox" value=""  onclick="viewRectmask()"/>打印掩膜</p>
+	<p style="width:80px;"><input id="viewRectmask1" type="checkbox" value=""  onclick="viewRectmask1()"/>显示掩膜</p>
+	<p style="width:80px;"><input id="viewTextselect" type="checkbox" value=""  onclick="viewTextselect()"/>文本选择</p>
+	<p style="width:80px;"><input id="viewSealpreview" type="checkbox" value=""  onclick="viewSealpreview()"/>预盖章</p>
+	
+	<p style="width:80px;"><input id="viewAnnotmark" type="checkbox" value=""  onclick="viewAnnotmark()"/>重点圈阅</p><br/>
+	  <p style="width:60px;"></p>
+   	<p style="width:80px;"><input id="viewInsertblankpage" type="checkbox" value=""  onclick="viewInsertblankpage()"/>插入签批页</p>
+    <p style="width:80px;"><input id="viewTp_penceil" type="checkbox" value=""  onclick="viewTp_penceil()"/>铅笔工具</p>
+   
+     <p style="width:120px;"><input id="create_print" type="checkbox" value=""  onclick="create_print()"/>从虚拟打印创建</p>
+	  <p style="width:120px;"><input id="create_convert" type="checkbox" value=""  onclick="create_convert()"/>从转换服务创建</p>
+	 <p style="width:50px;"><input id="viewNavigator" type="checkbox" value=""  onclick="viewNavigator()"/>导航栏</p>
+
+
+     <p style="width:80px;"><input id="viewToolbar_file" type="checkbox" value=""  onclick="viewToolbar_file()"/>操作工具栏</p>
+	 <p style="width:80px;"><input id="viewShowbar_file" type="checkbox" value=""  onclick="viewShowbar_file()"/>视图工具栏</p>
+	 <p style="width:80px;"><input id="viewBasebar_file" type="checkbox" value=""  onclick="viewBasebar_file()"/>基础工具栏</p>
+  	 <p style="width:80px;"><input id="viewDocumentbar_file" type="checkbox" value=""  onclick="viewDocumentbar_file()"/>文本工具栏</p>
+	
+     <p style="width:80px;"><input id="viewEditbar_file" type="checkbox" value=""  onclick="viewEditbar_file()"/>搜索工具栏</p><br/>
+	  	  <p style="width:60px;"></p>
+	 <p style="width:80px;"><input id="viewCustombar_file" type="checkbox" value=""  onclick="viewCustombar_file()"/>签章工具栏</p>
+    <p style="width:80px;"><input id="viewToolbar_zoom" type="checkbox" value=""  onclick="viewToolbar_zoom()"/>缩放工具栏</p>
+
+	<!--<p style="width:60px;"><input id="viewAttach" type="checkbox" value=""  onclick="viewAttach()"/>附件</p>-->
+	</div>
+
+
+	</div>
+
+
+
+<!--
+  <div class="list"><b> </b>	
+	<p style="width:80px;">操作调用</p>
+	
+	<p style="width:60px;"><input id="optOpen" type="checkbox" value=""  onclick="optOpen()"/>打开</p>
+	<p style="width:60px;"><input id="optSave" type="checkbox" value=""  onclick="optSave()"/>保存</p>
+	<p style="width:80px;"><input id="optDownload" type="checkbox" value=""  onclick="optDownload()"/>离线下载</p>
+	<p style="width:60px;"><input id="optPrint" type="checkbox" value=""  onclick="optPrint()"/>打印</p>
+	<p style="width:60px;"><input id="optSealsign" type="checkbox" value=""  onclick="optSealsign()"/>签章</p>
+	<p style="width:60px;"><input id="optFullscreen" type="checkbox" value=""  onclick="optFullscreen()"/>全屏</p>
+	<p style="width:80px;"><input id="optFitwidth" type="checkbox" value=""  onclick="optFitwidth()"/>合适宽度</p>
+	<p style="width:160px;"><input type="button" value="ActiveX插件测试" onclick="activexTest()" class="btn2"></p>
+	<p style="width:160px;"><input type="button" value="NPAPI插件测试" onclick="npapiTest()" class="btn2"></p>
+	</div>
+-->
+
+
+
+  <div class="list"><b> </b>	
+	<p style="width:80px;">功能扩展</p>
+<p style="width:180px;text-align:center"> <select id="mark" ><option value="fontMark" >文本</option><option value="secMark">二维码</option></select> <br/> <input type="button" value="填加水印" onclick="setBInfo()" class="btn1"> </select><input type="button" value="移除水印" onclick="removeBInfo()" class="btn1"></p>
+
+	<p style="width:180px;text-align:center"><select id="lnID" ><option value="f_open">打开</option><option value="f_print">打印</option><option value="t_sealsign">签章事前</option><option value="d_sealsign">签章事后</option><option value="f_save">保存</option><option value="f_saveas">另存</option><option value="f_saveurl">远程保存</option><option value="downloadenv">离线下载</option></select>  事前<input type="radio" id="bf" checked="checked" name="ln" value="" /> 事后<input type="radio" id="ar" name="ln" value="" /> <br/><input type="button" value="填加监听" onclick="setLn()" class="btn1"> &nbsp;&nbsp; <input type="button" value="移除监听" onclick="removeLn()" class="btn1"></p>
+
+	<p style="width:180px;text-align:center"><input id="textKey" type="text" value="高亮链接关键词" size="20"/> <br/>	<input type="button" value="填加高亮" onclick="dLink()" class="btn1">	<input type="button" value="移除高亮" onclick="removeDLink()" class="btn1"></p>
+
+<p style="width:200px;text-align:center">
+	<input id="printerName" type="text" value="打印机名" size="30"/><br/>
+	<input type="button" value="设置默认打印机" onclick="setPrinterName()" class="btn2">
+	</p>
+	
+	<p style="width:340px;text-align:center"> 
+	
+	<select id="firstSet" ><option value="1">转换地址</option><option value="2">内容地址</option><option value="3">注册地址</option><option value="4">更新地址</option><option value="5">离线地址</option><option value="6">日志地址</option></select><input   id="firestUrl" type="text" value="" size="30"/> <br/>
+	<input type="button" value="设置首选项" onclick="setFirstSet()" class="btn2">
+    </p>
+<p style="width:80px;"></p>
+	<p style="width:120px;text-align:center">  <input type="button" value="获取日志地址" onclick="getLogFilePath()"  class="btn2"/></p>
+   <p style="width:120px;text-align:center">  <input type="button" value="获取版本号" onclick="getVersion()"  class="btn2"/></p>
+
+	</div>
+
+
+
+    <div class="list"><b> </b>
+	<p style="width: 80px;">功能扩展<br/>语义、套打<br/>预盖章</p>
+	<p style="width:300px;">
+	电子公文/<input id="tagPath" type="text" value="" size="30"/><br/>
+	<input type="button" value="获取语义内容" onclick="getTagText()" class="btn2">
+	<input type="button" value="获取语义位置" onclick="getTagPos()" class="btn2">
+	</p>
+	<p style="width:200px;text-align:center;"><input id="annotPos" type="text" value="0,65,64,40,20" size="30"/><br/>
+	<input type="button" value="套打区域注释" onclick="setAnnotArea()" class="btn2"></p>
+
+	<p style="width:120px;text-align:center;"><input id="destPos" type="text" value="1,200,100" size="18"/><label></label><br/><input type="button" value="焦点定位" onclick="gotoDest()" class="btn2"></p>
+    <p style="width:50px;">	<input type="button" value="版本号" onclick="getVersion()" class="btn2"></p>
+
+	</div>
+
+
+
+    <div class="list"><b> </b>
+	<p style="width:80px;">功能扩展<br/>打印控制</p>
+	<p style="width:180px;">
+	<input type="button" value="1.设置最大份数" onclick="setCopies()" class="btn2">
+	<select id="copies" ><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>
+    </p>
+	<p style="width:120px;"> <input type="button" value="2.添加打印事前监听" onclick="addPrintBefListener()" class="btn2"></p>
+	<p style="width:200px;">2.1设置阅读模式<br/>2.2获取业务系统可打印份数并判断<br/>2.3填加水印(字/二维码)<br/> 2.4打印文件 </p>
+	<p style="width:120px;"> <input type="button" value="3.添加打印事后监听" onclick="addPrintAftListener()" class="btn2"></p>
+	<p style="width:180px;">3.1将已打印份数传递给业务系统<br/>3.2接收可打印份数<br/>3.3设置最大份数 </p>
+	
+	
+	</div>
+
+
+  
+
+
+	<div id="OFDActiveXDIV" style="float:center;" ></div>
+	
+
+    </body>
+    </html>
+ 
+    

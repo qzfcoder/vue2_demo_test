@@ -1,0 +1,96 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Dialog</title>
+
+    <link href="../jquery-easyui-1.4.4/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+
+    <link href="../jquery-easyui-1.4.4/themes/icon.css" rel="stylesheet" type="text/css" />
+
+    <script src="../jquery-easyui-1.4.4/jquery.min.js" type="text/javascript"></script>
+
+    <script src="../jquery-easyui-1.4.4/jquery.easyui.min.js" type="text/javascript"></script>
+	  <script src="../res/suwell_ofdReader.js" type="text/javascript"></script>
+
+
+    <script type="text/javascript">
+
+
+function initObject(){
+
+$('#fd').html("<div id='dlg'></div>");
+            $('#dlg').dialog({
+
+                title: '对话框',
+
+                iconCls: "icon-edit",
+
+                collapsible: true,
+
+                minimizable: true,
+
+                maximizable: true,
+
+                resizable: true,
+
+                width: 600,
+
+                height: 120,
+				top:20,
+				left:50,
+
+             onClose: function () {
+				}
+            });  
+	
+}
+
+	var ocx;
+			function initObject()
+			{
+              			
+			  if(window.console)
+				   window.console.log("initObject()");
+				else  
+				   alert("initObject()");
+
+	   //注意：插件宽高设固定值。
+				ocx = suwell.ofdReaderInit("OFDActiveXDIV","800px","600px");
+				
+
+			}
+
+
+    </script>
+
+</head>
+
+<body style="background-color:white;" onload="initObject();" >  
+
+
+<div >
+
+
+	 	<div id="OFDActiveXDIV" style="float:left;width:800px;height:600px;" ></div>
+<!--
+<embed id="reader" type="application/ofd" width="600" height="600"/>
+-->
+</div>
+
+在IE中ActiveX插件默认永远显示在最顶层<br/>
+某些项目集成后需在OFD插件显示页之上弹出div,结果被OFD阅读插件遮挡<br/>
+此处给大家一个解决方案，及在div外层包一个iframe，通过iframe的z-index来实现上层显示<br/>
+以上办法仅供大家参考<br/>
+
+
+<iframe id="fd" style="position: absolute; z-index:2; width:340px; height: 260px; top:100;left:0;left:50px;"  allowTransparency="true" frameborder="0"  scrolling="no" src='answer1_1.html'></iframe>
+
+
+
+</body>
+
+</html> 
+
+
