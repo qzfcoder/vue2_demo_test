@@ -3,6 +3,7 @@
     {{ alarmBizCode }}1``
     <el-button @click="click">无需处理</el-button>
     <el-button @click="toHandle">去处理</el-button>
+    <deptTreeSelect></deptTreeSelect>
     <nav>
       <router-link to="/home"> Home </router-link>|
       <router-link to="/sub_app_page1"> sub_app_page1 </router-link>
@@ -32,6 +33,7 @@
 </template>
 <script>
 // import { accountLoginRequest } from '@/api/index';
+import deptTreeSelect from '@/components/deptTreeSelect';
 export default {
   components: {},
   data() {
@@ -85,6 +87,10 @@ export default {
         },
         '*'
       );
+    },
+    components: { deptTreeSelect },
+    mounted() {
+      // accountLoginRequest('select');
     },
   },
 };
